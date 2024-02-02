@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches:
-      - devel # TODO: change based on tags created
+      - main # TODO: change based on tags created
   workflow_dispatch:
 
 jobs:
