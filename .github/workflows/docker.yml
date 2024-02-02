@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  container-build-publish:
+  build-publish-mug:
     runs-on: ubuntu-20.04
     permissions:
       contents: read
@@ -38,6 +38,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
+          dockerfile: Dockerfile.mug
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
