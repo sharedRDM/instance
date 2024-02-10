@@ -24,7 +24,7 @@ RUN pip install --upgrade pip && \
 COPY themes/KFU/variables.less /usr/local/lib/python3.9/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
 
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
-COPY ./invenio.cfg ${INVENIO_INSTANCE_PATH}
+COPY ./themes/KFU/invenio.cfg ${INVENIO_INSTANCE_PATH}
 COPY ./templates/ ${INVENIO_INSTANCE_PATH}/templates/
 COPY ./app_data/ ${INVENIO_INSTANCE_PATH}/app_data/
 COPY ./translations/ ${INVENIO_INSTANCE_PATH}/translations/
