@@ -35,7 +35,4 @@ RUN cp -r ./static/. ${INVENIO_INSTANCE_PATH}/static/ && \
     invenio collect --verbose  && \
     invenio webpack buildall
 
-## USER
-# USER invenio
-
 ENTRYPOINT [ "bash", "-c"]
