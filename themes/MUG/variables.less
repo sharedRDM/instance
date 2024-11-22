@@ -1,80 +1,86 @@
 /*
- *   Copyright (C) 2024 Shared RDM.
+ *   copyright (c) 2020-2023 graz university of technology.
+ *   copyright (c) 2024 shared rdm.
  *
- * invenio-override  is free software; you can redistribute it and/or modify it
- * under the terms of the MIT License; see LICENSE file for more details.
+ * invenio-override is free software; you can redistribute it and/or modify it
+ * under the terms of the mit license; see license file for more details.
  */
 
+/* badge colors, accessibility */
+@accessRight             : #e9711c;
+@accessRightOpen         : @accessRight;
+@accessRightRestricted   : #ff7f45;
+@accessRightEmbargoed    : #db2828;
+@accessRightClosed       : @accessRightEmbargoed;
+@accessRightMetadata     : #ff7f45;
 
-// badge colors, accessibility
-@accessRight          : #e9711c;
-@accessRightOpen      : @accessRight;
-@accessRightRestricted: #fbbd08;
-@accessRightEmbargoed : #db2828;
-@accessRightClosed    : @accessRightEmbargoed;
-@accessRightMetadata    : #2185D0;
+/* primary colors */
+@overridePrimary         : #007934;
+@overrideSecondary       : #34b233;
+@ocerridePlabels         : #ffffff;
+@overridePrimaryBt       : #dbdce0; /* override primary button - e.g. create community */
 
-// primary colors
-@overridePrimary  : #007934;
-@overrideSecondary: #2F9128;
-@ocerridePlabels: #FFFFFF;
+/* general */
+@primaryBackground       : #fff;
+@primaryText             : #000;
 
-@overridePrimaryBt  : #048622; // override primary button - e.g. Create community
+/* mug palette */
+@mugSearch               : @overridePrimary;
+@outlineRecord           : @accessRightMetadata;
+@recordText              : #6b6d74;
+@hoverOverridePrimaryBt  : #bfc0c2;
+@recordLightText         : #94959a;
 
-// general
-@primaryBackground: #fff;
-@primaryText      : #000;
+/* accent colors */
+@greyDark                : #393b41;
+@greyLight               : #e0e1e2;
+@labelKeywordBackground  : #e8e8e8;
 
+/* ui message colors */
+@uiMsgBc                 : #fcfff5;
+@uiMsgGc                 : @overridePrimary;
 
-// accent colors
-@greyDark              : #777;
-@greyLight             : #E0E1E2;
-@labelKeywordBackground: #E8E8E8;
+/* link and button colors */
+@primaryLinkInverted           : @primaryText;
+@primaryLinkBackgroundInverted : @primaryBackground;
+@primaryLink                   : @primaryBackground;
+@primaryLinkHoverBackground    : @primaryText;
+@primaryButton                 : @primaryBackground;
+@primaryButtonHoverBackground  : @primaryText;
+@primaryButtonInverted         : @primaryText;
 
-// ui message
-@uiMsgBc: #FCFFF5;
-@uiMsgGc: @overridePrimary;
+/* account-specific (signin, signup) */
+@primaryFormAccounts           : @primaryBackground;
+@formAccountsInputPlaceholder  : silver;
+@fieldInputSelectionBackground : #a7dabc;
+@signInBackground              : #6b6d74;
 
-// link and button colors
-@primaryLinkInverted          : @primaryText;
-@primaryLinkBackgroundInverted: @primaryBackground;
-@primaryLink                  : @primaryBackground;
-@primaryLinkHoverBackground   : @primaryText;
-@primaryButton                : @primaryBackground;
-@primaryButtonHoverBackground : @primaryText;
-@primaryButtonInverted        : @primaryText;
+/* footer specific */
+@footerGrey                    : #5e5e5e;
+@footerBottomBackground        : #f2f2f2;
 
+/* record specific */
+@recordVersionBackground       : #f2f2f2;
+@randomRecordsFrontpageArticle : rgba(34, 36, 38, 0.15);
 
+/* input styling */
+@outlineColor                  : #a7dabc;
 
+/* notification styling */
+@notificationBackground        : #fffaf3;
+@notificationBorder            : #e2d5c2;
 
-// account (signin, signup) specific
-@primaryFormAccounts          : @primaryBackground;
-@formAccountsInputPlaceholder : silver;
-@fieldInputSelectionBackground: #50a2ce;
-@signInBackground             : #245b78;
-
-// footer specific
-@footerGrey            : #5E5E5E;
-@footerBottomBackground: #f2f2f2;
-
-// record specific
-@recordVersionBackground : #f2f2f2;
-@randomRecordsFrontpageArticle: rgba(34, 36, 38, .15);
-
-// input
-@outlineColor: #85B7D9;
-
-// notification
-@notificationBackground: #fffaf3;
-@notificationBorder: #e2d5c2;
-
+/* home stroke */
 .home-stroke {
-   stroke:@overridePrimary;;stroke-linecap:square;stroke-width:4;fill:none
+   stroke: @overridePrimary;
+   stroke-linecap: square;
+   stroke-width: 4;
+   fill: none;
 }
 
-/**** hyperlink hover color ****/
+/* hyperlink hover color */
 a:focus,
 a:hover {
- color: @overridePrimary;
- text-decoration: underline;
+  color: @recordText;
+  text-decoration: underline;
 }
