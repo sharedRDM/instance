@@ -17,3 +17,4 @@ jobs:
           GITLB_TRIGGER_TOKEN: ${{ secrets.GITLB_TRIGGER_TOKEN }}
           PROJECT_ID: 45464
           REF_NAME: 'main'
+          PIPELINE_VARIABLES: '{"DOCKER_IMAGE_TAG":"mug"}' # mug/theme
