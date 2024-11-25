@@ -47,3 +47,12 @@ Following is an overview of the generated files and folders:
 
 To learn how to configure, customize, deploy and much more, visit
 the [InvenioRDM Documentation](https://inveniordm.docs.cern.ch/).
+
+
+## Docker Images
+
+| Name | Description |
+|---|---|
+| ``Dockerfile`` | Dockerfile used to build base image, without theme. |
+| ``Dockerfile.mug`` | Dockerfile used to build MUG image. |
+| ``Dockerfile.theme`` | Dockerfile used to build default override theme image. |
