@@ -1,0 +1,19 @@
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["build and push docker image"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  trigger_pipeline:
+    runs-on: ubuntu-latest
+          
+    steps:
+      - name: Trigger gitlab pipeline
+        uses: mb-wali/gitlab-cd-trigger@main
+        with:
+          URL: ${{ secrets.HOST }}
+          GITLB_TRIGGER_TOKEN: ${{ secrets.GITLB_TRIGGER_TOKEN }}
+          PROJECT_ID: 45464
+          REF_NAME: 'main'
