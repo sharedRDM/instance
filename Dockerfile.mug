@@ -15,9 +15,10 @@ COPY Pipfile Pipfile.lock ./
 RUN pipenv install --deploy --system
 
 # upgrade pip & install theme packge
-RUN pip install --upgrade pip && \
-    pip install git+https://github.com/sharedRDM/invenio-override.git@main
-    # pip install "invenio-override>=0.0.3"
+# RUN pip install --upgrade pip && \
+#     pip install git+https://github.com/sharedRDM/invenio-override.git@main
+
+RUN pip install "invenio-override>=0.0.4"
 
 # COPY variables.less
 # TODO: Using ARG change directory of variables.less
