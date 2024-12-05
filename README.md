@@ -48,6 +48,9 @@ Following is an overview of the generated files and folders:
 To learn how to configure, customize, deploy and much more, visit
 the [InvenioRDM Documentation](https://inveniordm.docs.cern.ch/).
 
+## Working with UV
+
+For detailed steps on working with UV, check the [Working with UV](./UV-GUIDE.md) documentation.
 
 ## Docker Images
 
