@@ -34,7 +34,7 @@ dependencies = [
 uv sync
 ```
 
-### **3. build assets**
+### **build assets**
 
 Compile and build assets for the project:
 
@@ -42,7 +42,7 @@ Compile and build assets for the project:
 uv run invenio-cli assets build
 ```
 
-### **4. start/destroy Services**
+### **start/destroy Services**
 
 Set up and start required services:
 
@@ -51,7 +51,7 @@ uv run invenio-cli services destroy
 uv run invenio-cli services setup
 ```
 
-### **5. run the app**
+### **run the app**
 
 Start the Invenio application:
 
@@ -66,18 +66,4 @@ issues related to architecture (e.g., `-84 architecture` errors) on macOS system
 ```bash
 export SYSTEM_VERSION_COMPAT=1
 arch -arm64 brew install python
-```
-
-### **recreating virtual env**
-
-```bash
-rm -rf .venv
-uv venv --prompt invenio-v12 && source .venv/bin/activate
-```
-
-### **Notes: for services setup**
-
-```bash
-uv run invenio-cli services destroy
-uv run invenio-cli services setup
 ```
