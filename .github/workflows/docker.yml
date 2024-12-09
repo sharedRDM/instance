@@ -72,8 +72,8 @@ jobs:
           context: .
           file: Dockerfile.mug
           push: true
-          tags: ${{ steps.meta.outputs.tags }}-mug
-          labels: ${{ steps.meta.outputs.labels }}-mug
+          tags: ${{ steps.meta.outputs.tags }}-mug-v12
+          labels: ${{ steps.meta.outputs.labels }}-mug-v12
 
   build-publish-theme:
     runs-on: ubuntu-20.04
@@ -104,5 +104,5 @@ jobs:
           context: .
           file: Dockerfile.theme
           push: true
-          tags: ${{ steps.meta.outputs.tags }}-theme
-          labels: ${{ steps.meta.outputs.labels }}-theme
+          tags: ${{ steps.meta.outputs.tags }}-theme-v12
+          labels: ${{ steps.meta.outputs.labels }}-theme-v12
