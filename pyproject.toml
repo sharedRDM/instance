@@ -14,13 +14,7 @@ dependencies = [
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
     "uwsgi-tools >=1.1.1",
-    "invenio-override ~=0.0.3",
-    "invenio-records-global-search ~=0.3.2",
-    "invenio-global-search >=0.2.0",
-    "invenio-rdm-records ~=10.9.1",
-    "invenio-search-ui ~=2.8.7",
-    "invenio-records-lom>=0.12.0",
-    "invenio-records-marc21>=0.17.0",
+    "invenio-override ~=0.0.3"
 ]
 
 [tool.setuptools]
