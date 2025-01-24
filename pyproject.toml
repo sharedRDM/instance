@@ -21,7 +21,7 @@ dependencies = [
 py-modules = []
 
 [tool.uv.sources]
-#invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main" }
-invenio-override = { path = "/Users/lpandath/Documents/work/rdm/invenio/invenio-instances/invenio-version-9/invenio-override", editable=true }
+invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main" }
+#invenio-override = { path = "/Users/lpandath/Documents/work/rdm/invenio/invenio-instances/invenio-version-9/invenio-override", editable=true }
 #invenio-cli = { git = "https://github.com/utnapischtim/invenio-cli", branch = "move-to-uv-instead-of-pip" }
 #invenio-theme-tugraz = { git = "https://github.com/tu-graz-library/invenio-theme-tugraz", branch = "master" }
