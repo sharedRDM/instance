@@ -12,6 +12,9 @@ COPY ./static/ ${INVENIO_INSTANCE_PATH}/static/
 COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
 COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 
+# Replace variables.less
+COPY themes/MUG/variables.less /opt/env/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
+
 RUN invenio collect --verbose && invenio webpack create
 
 WORKDIR ${INVENIO_INSTANCE_PATH}/assets
@@ -29,11 +32,8 @@ COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PAT
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/templates
 
 WORKDIR ${WORKING_DIR}/src
-
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 COPY ./themes/MUG/invenio.cfg ${INVENIO_INSTANCE_PATH}
-COPY themes/MUG/variables.less /usr/local/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
-
 
 USER invenio
 
