@@ -1,4 +1,5 @@
 # Adding Publications
+
 .
 .
 .
@@ -9,52 +10,68 @@ When introducing new packages such as **lom** and **marc**, or after performing 
 
 ---
 
-## Common Issue: Missing Indices  
+## Common Issue: Missing Indices
+
 After installing **lom** or **marc**, you may encounter the following error:
 
 ```bash
 opensearchpy.exceptions.NotFoundError: NotFoundError(404, 'index_not_found_exception', 'no such index [instance-marc21records-marc21]', instance-marc21records-marc21, index_or_alias)
 ```
+
 This indicates that the required search indices are missing and need to be rebuilt.
 
 ---
 
 ## Steps to Fix
 
-### **Create Global-Search Tables**  
+### **Handle Database Migrations**
+
+If the new package installation includes database schema changes or if you performed an **Invenio version migration**, you need to run database migrations:
+
+```bash
+invenio alembic upgrade  # applies database migrations to create missing tables
+
+```
+
+### **Create Global-Search Tables**
+
 Before initializing indices, ensure the database has the required tables for global search:
+
 ```bash
 invenio db create
 ```
 
-### **Rebuild Indices for Newly Installed Packages**  
+### **Rebuild Indices for Newly Installed Packages**
+
 After adding **lom** or **marc**, rebuild their respective indices:
+
 ```bash
-invenio lom rebuild-index
+
 invenio marc21 rebuild-index
 invenio global-search rebuild-database
 ```
 
-### **Handle Database Migrations**  
-If the new package installation includes database schema changes or if you performed an **Invenio version migration**, you need to run database migrations:
-```bash
-invenio alembic upgrade  # Applies database migrations to create missing tables
-```
+### ⚠️ **Warning: Destroy and Reinitialize OpenSearch Indices (If Needed)**
 
-### **Destroy and Reinitialize OpenSearch Indices (If Needed)**  
-If indices are outdated or corrupted, first **destroy** them and then **initialize** them again:
+⚠️ **Warning:** If indices are outdated or corrupted, destroying them will remove all indexed data. Only proceed if necessary. After destruction, you must reinitialize and rebuild all indices to restore functionality.
+
 ```bash
 invenio index destroy --yes-i-know
 invenio index init
 ```
 
-### **Rebuild All Indices**  
+### **Rebuild All Indices**
+
 After initializing indices, rebuild all required search indices:
+
 ```bash
 invenio rdm rebuild-all-indices
-invenio marc21 rebuild-indices
+```
+
+### **Load Demo Records for Publications**  
+If you want to try the demo records for publications, run:  
+```bash
+invenio marc21 demo -b -m -n 10
 ```
 
 ---
-
-
