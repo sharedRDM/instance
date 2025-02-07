@@ -34,6 +34,7 @@ COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/
 WORKDIR ${WORKING_DIR}/src
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 COPY ./themes/MUG/invenio.cfg ${INVENIO_INSTANCE_PATH}
+RUN chown invenio:invenio .
 
 USER invenio
 

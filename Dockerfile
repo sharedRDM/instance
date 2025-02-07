@@ -32,7 +32,7 @@ WORKDIR ${WORKING_DIR}/src
 
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 COPY ./invenio.cfg ${INVENIO_INSTANCE_PATH}
-
+RUN chown invenio:invenio .
 
 USER invenio
 
