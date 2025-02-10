@@ -66,6 +66,8 @@ After initializing indices, rebuild all required search indices:
 
 ```bash
 invenio rdm rebuild-all-indices
+invenio marc21 rebuild-index
+invenio global-search rebuild-database
 ```
 
 ### **Load Demo Records for Publications**  
