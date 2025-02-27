@@ -100,3 +100,17 @@ OAUTHCLIENT_REMOTE_APPS = {"keycloak": _keycloak_helper.remote_app}
 ```
 ---
 
+# Debugging
+
+## If you want to see defined configs
+```bash
+# exec UI container
+docker exec -it UI_CONTAINER bash
+
+# open invenio shell
+invenio shell
+
+# print config
+print(app.config["OAUTHCLIENT_KEYCLOAK_USER_INFO_URL"])
+```
+
