@@ -92,6 +92,7 @@ OAUTHCLIENT_KEYCLOAK_USER_INFO_URL = _keycloak_helper.user_info_url
 OAUTHCLIENT_KEYCLOAK_VERIFY_EXP = True  # whether to verify the expiration date of tokens
 OAUTHCLIENT_KEYCLOAK_VERIFY_AUD = True  # whether to verify the audience tag for tokens
 OAUTHCLIENT_KEYCLOAK_AUD = "inveniordm"  # probably the same as the client ID
+OAUTHCLIENT_KEYCLOAK_USER_INFO_FROM_ENDPOINT = True  # get user info from keycloak endpoint
 
 OAUTHCLIENT_REMOTE_APPS = {"keycloak": _keycloak_helper.remote_app}
 
