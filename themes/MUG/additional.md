@@ -72,6 +72,45 @@ If you want to try the demo records for publications, run:
 invenio marc21 demo -b -m -n 10
 ```
 
+## **Disabling Educational Resources (OER) for MUG**
+The **educational resources schema (`lom`)** is not required for the MUG repository. Therefore, it has been removed from the **global search configuration** and set to `False`.  
+
+If, in the future, MUG decides to enable **educational resources**, the developer can follow these steps:
+
+### **1. Update configuration variables**
+In the configuration file, set the following variable to `True`:
+```bash
+OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = True
+```
+
+### **2. Add the schema back to the Global Search Configuration**
+Modify the GLOBAL_SEARCH_SCHEMAS dictionary by adding the lom schema:
+```bash
+GLOBAL_SEARCH_SCHEMAS = {
+    "lom": {
+        "schema": "lom",
+        "name_l10n": _("OER"),
+    },
+    "rdm": {
+        "schema": "rdm",
+        "name_l10n": _("Research Result"),
+    },
+    "marc21": {
+        "schema": "marc21",
+        "name_l10n": _("Publication"),
+    },
+}
+```
+
+### **3. Rebuild Global Search and Indices**
+After reintroducing the schema, the global search database and indices need to be recreated:
+```bash
+invenio global-search rebuild-database
+invenio index destroy --yes-i-know
+invenio index init
+invenio rdm rebuild-all-indices
+```
+
 # Keycloak
 Adding SSO with OpenID Connect (OIDC)
 
