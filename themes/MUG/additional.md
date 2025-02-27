@@ -1,16 +1,12 @@
 # Adding Publications
 
-.
-.
-.
-
-# Invenio: Database and Index Management after Installing New Packages
+## Invenio: Database and Index Management after Installing New Packages
 
 When introducing new packages such as **lom** and **marc**, or after performing a **version migration of invenio-app-rdm**, it is essential to ensure that all required tables and indices are correctly set up.
 
 ---
 
-## Common Issue: Missing Indices
+### Common Issue: Missing Indices
 
 After installing **lom** or **marc**, you may encounter the following error:
 
@@ -22,9 +18,9 @@ This indicates that the required search indices are missing and need to be rebui
 
 ---
 
-## Steps to Fix
+### Steps to Fix
 
-### **Handle Database Migrations**
+#### **Handle Database Migrations**
 
 If the new package installation includes database schema changes or if you performed an **Invenio version migration**, you need to run database migrations:
 
@@ -33,7 +29,7 @@ invenio alembic upgrade  # applies database migrations to create missing tables
 
 ```
 
-### **Create Global-Search Tables**
+#### **Create Global-Search Tables**
 
 Before initializing indices, ensure the database has the required tables for global search:
 
@@ -41,7 +37,7 @@ Before initializing indices, ensure the database has the required tables for glo
 invenio db create
 ```
 
-### **Rebuild Indices for Newly Installed Packages**
+#### **Rebuild Indices for Newly Installed Packages**
 
 After adding **lom** or **marc**, rebuild their respective indices:
 
@@ -51,7 +47,7 @@ invenio marc21 rebuild-index
 invenio global-search rebuild-database
 ```
 
-### ⚠️ **Warning: Destroy and Reinitialize OpenSearch Indices (If Needed)**
+#### ⚠️ **Warning: Destroy and Reinitialize OpenSearch Indices (If Needed)**
 
 ⚠️ **Warning:** If indices are outdated or corrupted, destroying them will remove all indexed data. Only proceed if necessary. After destruction, you must reinitialize and rebuild all indices to restore functionality.
 
@@ -60,7 +56,7 @@ invenio index destroy --yes-i-know
 invenio index init
 ```
 
-### **Rebuild All Indices**
+#### **Rebuild All Indices**
 
 After initializing indices, rebuild all required search indices:
 
@@ -70,10 +66,37 @@ invenio marc21 rebuild-index
 invenio global-search rebuild-database
 ```
 
-### **Load Demo Records for Publications**  
+#### **Load Demo Records for Publications**  
 If you want to try the demo records for publications, run:  
 ```bash
 invenio marc21 demo -b -m -n 10
 ```
 
+# Keycloak
+Adding SSO with OpenID Connect (OIDC)
+
+```bash
+from invenio_oauthclient.contrib.keycloak import KeycloakSettingsHelper
+
+_keycloak_helper = KeycloakSettingsHelper(
+    title="Meduni SSO",
+    description="Meduni SSO",
+    base_url="https://openid.medunigraz.at/",
+    realm="invenioRDM",
+    app_key="KEYCLOAK_APP_CREDENTIALS",
+    legacy_url_path=False  # Remove "/auth/" between the base URL and realm names for generated Keycloak URLs (default: True, for Keycloak up to v17)
+)
+
+OAUTHCLIENT_KEYCLOAK_REALM_URL = _keycloak_helper.realm_url
+OAUTHCLIENT_KEYCLOAK_USER_INFO_URL = _keycloak_helper.user_info_url
+OAUTHCLIENT_KEYCLOAK_VERIFY_EXP = True  # whether to verify the expiration date of tokens
+OAUTHCLIENT_KEYCLOAK_VERIFY_AUD = True  # whether to verify the audience tag for tokens
+OAUTHCLIENT_KEYCLOAK_AUD = "inveniordm"  # probably the same as the client ID
+
+OAUTHCLIENT_REMOTE_APPS = {"keycloak": _keycloak_helper.remote_app}
+
+## SET THE CREDENTIALS via .env
+# INVENIO_KEYCLOAK_APP_CREDENTIALS={'consumer_key':'<YOUR.CLIENT.ID>','consumer_secret': '<YOUR.CLIENT.CREDENTIALS.SECRET>'}
+```
 ---
+
