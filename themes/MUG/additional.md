@@ -20,6 +20,7 @@ This indicates that the required search indices are missing and need to be rebui
 
 ### Steps to Fix
 
+**To see the publication tap in Overview (dashboard) the user has to have admin role or role bellow.**
 
 
 #### Add Publication (marc21) roles
