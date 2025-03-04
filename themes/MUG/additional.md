@@ -20,6 +20,15 @@ This indicates that the required search indices are missing and need to be rebui
 
 ### Steps to Fix
 
+
+
+#### Add Publication (marc21) roles
+```bash
+invenio roles create Marc21Curator
+invenio roles create Marc21Manager
+invenio roles create Marc21Creator
+```
+
 #### **Handle Database Migrations**
 
 If the new package installation includes database schema changes or if you performed an **Invenio version migration**, you need to run database migrations:
