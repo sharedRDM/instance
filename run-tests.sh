@@ -17,7 +17,7 @@ set -o nounset
 
 # Ensure Black and Flake8 are installed via uv
 echo "Installing formatting tools..."
-uv pip install black flake8 --system
+uv pip install black flake8
 
 # Run Black formatting check on the entire project
 echo "Checking Python formatting with Black..."

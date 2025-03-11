@@ -8,4 +8,11 @@
  * Add here all the overridden components of your app.
  */
 
-export const overriddenComponents = {}
+import { curationComponentOverrides } from "@js/invenio_curations/requests";
+import { DepositBox } from "@js/invenio_curations/deposit/DepositBox";
+
+export const overriddenComponents = {
+        // ... after your other overrides ...
+        ...curationComponentOverrides,
+        "InvenioAppRdm.Deposit.CardDepositStatusBox.container": DepositBox,
+}

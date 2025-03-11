@@ -1,0 +1,13 @@
+<dt class="ui tiny header">{{ _("Experiments")}}</dt>
+
+{% for value in field_value %} 
+    {{value.get("title", "Unknown")}} (
+
+        {{_("Program") }}:
+     {{value.get("program", "Unknown")}}
+
+        {{_("Extra") }}:
+    {{value.get("extra", "Unknown")}}
+
+     ) {{ ", " if not loop.last}}
+{% endfor %}
