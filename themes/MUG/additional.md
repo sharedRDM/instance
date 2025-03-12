@@ -23,6 +23,14 @@ This indicates that the required search indices are missing and need to be rebui
 **To see the publication tap in Overview (dashboard) the user has to have admin role or role bellow.**
 
 
+#### **Create Admin User and Assign Roles**
+```bash
+# Create an admin user
+invenio users create admin-v2@demo.org --password 123456 --active --confirm
+
+# Assign the admin role to the user
+invenio roles add admin-v2@demo.org admin
+
 #### Add Publication (marc21) roles
 ```bash
 invenio roles create Marc21Curator
