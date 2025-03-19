@@ -1226,7 +1226,7 @@ dependencies = [
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "~=12.0.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = "~=2.0" },
-    { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=main" },
+    { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=fix-menu-distance" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
     { name = "uwsgitop", specifier = ">=0.11" },
@@ -1767,7 +1767,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.4"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#c1757f85ce7a8b1582a49e0cd16c65a59a93b832" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=fix-menu-distance#aa5bbf0ae1539acb8684e0c266e5ed22955070ca" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-assets" },
