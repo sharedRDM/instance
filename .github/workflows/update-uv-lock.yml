@@ -1,0 +1,43 @@
+name: Update uv.lock
+
+on:
+  push:
+    branches:
+      - cd-uv-lock
+
+jobs:
+  update-uv-lock:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package
+        run: |
+          pip install uv
+
+      - name: Install invenio-override
+        run: |
+          mkdir .venv
+          uv venv .venv
+          source .venv/bin/activate
+          uv pip install git+https://github.com/sharedRDM/invenio-override@fix-menu-distance
+          uv lock
+          deactivate
+          rm -rf .venv
+
+      - name: Commit and push updated uv.lock
+        run: |
+          git add uv.lock
+          git commit -m "Update uv.lock due to package update"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
