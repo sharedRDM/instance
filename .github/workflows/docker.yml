@@ -44,13 +44,8 @@ jobs:
           rm -rf .venv
 
       - name: Commit and push updated uv.lock
-        run: |
-          git add uv.lock
-          git commit -m "Update uv.lock due to package update"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        uses: stefanzweifel/git-auto-commit-action@v5
+        
       - name: Convert repository name to lowercase
         run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
