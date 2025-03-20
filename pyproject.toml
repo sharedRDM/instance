@@ -14,7 +14,7 @@ dependencies = [
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
     "uwsgi-tools >=1.1.1",
-    "invenio-override ~=0.0.3"
+    "invenio-override ~=0.0.4"
 ]
 
 [tool.setuptools]
