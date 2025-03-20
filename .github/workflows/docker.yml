@@ -24,6 +24,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package
+        run: |
+          pip install uv
+
+      - name: Install invenio-override
+        run: |
+          mkdir .venv
+          uv venv .venv
+          source .venv/bin/activate
+          uv pip install git+https://github.com/sharedRDM/invenio-override@main
+          uv lock
+          deactivate
+          rm -rf .venv
+
       - name: Convert repository name to lowercase
         run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
