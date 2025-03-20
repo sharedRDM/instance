@@ -43,9 +43,6 @@ jobs:
           deactivate
           rm -rf .venv
 
-      - name: Commit and push updated uv.lock
-        uses: stefanzweifel/git-auto-commit-action@v5
-
       - name: Convert repository name to lowercase
         run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
