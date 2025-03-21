@@ -68,8 +68,6 @@ There are 2 workflows implemented now. The main goal is CI so that the end resul
 
 - **build and push docker image**
   - This workflow runs automatically on every commit to the main branch and whenever a new tag is created for the repository. Additionally, it can be triggered manually from the Actions tab under 'Run workflow,' where you can select a different branch. This process results in the creation of a new Docker image, tagged with the branch name or the tag name.
-  - builds the MUG image with latest invenio-override main branch
-  - builds Theme image
 
  - **deploy**
    - runs when **build and push docker image** is completed
