@@ -67,7 +67,7 @@ For detailed steps on working with UV, check the [Working with UV](./UV-GUIDE.md
 There are 2 workflows implemented now. The main goal is CI so that the end result of these workflows is a fully functional and deployed instance image, whenever triggered.
 
 - **build and push docker image**
-  - runs either on a commit in the main branch or by manual trigger in Actions tab, Run workflow
+  - This workflow runs automatically on every commit to the main branch and whenever a new tag is created for the repository. Additionally, it can be triggered manually from the Actions tab under 'Run workflow,' where you can select a different branch. This process results in the creation of a new Docker image, tagged with the branch name or the tag name.
   - builds the MUG image with latest invenio-override main branch
   - builds Theme image
 
