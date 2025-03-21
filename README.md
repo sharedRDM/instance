@@ -42,6 +42,7 @@ Following is an overview of the generated files and folders:
 | ``templates`` | Folder for your Jinja templates. |
 | ``.invenio`` | Common file used by Invenio-CLI to be version controlled. |
 | ``.invenio.private`` | Private file used by Invenio-CLI *not* to be version controlled. |
+| ``.github/workflows`` | Folder to add or edit github workflows. |
 
 ## Documentation
 
@@ -59,3 +60,17 @@ For detailed steps on working with UV, check the [Working with UV](./UV-GUIDE.md
 | ``Dockerfile`` | Dockerfile used to build base image, without theme. |
 | ``Dockerfile.mug`` | Dockerfile used to build MUG image. |
 | ``Dockerfile.theme`` | Dockerfile used to build default override theme image. |
+
+
+## CI/CD
+
+There are 2 workflows implemented now. The main goal is CI so that the end result of these workflows is a fully functional and deployed instance image, whenever triggered.
+
+- **build and push docker image**
+  - This workflow runs automatically on every commit to the main branch and whenever a new tag is created for the repository. Additionally, it can be triggered manually from the Actions tab under 'Run workflow,' where you can select a different branch. This process results in the creation of a new Docker image, tagged with the branch name or the tag name.
+
+ - **deploy**
+   - runs when **build and push docker image** is completed
+   - triggers Gitlab pipeline with the current docker image tags which will handle the actual deployment of the newly created images 
+  
+  
