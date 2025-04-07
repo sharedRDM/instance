@@ -36,6 +36,10 @@ COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 COPY ./themes/MUG/invenio.cfg ${INVENIO_INSTANCE_PATH}
 RUN chown invenio:invenio .
 
+# revisit: for some reason invenio user did not had the permissions..
+# the default uploaded data directory.
+RUN chown -R invenio:root /opt/invenio/var/instance/data
+
 USER invenio
 
 ENTRYPOINT [ "bash", "-c"]
