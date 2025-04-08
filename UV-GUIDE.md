@@ -1,5 +1,8 @@
 ## **Working with UV InvenioRDM**
 
+### Installing UV
+Make sure to [install](https://docs.astral.sh/uv/getting-started/installation) UV on your Operating system.
+
 ### **using UV to set up your virtual env and install packages**
 
 Use UV to create and activate a virtual environment:
