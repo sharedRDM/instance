@@ -38,7 +38,7 @@ jobs:
           mkdir .venv
           uv venv .venv
           source .venv/bin/activate
-          uv pip install git+https://github.com/sharedRDM/invenio-override@main
+          uv pip install git+https://github.com/sharedRDM/invenio-override@icon-cyverse
           uv lock --upgrade
           deactivate
           rm -rf .venv
