@@ -43,11 +43,18 @@ jobs:
           mkdir .venv
           uv venv .venv
           source .venv/bin/activate
-          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@'
-          install_cmd_with_branch='${install_cmd}${{ github.event.inputs.invenio-override-branch }}'
-          eval "$install_cmd_with_branch"
 
+          if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
+            INVENIO_OVERRIDE_BRANCH="main"
+          else
+            INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
+          fi
+
+          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
+          eval "$install_cmd"
+    
       - name: Change pyproject.toml
+        if: "${{ github.event.inputs.invenio-override-branch != '' }}"
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
 
       - name: Relock uv
