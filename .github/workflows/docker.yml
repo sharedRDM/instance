@@ -146,3 +146,30 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-theme
           labels: ${{ steps.meta.outputs.labels }}
+
+  trigger-gitlab-pipeline:
+    name: Trigger GitLab Pipeline
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-push-mug
+      - build-and-push-theme
+
+    steps:
+      - name: Set Docker tag environment
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+          else
+            TAG_NAME="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "DOCKER_TAG=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Trigger GitLab pipeline
+        uses: mb-wali/gitlab-cd-trigger@main
+        with:
+          URL: ${{ secrets.HOST }}
+          GITLB_TRIGGER_TOKEN: ${{ secrets.GITLB_TRIGGER_TOKEN }}
+          PROJECT_ID: 45464
+          REF_NAME: 'main'
+          PIPELINE_VARIABLES: '{"DOCKER_IMAGE_TAG":"${{ env.DOCKER_TAG }}", "DOCKER_IMAGE_TAG_INSTANCE":"mug"}'
+
