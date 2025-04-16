@@ -20,7 +20,7 @@ on:
 jobs:
 
   build-and-push-mug:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -49,7 +49,7 @@ jobs:
 
       - name: Change pyproject.toml
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
-        
+
       - name: Relock uv
         run: |
           source .venv/bin/activate
@@ -95,7 +95,7 @@ jobs:
 
 
   build-and-push-theme:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
