@@ -73,3 +73,6 @@ data/.minio.sys
 
 # Celery
 celerybeat-schedule*
+
+# IDEs
+.idea/
