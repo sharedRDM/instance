@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - fix-workflow
     tags:
       - 'v*'
   workflow_dispatch:
@@ -38,22 +39,20 @@ jobs:
         run: |
           pip install uv
 
-      - name: Install invenio-override from input
-        if: "${{ github.event.inputs.invenio-override-branch != '' }}"
+      - name: Install invenio-override
         run: |
           mkdir .venv
           uv venv .venv
           source .venv/bin/activate
-          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${{ github.event.inputs.invenio-override-branch }}'
-          eval "$install_cmd"
 
-      - name: Install invenio-override from event
-        if: "${{ github.event.inputs.invenio-override-branch == '' }}"
-        run: |
-          mkdir .venv
-          uv venv .venv
-          source .venv/bin/activate
-          uv pip install git+https://github.com/sharedRDM/invenio-override@main
+          if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
+            INVENIO_OVERRIDE_BRANCH="main"
+          else
+            INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
+          fi
+          
+          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
+          eval "$install_cmd"
     
       - name: Change pyproject.toml
         if: "${{ github.event.inputs.invenio-override-branch != '' }}"
