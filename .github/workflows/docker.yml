@@ -11,6 +11,11 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      invenio-override-branch:
+        description: 'invenio-override repo branch'     
+        required: false
+        default: 'main'
 
 jobs:
 
@@ -38,7 +43,16 @@ jobs:
           mkdir .venv
           uv venv .venv
           source .venv/bin/activate
-          uv pip install git+https://github.com/sharedRDM/invenio-override@main
+          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@'
+          install_cmd_with_branch='${install_cmd}${{ github.event.inputs.invenio-override-branch }}'
+          eval "$install_cmd_with_branch"
+
+      - name: Change pyproject.toml
+        run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
+        
+      - name: Relock uv
+        run: |
+          source .venv/bin/activate
           uv lock --upgrade
           deactivate
           rm -rf .venv
