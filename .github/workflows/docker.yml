@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - main
-      - fix-workflow
     tags:
       - 'v*'
   workflow_dispatch:
@@ -50,7 +49,7 @@ jobs:
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
-          
+
           install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
           eval "$install_cmd"
     
