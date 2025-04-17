@@ -59,14 +59,6 @@ uv run invenio-cli services setup
 Start the Invenio application:
 
 ```bash
-uv run invenio-cli run
+run invenio-cli 
 ```
 
-### **OS (macOS) architecture compatibility issues**
-
-issues related to architecture (e.g., `-84 architecture` errors) on macOS systems, particularly with Apple Silicon chips (M1/M2), use the following command to resolve them:
-
-```bash
-export SYSTEM_VERSION_COMPAT=1
-arch -arm64 brew install python
-```
