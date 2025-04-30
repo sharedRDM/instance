@@ -101,7 +101,19 @@ In the configuration file, set the following variable to `True`:
 OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = True
 ```
 
-### **2. Add the schema back to the Global Search Configuration**
+### **2. Remove this workaround**
+In the configuration file, find these lines and remove them:
+```python
+import invenio_records_lom.ext
+
+def register_lom_dashboard_tab():
+    pass
+
+invenio_records_lom.ext.register_lom_dashboard_tab = register_lom_dashboard_tab
+"""Force disable educational resources from the dashboard menu."""
+```
+
+### **3. Add the schema back to the Global Search Configuration**
 Modify the GLOBAL_SEARCH_SCHEMAS dictionary by adding the lom schema:
 ```bash
 GLOBAL_SEARCH_SCHEMAS = {
@@ -129,3 +141,16 @@ invenio index init
 invenio rdm rebuild-all-indices
 ```
 
+# MUG Customization
+
+## UI
+
+- We change the name of the Uploads dashboard menu with Research Results.
+```python
+USER_DASHBOARD_MENU_OVERRIDES = {
+      "uploads": {
+        "text": _("Research Results"),
+      },
+}
+"""Override the Uploads menu title"""
+```
