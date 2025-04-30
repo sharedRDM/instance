@@ -95,7 +95,10 @@ The **educational resources schema (`lom`)** is not required for the MUG reposit
 
 If, in the future, MUG decides to enable **educational resources**, the developer can follow these steps:
 
-### **1. Update configuration variables**
+### **1. Install invenio-records-lom**
+Locally install invenio-records-lom, update the uv.lock and push the changes. **TODO: this should be somehow automatic.**
+
+### **2. Update configuration variables**
 In the configuration file, set the following variable to `True`:
 ```bash
 OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = True
@@ -103,7 +106,7 @@ OVERRIDE_SHOW_EDUCATIONAL_RESOURCES = True
 
 ### **2. Add the schema back to the Global Search Configuration**
 Modify the GLOBAL_SEARCH_SCHEMAS dictionary by adding the lom schema:
-```bash
+```python
 GLOBAL_SEARCH_SCHEMAS = {
     "lom": {
         "schema": "lom",
@@ -120,7 +123,13 @@ GLOBAL_SEARCH_SCHEMAS = {
 }
 ```
 
-### **3. Rebuild Global Search and Indices**
+### **3. Run the database migration**
+To create the tables necessary for OER run the database migrations with:
+```bash
+invenio alembic upgrade
+```
+
+### **4. Rebuild Global Search and Indices**
 After reintroducing the schema, the global search database and indices need to be recreated:
 ```bash
 invenio global-search rebuild-database
@@ -129,3 +138,16 @@ invenio index init
 invenio rdm rebuild-all-indices
 ```
 
+# MUG Customization
+
+## UI
+
+- We change the name of the Uploads dashboard menu with Research Results.
+```python
+USER_DASHBOARD_MENU_OVERRIDES = {
+      "uploads": {
+        "text": _("Research Results"),
+      },
+}
+"""Override the Uploads menu title"""
+```
