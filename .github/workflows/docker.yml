@@ -60,7 +60,7 @@ jobs:
       - name: Relock uv
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock --upgrade-package invenio-override
           deactivate
           rm -rf .venv
 
