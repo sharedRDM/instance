@@ -34,35 +34,35 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install uv package
-        run: |
-          pip install uv
+      # - name: Install uv package
+      #   run: |
+      #     pip install uv
 
-      - name: Install invenio-override
-        run: |
-          mkdir .venv
-          uv venv .venv
-          source .venv/bin/activate
+      # - name: Install invenio-override
+      #   run: |
+      #     mkdir .venv
+      #     uv venv .venv
+      #     source .venv/bin/activate
 
-          if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
-          else
-            INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
-          fi
+      #     if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
+      #       INVENIO_OVERRIDE_BRANCH="main"
+      #     else
+      #       INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
+      #     fi
 
-          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
-          eval "$install_cmd"
+      #     install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
+      #     eval "$install_cmd"
     
-      - name: Change pyproject.toml
-        if: "${{ github.event.inputs.invenio-override-branch != '' }}"
-        run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
+      # - name: Change pyproject.toml
+      #   if: "${{ github.event.inputs.invenio-override-branch != '' }}"
+      #   run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
 
-      - name: Relock uv
-        run: |
-          source .venv/bin/activate
-          uv lock --upgrade
-          deactivate
-          rm -rf .venv
+      # - name: Relock uv
+      #   run: |
+      #     source .venv/bin/activate
+      #     uv lock --upgrade
+      #     deactivate
+      #     rm -rf .venv
 
       - name: Convert repository name to lowercase
         run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
