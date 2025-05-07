@@ -14,13 +14,16 @@ dependencies = [
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
     "uwsgi-tools >=1.1.1",
+    "invenio-override ~=0.0.3",
+    "invenio-global-search[marc21] ~=0.2.5"
 ]
 
 [tool.setuptools]
 py-modules = []
 
 [tool.uv.sources]
-#invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main" }
-#invenio-override = { path = "/Users/lpandath/Documents/work/rdm/invenio/invenio-instances/invenio-version-9/invenio-override", editable=true }
+invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "v13" }
+#invenio-override = { path = "/home/eduard/Schreibtisch/invenio-override", editable=true }
+invenio-global-search = { git = "https://github.com/edivalentinitu/invenio-global-search", branch = "fix-dependencies" }
 #invenio-cli = { git = "https://github.com/utnapischtim/invenio-cli", branch = "move-to-uv-instead-of-pip" }
 #invenio-theme-tugraz = { git = "https://github.com/tu-graz-library/invenio-theme-tugraz", branch = "master" }
