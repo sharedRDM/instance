@@ -1,5 +1,6 @@
 ## **Working with UV InvenioRDM**
 
+### Instance now running with invenio-app-rdm v13 which has UV already integrated. The following guide however is still helpful for a better understanding of how UV works.
 ### Installing UV
 Make sure to [install](https://docs.astral.sh/uv/getting-started/installation) UV on your Operating system.
 
