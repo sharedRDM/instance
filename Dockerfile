@@ -5,6 +5,8 @@ COPY pyproject.toml uv.lock ./
 
 RUN uv sync --frozen
 
+# to use rspack
+ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
 COPY ./app_data/ ${INVENIO_INSTANCE_PATH}/app_data/
 COPY ./assets/ ${INVENIO_INSTANCE_PATH}/assets/
@@ -15,8 +17,9 @@ COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 RUN invenio collect --verbose && invenio webpack create
 
 WORKDIR ${INVENIO_INSTANCE_PATH}/assets
-RUN npm install --legacy-peer-deps
-RUN npm run build
+RUN pnpm install
+RUN pnpm run build
+
 
 # STAGE 2
 FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
