@@ -1187,7 +1187,7 @@ dependencies = [
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "~=13.0.0b3.dev2" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
-    { name = "invenio-override", extras = ["marc21"], git = "https://github.com/sharedRDM/invenio-override?branch=main" },
+    { name = "invenio-override", extras = ["marc21"], specifier = "~=0.0.6" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
     { name = "uwsgitop", specifier = ">=0.11" },
@@ -1575,17 +1575,18 @@ marc21 = [
 
 [[package]]
 name = "invenio-i18n"
-version = "3.0.0"
+version = "3.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel" },
     { name = "flask-babel" },
     { name = "invenio-base" },
+    { name = "polib" },
     { name = "pytz" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a4/b8/006e20e603f664a1b02f960d58f450a07ec78b19ae9897ee691290229619/invenio_i18n-3.0.0.tar.gz", hash = "sha256:81d55f1e96a8c1f9c777565d31af5fbd5c6cc5adebc1adb93f5ad2faa3e1bb2f", size = 37425, upload-time = "2024-12-02T22:12:40.969Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/84/a9/76c74abdbaf3a269a6b40418b111bf7c3b551876d04ed987671b5e8ffcac/invenio_i18n-3.1.0.tar.gz", hash = "sha256:ee90718a9c82c6734224f1cf08f7ff1fee1f597daff38be3e67a7daeefca552c", size = 40935, upload-time = "2025-05-20T07:12:02.556Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3c/26/fb6280fa644bf2a5f53eabbc8b7da9bdb4dc022069f56875f886e44330e2/invenio_i18n-3.0.0-py2.py3-none-any.whl", hash = "sha256:d06e02c14e07a09bf6989ac564c8cc17388382ebd2806c2fc18e8495421b767b", size = 45328, upload-time = "2024-12-02T22:12:39.174Z" },
+    { url = "https://files.pythonhosted.org/packages/e1/c3/21c938fe3eaa0aa4ba2a3beab823be6a4f6a9dfc855682815237f2280ae6/invenio_i18n-3.1.0-py2.py3-none-any.whl", hash = "sha256:a5d0702eb99b1dfef84a874a926398e169e4e06666b416a7cc9ac045d9fec81a", size = 46771, upload-time = "2025-05-20T07:12:01.439Z" },
 ]
 
 [[package]]
@@ -1743,14 +1744,18 @@ wheels = [
 
 [[package]]
 name = "invenio-override"
-version = "0.0.4"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#7ba2ff90889b47a583f1e10299690050225b5e76" }
+version = "0.0.6"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
     { name = "opensearch-dsl" },
     { name = "opensearch-py" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d3/e2/61ca7d222b5333fbc4f4dcbd3499f474b87d2271c41cf9bf000e49c42b83/invenio_override-0.0.6.tar.gz", hash = "sha256:b43100f050d1ee9a252a14aefa21088ee0e67930cf7284d99af1ed3258fabc8d", size = 308407, upload-time = "2025-05-20T08:58:19.165Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/17/e7/e87709ebe3c706ec2e734874e4f2cc7f7fabcfdc143e837239750d23399d/invenio_override-0.0.6-py2.py3-none-any.whl", hash = "sha256:c2ffd90ad6184ab5f61a74ea72a55061a4597ea247536dc86cd3ad8946de5fc2", size = 323658, upload-time = "2025-05-20T08:58:17.473Z" },
 ]
 
 [package.optional-dependencies]
@@ -3015,6 +3020,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz", hash = "sha256:00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3", size = 159130, upload-time = "2018-02-15T19:01:31.097Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a3/58/35da89ee790598a0700ea49b2a66594140f44dec458c07e8e3d4979137fc/ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce", size = 49567, upload-time = "2018-02-15T19:01:27.172Z" },
+]
+
+[[package]]
+name = "polib"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/10/9a/79b1067d27e38ddf84fe7da6ec516f1743f31f752c6122193e7bce38bdbf/polib-1.2.0.tar.gz", hash = "sha256:f3ef94aefed6e183e342a8a269ae1fc4742ba193186ad76f175938621dbfc26b", size = 161658, upload-time = "2023-02-23T17:53:56.873Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6b/99/45bb1f9926efe370c6dbe324741c749658e44cb060124f28dad201202274/polib-1.2.0-py2.py3-none-any.whl", hash = "sha256:1c77ee1b81feb31df9bca258cbc58db1bbb32d10214b173882452c73af06d62d", size = 20634, upload-time = "2023-02-23T17:53:59.919Z" },
 ]
 
 [[package]]
