@@ -1187,7 +1187,7 @@ dependencies = [
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "~=13.0.0b3.dev2" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
-    { name = "invenio-override", extras = ["marc21"], git = "https://github.com/sharedRDM/invenio-override?branch=main" },
+    { name = "invenio-override", extras = ["marc21"], specifier = "~=0.0.6" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
     { name = "uwsgitop", specifier = ">=0.11" },
@@ -1745,13 +1745,17 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.6"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#3720841200429303561cded3e6374b6003afc381" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
     { name = "opensearch-dsl" },
     { name = "opensearch-py" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d3/e2/61ca7d222b5333fbc4f4dcbd3499f474b87d2271c41cf9bf000e49c42b83/invenio_override-0.0.6.tar.gz", hash = "sha256:b43100f050d1ee9a252a14aefa21088ee0e67930cf7284d99af1ed3258fabc8d", size = 308407, upload-time = "2025-05-20T08:58:19.165Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/17/e7/e87709ebe3c706ec2e734874e4f2cc7f7fabcfdc143e837239750d23399d/invenio_override-0.0.6-py2.py3-none-any.whl", hash = "sha256:c2ffd90ad6184ab5f61a74ea72a55061a4597ea247536dc86cd3ad8946de5fc2", size = 323658, upload-time = "2025-05-20T08:58:17.473Z" },
 ]
 
 [package.optional-dependencies]
