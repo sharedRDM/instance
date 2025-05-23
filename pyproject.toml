@@ -19,3 +19,6 @@ dependencies = [
 
 [tool.setuptools]
 py-modules = []
+
+[tool.uv.sources]
+invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main" }
