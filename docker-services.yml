@@ -89,3 +89,11 @@ services:
       # settings only for development. DO NOT use in production!
       - 'OPENSEARCH_HOSTS=["http://search:9200"]'
       - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
+  smarthost:
+    image: imixs/exim4:latest
+    environment:
+      EXIM_SMARTHOST: "qa-smtp.cyverse.at:587"
+      EXIM_PASSWORD: "qa-smtp.cyverse.at:newuser@example.com:1234567"
+      EXIM_MESSAGE_SIZE_LIMIT: "1M"
+    ports:
+      - "1025:25"

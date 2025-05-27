@@ -39,3 +39,8 @@ services:
     extends:
       file: docker-services.yml
       service: pgadmin
+  smarthost:
+    extends:
+      file: docker-services.yml
+      service: smarthost
+
