@@ -1,0 +1,1 @@
+# Example config for installation with invenio-override and OER

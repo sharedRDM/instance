@@ -55,11 +55,14 @@ For detailed steps on working with UV, check the [Working with UV](./UV-GUIDE.md
 
 ## Docker Images
 
+Each image has a correspondent instance _variant_ that a user can choose to deploy.
+
 | Name | Description |
 |---|---|
-| ``Dockerfile`` | Dockerfile used to build base image, without theme. |
-| ``Dockerfile.mug`` | Dockerfile used to build MUG image. |
-| ``Dockerfile.theme`` | Dockerfile used to build default override theme image. |
+| ``Dockerfile`` | Dockerfile used to build base image, without theme. - no variant, used for local testing. |
+| ``Dockerfile.mug`` | Dockerfile used to build MUG image. (with Publications) - variant **mug** | 
+| ``Dockerfile.oer`` | Dockerfile used to build Educational Resources image (OER). - variant **oer** |
+| ``Dockerfile.basic`` | Dockerfile used to base invenio-override image (no OER or Publications) and also base invenio theme (without invenio-override) - variants **basic** and **vanilla** |
 
 
 ## CI/CD

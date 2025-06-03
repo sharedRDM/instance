@@ -16,6 +16,24 @@ on:
         description: 'invenio-override repo branch'     
         required: false
         default: 'main'
+      variant:
+        type: choice
+        description: Choose the instance variant
+        options:
+        - mug
+        - oer
+        - basic
+        - vanilla
+        required: false
+        default: mug
+      recreate:
+        type: choice
+        description: Recreate instance (passed to gitlab pipeline)
+        options:
+        - true
+        - false
+        required: false
+        default: false
 
 jobs:
 
@@ -39,6 +57,7 @@ jobs:
           pip install uv
 
       - name: Install invenio-override
+        if: ${{ !startsWith( github.ref, 'refs/tags') }}
         run: |
           mkdir .venv
           uv venv .venv
@@ -53,9 +72,12 @@ jobs:
           install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
           eval "$install_cmd"
     
-      - name: Change pyproject.toml
-        if: "${{ github.event.inputs.invenio-override-branch != '' }}"
+      - name: Change pyproject.toml override branch
+        if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
+
+      - name: Change pyproject.toml override MUG
+        run: sed -i 's/-override ~/-override[marc21] ~/g' pyproject.toml
 
       - name: Relock uv
         run: |
@@ -101,7 +123,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
 
-  build-and-push-theme:
+  build-and-push-oer:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -110,6 +132,45 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package
+        run: |
+          pip install uv
+
+      - name: Install invenio-override
+        if: ${{ !startsWith( github.ref, 'refs/tags') }}
+        run: |
+          mkdir .venv
+          uv venv .venv
+          source .venv/bin/activate
+
+          if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
+            INVENIO_OVERRIDE_BRANCH="main"
+          else
+            INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
+          fi
+
+          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
+          eval "$install_cmd"
+
+      - name: Change pyproject.toml override branch
+        if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
+        run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
+
+      - name: Change pyproject.toml override OER
+        run: sed -i 's/-override ~/-override[lom] ~/g' pyproject.toml
+
+      - name: Relock uv
+        run: |
+          source .venv/bin/activate
+          uv lock --upgrade
+          deactivate
+          rm -rf .venv
 
       - name: Convert repository name to lowercase
         run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
@@ -137,22 +198,177 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push Theme Docker image
+      - name: Build and push OER Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          file: Dockerfile.theme
+          file: Dockerfile.oer
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-theme
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-oer
           labels: ${{ steps.meta.outputs.labels }}
+
+
+  build-and-push-basic:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package
+        run: |
+          pip install uv
+
+      - name: Install invenio-override
+        if: ${{ !startsWith( github.ref, 'refs/tags') }}
+        run: |
+          mkdir .venv
+          uv venv .venv
+          source .venv/bin/activate
+
+          if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
+            INVENIO_OVERRIDE_BRANCH="main"
+          else
+            INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
+          fi
+
+          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
+          eval "$install_cmd"
+
+      - name: Change pyproject.toml override branch
+        if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
+        run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
+
+      - name: Relock uv
+        run: |
+          source .venv/bin/activate
+          uv lock --upgrade
+          deactivate
+          rm -rf .venv
+
+      - name: Convert repository name to lowercase
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      - name: Determine Docker tag (from tag or branch)
+        id: get_tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+          else
+            TAG_NAME="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "DOCKER_TAG=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Basic Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          file: Dockerfile.basic
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-basic
+          labels: ${{ steps.meta.outputs.labels }}
+
+
+  build-and-push-vanilla:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package
+        run: |
+          pip install uv
+
+      - name: Change pyproject.toml no override
+        run: sed -i 's/"invenio-override ~=0.0.6",//g' pyproject.toml
+
+      - name: Relock uv
+        run: |
+          mkdir .venv
+          uv venv .venv
+          source .venv/bin/activate
+          uv pip uninstall invenio-override
+          uv lock --upgrade
+          deactivate
+          rm -rf .venv
+
+      - name: Convert repository name to lowercase
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      - name: Determine Docker tag (from tag or branch)
+        id: get_tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+          else
+            TAG_NAME="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "DOCKER_TAG=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Vanilla Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          file: Dockerfile.basic
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-vanilla
+          labels: ${{ steps.meta.outputs.labels }}
+
 
   trigger-gitlab-pipeline:
     name: Trigger GitLab Pipeline
     runs-on: ubuntu-latest
     needs:
       - build-and-push-mug
-      - build-and-push-theme
+      - build-and-push-oer
+      - build-and-push-basic
+      - build-and-push-vanilla
 
     steps:
       - name: Set Docker tag environment
@@ -172,5 +388,5 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           PROJECT_ID: 45464
           REF_NAME: 'main'
-          PIPELINE_VARIABLES: '{"DOCKER_IMAGE_TAG":"${{ env.DOCKER_TAG }}", "DOCKER_IMAGE_TAG_INSTANCE":"mug"}'
+          PIPELINE_VARIABLES: '{"DOCKER_IMAGE_TAG":"${{ env.DOCKER_TAG }}", "DOCKER_IMAGE_TAG_INSTANCE":"${{ github.event.inputs.variant }}", "RECREATE_INSTANCE":"${{ github.event.inputs.recreate }}"}'
 
