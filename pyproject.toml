@@ -10,11 +10,12 @@ authors = [
 
 dependencies = [
     "invenio-app-rdm[opensearch2] ~=13.0.0b3.dev2",
+    "invenio-rdm-records>=18.11.0,<19.0.0",
     "invenio-logging[sentry_sdk]>=4.0.0,<5.0.0",
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
     "uwsgi-tools >=1.1.1",
-    "invenio-override[marc21] ~=0.0.6",
+    "invenio-override ~=0.0.6",
 ]
 
 [tool.setuptools]

@@ -1,0 +1,1 @@
+# Example config for instance installation with invenio-override withour OER and Publications (basic) or completely without invenio-override (vanilla invenioRDM).
