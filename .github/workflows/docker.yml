@@ -380,6 +380,17 @@ jobs:
           fi
           echo "DOCKER_TAG=$TAG_NAME" >> $GITHUB_ENV
 
+          if [[ "${{ github.event.inputs.variant }}" == "" ]]; then
+            VARIANT=mug
+            RECREATE=false
+          else
+            VARIANT=${{ github.event.inputs.variant }}
+            RECREATE=${{ github.event.inputs.recreate }}
+          fi
+          
+          echo "INSTANCE_TAG=$VARIANT" >> $GITHUB_ENV
+          echo "RECREATE_INSTANCE=$RECREATE" >> $GITHUB_ENV
+
       - name: Trigger GitLab pipeline
         uses: mb-wali/gitlab-cd-trigger@main
         with:
@@ -388,5 +399,5 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           PROJECT_ID: 45464
           REF_NAME: 'main'
-          PIPELINE_VARIABLES: '{"DOCKER_IMAGE_TAG":"${{ env.DOCKER_TAG }}", "DOCKER_IMAGE_TAG_INSTANCE":"${{ github.event.inputs.variant }}", "RECREATE_INSTANCE":"${{ github.event.inputs.recreate }}"}'
+          PIPELINE_VARIABLES: '{"DOCKER_IMAGE_TAG":"${{ env.DOCKER_TAG }}", "DOCKER_IMAGE_TAG_INSTANCE":"${{ env.INSTANCE_TAG }}", "RECREATE_INSTANCE":"${{ env.RECREATE_INSTANCE }}"}'
 
