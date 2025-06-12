@@ -14,6 +14,9 @@ COPY ./static/ ${INVENIO_INSTANCE_PATH}/static/
 COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
 COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 
+COPY ./package.json ${INVENIO_INSTANCE_PATH}/assets/
+COPY ./pnpm-lock.yaml ${INVENIO_INSTANCE_PATH}/assets/
+
 RUN invenio collect --verbose && invenio webpack create
 
 WORKDIR ${INVENIO_INSTANCE_PATH}/assets

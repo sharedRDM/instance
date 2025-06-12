@@ -14,6 +14,9 @@ COPY ./static/ ${INVENIO_INSTANCE_PATH}/static/
 COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
 COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 
+COPY ./package.json ${INVENIO_INSTANCE_PATH}/assets/
+COPY ./pnpm-lock.yaml ${INVENIO_INSTANCE_PATH}/assets/
+
 # Replace variables.less
 COPY themes/MUG/variables.less /opt/env/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
 
