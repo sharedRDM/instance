@@ -2,6 +2,9 @@
 
 Welcome to your InvenioRDM instance.
 
+## Version
+This repository is based on InvenioAppRDM version 13.
+
 ## Getting started
 
 Run the following commands in order to start your new InvenioRDM instance:
@@ -67,13 +70,17 @@ Each image has a correspondent instance _variant_ that a user can choose to depl
 
 ## CI/CD
 
-There are 2 workflows implemented now. The main goal is CI so that the end result of these workflows is a fully functional and deployed instance image, whenever triggered.
+The main goal is CI so that the end result of these workflows is a fully functional and deployed instance image, whenever triggered.
 
-- **build and push docker image**
-  - This workflow runs automatically on every commit to the main branch and whenever a new tag is created for the repository. Additionally, it can be triggered manually from the Actions tab under 'Run workflow,' where you can select a different branch. This process results in the creation of a new Docker image, tagged with the branch name or the tag name.
+This repository's only workflow runs automatically on every commit to the main branch and whenever a new tag is created for the repository. Additionally, it can be triggered manually from the Actions tab under 'Run workflow,' where you can select the following
+  - the invenio-override branch
+  - the "flavour" of invenio which is described in the previous section
+  - the branch of this repository to run the workflow from.
+  
+This process results in the creation of 4 new Docker images, tagged with the branch name or the tag name.
 
- - **deploy**
-   - runs when **build and push docker image** is completed
-   - triggers Gitlab pipeline with the current docker image tags which will handle the actual deployment of the newly created images 
+There is also a _deployment_ step that runs **after** all docker images are pushed **successfully**. 
+
+This step triggers a _Gitlab_ pipeline with the selected or default tags which will handle the actual deployment of **only one of** the newly created images.
   
   
