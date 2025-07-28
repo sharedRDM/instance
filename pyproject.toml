@@ -9,7 +9,7 @@ authors = [
 ]
 
 dependencies = [
-    "invenio-app-rdm[opensearch2] ==13.0.0rc1",
+    "invenio-app-rdm[opensearch2] ==13.0.0",
     "invenio-logging[sentry_sdk]>=4.0.0,<5.0.0",
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
