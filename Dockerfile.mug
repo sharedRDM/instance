@@ -16,6 +16,7 @@ COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 
 # Replace variables.less
 COPY themes/MUG/variables.less /opt/env/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
+COPY themes/MUG/overrides.less /opt/env/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
 
 RUN invenio collect --verbose && invenio webpack create
 
