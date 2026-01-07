@@ -62,7 +62,7 @@ services:
       file: docker-services.yml
       service: app
     command: ["uwsgi /opt/invenio/var/instance/uwsgi_ui.ini"]
-    image: instance:latest
+    image: ghcr.io/sharedrdm/instance:official-v13-basic
     ports:
       - "5000"
     volumes:
@@ -76,7 +76,7 @@ services:
       file: docker-services.yml
       service: app
     command: ["uwsgi /opt/invenio/var/instance/uwsgi_rest.ini"]
-    image: instance:latest
+    image: ghcr.io/sharedrdm/instance:official-v13-basic
     ports:
       - "5000"
     volumes:
@@ -89,7 +89,7 @@ services:
       file: docker-services.yml
       service: app
     command: ["celery -A invenio_app.celery worker --beat --loglevel=INFO"]
-    image: instance:latest
+    image: ghcr.io/sharedrdm/instance:official-v13-basic
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
     depends_on:
