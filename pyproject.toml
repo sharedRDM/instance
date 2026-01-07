@@ -23,5 +23,4 @@ dependencies = [
 py-modules = []
 
 [tool.uv.sources]
-invenio-override = { path = "../invenio-override", editable = true }
 invenio-curations = { git = "https://github.com/tu-graz-library/invenio-curations", branch = "main"}
