@@ -1187,6 +1187,8 @@ name = "instance"
 source = { virtual = "." }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
+    { name = "invenio-curations" },
+    { name = "invenio-global-search" },
     { name = "invenio-logging" },
     { name = "invenio-override" },
     { name = "uwsgi" },
@@ -1197,8 +1199,10 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "==13.0.0" },
+    { name = "invenio-curations", git = "https://github.com/tu-graz-library/invenio-curations?branch=main" },
+    { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
-    { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=main" },
+    { name = "invenio-override", editable = "../invenio-override" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
     { name = "uwsgitop", specifier = ">=0.11" },
@@ -1499,6 +1503,17 @@ wheels = [
 ]
 
 [[package]]
+name = "invenio-curations"
+version = "0.4.0"
+source = { git = "https://github.com/tu-graz-library/invenio-curations?branch=main#cd91640ac9c36ff7d73306ef4507de45d97ee66f" }
+dependencies = [
+    { name = "invenio-drafts-resources" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-requests" },
+    { name = "nh3" },
+]
+
+[[package]]
 name = "invenio-db"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1785,7 +1800,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.6"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#d5a52a6ac35697a99b060f0fced48caf5847d854" }
+source = { editable = "../invenio-override" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
@@ -1793,6 +1808,25 @@ dependencies = [
     { name = "opensearch-dsl" },
     { name = "opensearch-py" },
 ]
+
+[package.metadata]
+requires-dist = [
+    { name = "invenio-app", marker = "extra == 'tests'", specifier = ">=2.1.0,<3.0.0" },
+    { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = ">=13.0.0b3.dev2,<13.1.dev0" },
+    { name = "invenio-global-search", specifier = ">=0.3.0" },
+    { name = "invenio-global-search", extras = ["lom"], marker = "extra == 'lom'", specifier = ">=0.3.0" },
+    { name = "invenio-global-search", extras = ["lom", "marc21"], marker = "extra == 'tests'", specifier = ">=0.3.0" },
+    { name = "invenio-global-search", extras = ["marc21"], marker = "extra == 'marc21'", specifier = ">=0.3.0" },
+    { name = "invenio-previewer", marker = "extra == 'tests'", specifier = ">=2.2.0" },
+    { name = "invenio-rdm-records", specifier = ">=18.0.0" },
+    { name = "invenio-search", extras = ["opensearch2"], marker = "extra == 'opensearch2'", specifier = ">=3.0.0,<4.0.0" },
+    { name = "opensearch-dsl", specifier = ">=2.0.0,<3.0.0" },
+    { name = "opensearch-py", specifier = ">=2.0.0,<3.0.0" },
+    { name = "pytest-black-ng", marker = "extra == 'tests'", specifier = ">=0.4.0" },
+    { name = "pytest-invenio", marker = "extra == 'tests'", specifier = ">=3.3.0,<4.0.0" },
+    { name = "sphinx", marker = "extra == 'tests'", specifier = ">=4.5.0" },
+]
+provides-extras = ["lom", "marc21", "tests", "opensearch2"]
 
 [[package]]
 name = "invenio-pages"
@@ -1936,16 +1970,17 @@ wheels = [
 
 [[package]]
 name = "invenio-records-global-search"
-version = "0.3.4"
+version = "0.3.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-indexer" },
+    { name = "invenio-rdm-records" },
     { name = "invenio-records-resources" },
     { name = "invenio-search-ui" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a5/ba/cf5e382db02b2918f6afcff481c85d4638b8b1970ead4f2f0ff83af477b6/invenio_records_global_search-0.3.4.tar.gz", hash = "sha256:f869778ed1550828dd6049158b338dbaa7ded02b9e9d35a4ab0d8b3eadf73831", size = 43706 }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/5c/80dffbb8891f5c8acc43bca6a160a47474acff55987a9c000e4002d825da/invenio_records_global_search-0.3.5.tar.gz", hash = "sha256:8fd89785d8768dceac0dfaa7d22f245f11c5f05872138d0da4257f27c89c54a5", size = 45433 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/fc/3ae8972152b7a37426adfdc27d6d6dfcf5dd98dd12c9c6562c1464f87dfb/invenio_records_global_search-0.3.4-py2.py3-none-any.whl", hash = "sha256:73a7eeee65624891f03a038303ac4031cd64c07ae96584e7102f455983cd4914", size = 63720 },
+    { url = "https://files.pythonhosted.org/packages/86/c1/c0d4c20b69599777bb7a4cb4a145e63b1a97dc199443c2bd770d3bca1494/invenio_records_global_search-0.3.5-py2.py3-none-any.whl", hash = "sha256:95eb69fe46caba7defb4336076ba5d5239599972264d35a961a0559ba8fda657", size = 66240 },
 ]
 
 [[package]]
