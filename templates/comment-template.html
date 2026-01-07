@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h3> {{header}} </h3>
+
+    {% if adds|length > 0 %}
+    <h3>{{ _("Added") }}</h3>
+        <ul>
+        {% for add in adds %}
+            {% set result_items = add.diff[2] %}
+            {% for result in result_items %}
+                {% set field = result[0] %}
+                {% set values = result[1:] %}
+                {% for value in values %}
+                    <li>
+                        <strong>{{ field }}</strong>
+                        <div style="margin-left: 1em;">
+                        <span style="color: green;">New: {{ value|safe }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if changes|length > 0 %}
+    <h3>{{_("Changed")}}</h3>
+        <ul>
+        {% for change in changes %}
+            {% set result = change.diff[2] %}
+            {% set old = result[0] %}
+            {% set new = result[1] %}
+            <li>
+                <strong>{{ change.diff[1] }}</strong>
+                <div style="margin-left: 1em;">
+                <span style="color: red;">Old: {{ old|safe }}</span><br>
+                <span style="color: green;">New: {{ new|safe }}</span>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if removes|length > 0 %}
+    <h3>{{ _("Removed") }}</h3>
+        <ul>
+        {% for remove in removes %}
+            {% set result_items = remove.diff[2] %}
+            {% for result in result_items %}
+                {% set values = result[1:] %}
+                {% for value in values %}
+                {% if remove.diff[1] == "metadata" %}
+                    {% set field = result[0] %}
+                {% else %}
+                    {% set field = remove.diff[1] %}
+                {% endif %}
+                    <li>
+                        <strong>{{ field }}</strong>
+                        <div style="margin-left: 1em;">
+                        <span style="color: red;">{{ value|safe }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
