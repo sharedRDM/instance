@@ -120,6 +120,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-mug
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:official-v13-mug
           labels: ${{ steps.meta.outputs.labels }}
 
 
