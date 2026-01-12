@@ -1,0 +1,15 @@
+cyverse:
+  title: "Cyverse SSO"
+  description: Cyverse SSO
+  base_url: https://keycloak.cyverse.at
+  realm: CyVerse
+  app_key: CYVERSE_KEYCLOAK_APP_CREDENTIALS
+  legacy_url_path: False
+
+meduni:
+  title: Meduni SSO
+  description: Meduni SSO
+  base_url: https://openid.medunigraz.at/
+  realm: invenioRDM
+  app_key: KEYCLOAK_APP_CREDENTIALS
+  legacy_url_path: False
