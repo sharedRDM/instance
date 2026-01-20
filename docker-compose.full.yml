@@ -40,14 +40,17 @@ services:
       file: docker-services.yml
       service: opensearch-dashboards
   pgadmin:
-    extends:
-      file: docker-services.yml
-      service: pgadmin
+     extends:
+       file: docker-services.yml
+       service: pgadmin
   # Frontend
   frontend:
-    extends:
-      file: docker-services.yml
-      service: frontend
+    #extends:
+      #file: docker-services.yml
+      #service: frontend
+    build: ./docker/nginx/
+    image: instance-frontend
+    restart: "unless-stopped"
     volumes:
       - static_data:/opt/invenio/var/instance/static
     depends_on:
@@ -58,11 +61,11 @@ services:
       - "443:443"
   # UI Application
   web-ui:
-    extends:
-      file: docker-services.yml
-      service: app
+    #extends:
+      #file: docker-services.yml
+      #service: app
     command: ["uwsgi /opt/invenio/var/instance/uwsgi_ui.ini"]
-    image: ghcr.io/sharedrdm/instance:official-v13-basic
+    image: ghcr.io/sharedrdm/instance:dev-mug
     ports:
       - "5000"
     volumes:
@@ -72,11 +75,11 @@ services:
 
   # API Rest Application
   web-api:
-    extends:
-      file: docker-services.yml
-      service: app
+    #extends:
+      #file: docker-services.yml
+      #service: app
     command: ["uwsgi /opt/invenio/var/instance/uwsgi_rest.ini"]
-    image: ghcr.io/sharedrdm/instance:official-v13-basic
+    image: ghcr.io/sharedrdm/instance:dev-mug
     ports:
       - "5000"
     volumes:
@@ -85,11 +88,11 @@ services:
 
   # Worker
   worker:
-    extends:
-      file: docker-services.yml
-      service: app
+    #extends:
+      #file: docker-services.yml
+      #service: app
     command: ["celery -A invenio_app.celery worker --beat --loglevel=INFO"]
-    image: ghcr.io/sharedrdm/instance:official-v13-basic
+    image: ghcr.io/sharedrdm/instance:dev-mug
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
     depends_on:
