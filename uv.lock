@@ -1258,7 +1258,7 @@ requires-dist = [
     { name = "invenio-curations", git = "https://github.com/tu-graz-library/invenio-curations?branch=main" },
     { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
-    { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=main" },
+    { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=fix-curation-permissions" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
     { name = "uwsgitop", specifier = ">=0.11" },
@@ -1855,7 +1855,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.6"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#988917c76e430497f36e74849785c6bd53b25c05" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=fix-curation-permissions#9cc475ac2a0026a0ed43ad9543ee654269797dfa" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
