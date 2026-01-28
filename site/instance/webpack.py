@@ -10,6 +10,7 @@ theme = WebpackThemeBundle(
         "semantic-ui": dict(
             entry={
                 # Add your webpack entrypoints
+                "invenio-app-rdm-overrides": "./js/invenio_app_rdm/overridableRegistry/mapping.js",
             },
         ),
     },
