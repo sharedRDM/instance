@@ -24,4 +24,4 @@ py-modules = []
 
 [tool.uv.sources]
 invenio-curations = { git = "https://github.com/tu-graz-library/invenio-curations", branch = "main" }
-invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "fix-curation-permissions"}
+invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "fix-curation-permissions" }

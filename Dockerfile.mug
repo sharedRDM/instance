@@ -19,11 +19,15 @@ COPY ./themes/MUG/templates/ ${INVENIO_INSTANCE_PATH}/templates/
 COPY themes/MUG/variables.less /opt/env/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
 COPY themes/MUG/overrides.less /opt/env/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
 
+# Copy MUG config BEFORE webpack so it picks up curation settings
+COPY ./themes/MUG/invenio.cfg ${INVENIO_INSTANCE_PATH}/invenio.cfg
+
 RUN invenio collect --verbose && invenio webpack create
 
 WORKDIR ${INVENIO_INSTANCE_PATH}/assets
 RUN pnpm install
 RUN pnpm run build
+
 
 # STAGE 2
 FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
@@ -31,13 +35,14 @@ FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
 COPY --from=builder ${VIRTUAL_ENV}/lib ${VIRTUAL_ENV}/lib
 COPY --from=builder ${VIRTUAL_ENV}/bin ${VIRTUAL_ENV}/bin
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/app_data ${INVENIO_INSTANCE_PATH}/app_data
+COPY --from=builder ${INVENIO_INSTANCE_PATH}/assets ${INVENIO_INSTANCE_PATH}/assets
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/static
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/templates
 
 WORKDIR ${WORKING_DIR}/src
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
-# invenio.cfg already copied in builder stage, ensure it's in final location
+# Use MUG config (copied after webpack build so it's available for runtime)
 COPY ./themes/MUG/invenio.cfg ${INVENIO_INSTANCE_PATH}
 RUN chown invenio:invenio .
 

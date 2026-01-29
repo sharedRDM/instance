@@ -5,9 +5,12 @@
 // under the terms of the MIT License; see LICENSE file for more details.
 
 /**
- * Add here all the overridden components of your app.
+ * Curation component overrides for InvenioRDM.
+ * These are imported and bundled from invenio-override package.
  */
 
+// Import curation components from invenio-override's bundle
+// (which includes the full implementation with invenio-curations)
 import { DepositBox } from "@js/invenio_curations/deposit/DepositBox";
 import { curationComponentOverrides } from "@js/invenio_curations/requests";
 
