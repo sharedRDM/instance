@@ -724,14 +724,14 @@ wheels = [
 
 [[package]]
 name = "faker"
-version = "40.1.2"
+version = "40.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5e/77/1c3ff07b6739b9a1d23ca01ec0a90a309a33b78e345a3eb52f9ce9240e36/faker-40.1.2.tar.gz", hash = "sha256:b76a68163aa5f171d260fc24827a8349bc1db672f6a665359e8d0095e8135d30", size = 1949802, upload-time = "2026-01-13T20:51:49.917Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fc/7e/dccb7013c9f3d66f2e379383600629fec75e4da2698548bdbf2041ea4b51/faker-40.4.0.tar.gz", hash = "sha256:76f8e74a3df28c3e2ec2caafa956e19e37a132fdc7ea067bc41783affcfee364", size = 1952221, upload-time = "2026-02-06T23:30:15.515Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/46/ec/91a434c8a53d40c3598966621dea9c50512bec6ce8e76fa1751015e74cef/faker-40.1.2-py3-none-any.whl", hash = "sha256:93503165c165d330260e4379fd6dc07c94da90c611ed3191a0174d2ab9966a42", size = 1985633, upload-time = "2026-01-13T20:51:47.982Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/63/58efa67c10fb27810d34351b7a10f85f109a7f7e2a07dc3773952459c47b/faker-40.4.0-py3-none-any.whl", hash = "sha256:486d43c67ebbb136bc932406418744f9a0bdf2c07f77703ea78b58b77e9aa443", size = 1987060, upload-time = "2026-02-06T23:30:13.44Z" },
 ]
 
 [[package]]
@@ -1248,6 +1248,7 @@ dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-logging" },
     { name = "invenio-override" },
+    { name = "setuptools" },
     { name = "uwsgi" },
     { name = "uwsgi-tools" },
     { name = "uwsgitop" },
@@ -1260,6 +1261,7 @@ requires-dist = [
     { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
     { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=main" },
+    { name = "setuptools", specifier = "<82" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
     { name = "uwsgitop", specifier = ">=0.11" },
@@ -1861,7 +1863,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.6"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#988917c76e430497f36e74849785c6bd53b25c05" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=main#592a3146363376abeebe0f2c25d563755bd09658" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
@@ -1903,7 +1905,7 @@ wheels = [
 
 [[package]]
 name = "invenio-previewer"
-version = "3.6.0"
+version = "3.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "charset-normalizer" },
@@ -1918,9 +1920,9 @@ dependencies = [
     { name = "nbconvert" },
     { name = "nbformat" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/2b/a2a88b5ef5dd45bcda9496dfd00b9f2488b01839bf63a698fd38e557f25f/invenio_previewer-3.6.0.tar.gz", hash = "sha256:12c2ecdf679e03dc3c5069f6b6945628071c2df1c2ed6d6be88fa82eba4ef0ab", size = 157603, upload-time = "2026-01-15T14:50:41.31Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0d/c8/650e0c22c012cf91b7a35cfad060ab0be70e1c4fcf6ae89afe2f90358f75/invenio_previewer-3.7.0.tar.gz", hash = "sha256:d64bfc6dd5782c26acc84d3f6127a473d93062bde18237a1b2a9a9afe1615494", size = 158156, upload-time = "2026-02-06T09:57:53.303Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/3b/5276a732ce9158fb923415006833f7e99c34eba590d786b47ad6e68576c8/invenio_previewer-3.6.0-py2.py3-none-any.whl", hash = "sha256:f253bbb1b63b11eddf18e7f0868f6091b886bf7a463e6e778d67dfc1d4bfdccd", size = 207239, upload-time = "2026-01-15T14:50:40.02Z" },
+    { url = "https://files.pythonhosted.org/packages/85/f0/25408f67a2a62b10a3bed1ece894ac36250a9e9441c836ab93c1dcfb99c9/invenio_previewer-3.7.0-py2.py3-none-any.whl", hash = "sha256:ed0104fc4d2a0a9a40c369ae86d415753de824cf17af9988cd1aaa750ff954d1", size = 207541, upload-time = "2026-02-06T09:57:52.049Z" },
 ]
 
 [[package]]
@@ -2524,16 +2526,16 @@ wheels = [
 
 [[package]]
 name = "limits"
-version = "5.6.0"
+version = "5.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "deprecated" },
     { name = "packaging" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/e5/c968d43a65128cd54fb685f257aafb90cd5e4e1c67d084a58f0e4cbed557/limits-5.6.0.tar.gz", hash = "sha256:807fac75755e73912e894fdd61e2838de574c5721876a19f7ab454ae1fffb4b5", size = 182984, upload-time = "2025-09-29T17:15:22.689Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/71/69/826a5d1f45426c68d8f6539f8d275c0e4fcaa57f0c017ec3100986558a41/limits-5.8.0.tar.gz", hash = "sha256:c9e0d74aed837e8f6f50d1fcebcf5fd8130957287206bc3799adaee5092655da", size = 226104, upload-time = "2026-02-05T07:17:35.859Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/96/4fcd44aed47b8fcc457653b12915fcad192cd646510ef3f29fd216f4b0ab/limits-5.6.0-py3-none-any.whl", hash = "sha256:b585c2104274528536a5b68864ec3835602b3c4a802cd6aa0b07419798394021", size = 60604, upload-time = "2025-09-29T17:15:18.419Z" },
+    { url = "https://files.pythonhosted.org/packages/b9/98/cb5ca20618d205a09d5bec7591fbc4130369c7e6308d9a676a28ff3ab22c/limits-5.8.0-py3-none-any.whl", hash = "sha256:ae1b008a43eb43073c3c579398bd4eb4c795de60952532dc24720ab45e1ac6b8", size = 60954, upload-time = "2026-02-05T07:17:34.425Z" },
 ]
 
 [[package]]
@@ -3137,11 +3139,11 @@ wheels = [
 
 [[package]]
 name = "parso"
-version = "0.8.5"
+version = "0.8.6"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d4/de/53e0bcf53d13e005bd8c92e7855142494f41171b34c2536b86187474184d/parso-0.8.5.tar.gz", hash = "sha256:034d7354a9a018bdce352f48b2a8a450f05e9d6ee85db84764e9b6bd96dafe5a", size = 401205, upload-time = "2025-08-23T15:15:28.028Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/81/76/a1e769043c0c0c9fe391b702539d594731a4362334cdf4dc25d0c09761e7/parso-0.8.6.tar.gz", hash = "sha256:2b9a0332696df97d454fa67b81618fd69c35a7b90327cbe6ba5c92d2c68a7bfd", size = 401621, upload-time = "2026-02-09T15:45:24.425Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/16/32/f8e3c85d1d5250232a5d3477a2a28cc291968ff175caeadaf3cc19ce0e4a/parso-0.8.5-py2.py3-none-any.whl", hash = "sha256:646204b5ee239c396d040b90f9e272e9a8017c630092bf59980beb62fd033887", size = 106668, upload-time = "2025-08-23T15:15:25.663Z" },
+    { url = "https://files.pythonhosted.org/packages/b6/61/fae042894f4296ec49e3f193aff5d7c18440da9e48102c3315e1bc4519a7/parso-0.8.6-py2.py3-none-any.whl", hash = "sha256:2c549f800b70a5c4952197248825584cb00f033b29c692671d3bf08bf380baff", size = 106894, upload-time = "2026-02-09T15:45:21.391Z" },
 ]
 
 [[package]]
@@ -3607,11 +3609,11 @@ wheels = [
 
 [[package]]
 name = "redis"
-version = "7.1.0"
+version = "7.1.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/43/c8/983d5c6579a411d8a99bc5823cc5712768859b5ce2c8afe1a65b37832c81/redis-7.1.0.tar.gz", hash = "sha256:b1cc3cfa5a2cb9c2ab3ba700864fb0ad75617b41f01352ce5779dabf6d5f9c3c", size = 4796669, upload-time = "2025-11-19T15:54:39.961Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f7/80/2971931d27651affa88a44c0ad7b8c4a19dc29c998abb20b23868d319b59/redis-7.1.1.tar.gz", hash = "sha256:a2814b2bda15b39dad11391cc48edac4697214a8a5a4bd10abe936ab4892eb43", size = 4800064, upload-time = "2026-02-09T18:39:40.292Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/89/f0/8956f8a86b20d7bb9d6ac0187cf4cd54d8065bc9a1a09eb8011d4d326596/redis-7.1.0-py3-none-any.whl", hash = "sha256:23c52b208f92b56103e17c5d06bdc1a6c2c0b3106583985a76a18f83b265de2b", size = 354159, upload-time = "2025-11-19T15:54:38.064Z" },
+    { url = "https://files.pythonhosted.org/packages/29/55/1de1d812ba1481fa4b37fb03b4eec0fcb71b6a0d44c04ea3482eb017600f/redis-7.1.1-py3-none-any.whl", hash = "sha256:f77817f16071c2950492c67d40b771fa493eb3fccc630a424a10976dbb794b7a", size = 356057, upload-time = "2026-02-09T18:39:38.602Z" },
 ]
 
 [[package]]
@@ -3866,11 +3868,11 @@ wheels = [
 
 [[package]]
 name = "setuptools"
-version = "80.10.2"
+version = "81.0.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/76/95/faf61eb8363f26aa7e1d762267a8d602a1b26d4f3a1e758e92cb3cb8b054/setuptools-80.10.2.tar.gz", hash = "sha256:8b0e9d10c784bf7d262c4e5ec5d4ec94127ce206e8738f29a437945fbc219b70", size = 1200343, upload-time = "2026-01-25T22:38:17.252Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0d/1c/73e719955c59b8e424d015ab450f51c0af856ae46ea2da83eba51cc88de1/setuptools-81.0.0.tar.gz", hash = "sha256:487b53915f52501f0a79ccfd0c02c165ffe06631443a886740b91af4b7a5845a", size = 1198299, upload-time = "2026-02-06T21:10:39.601Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/b8/f1f62a5e3c0ad2ff1d189590bfa4c46b4f3b6e49cef6f26c6ee4e575394d/setuptools-80.10.2-py3-none-any.whl", hash = "sha256:95b30ddfb717250edb492926c92b5221f7ef3fbcc2b07579bcd4a27da21d0173", size = 1064234, upload-time = "2026-01-25T22:38:15.216Z" },
+    { url = "https://files.pythonhosted.org/packages/e1/e3/c164c88b2e5ce7b24d667b9bd83589cf4f3520d97cad01534cd3c4f55fdb/setuptools-81.0.0-py3-none-any.whl", hash = "sha256:fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6", size = 1062021, upload-time = "2026-02-06T21:10:37.175Z" },
 ]
 
 [[package]]
@@ -4101,11 +4103,11 @@ wheels = [
 
 [[package]]
 name = "types-dateparser"
-version = "1.2.2.20250809"
+version = "1.3.0.20260210"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/63/54/2d2b77d1beba5bdb7faeabc7d7f0b9b2f8e428f79f45a144ad7ab87d1a29/types_dateparser-1.2.2.20250809.tar.gz", hash = "sha256:a898f5527e6c34d213bc5d85254b8246d8b1e76239ed9243711198add0c8a29c", size = 15804, upload-time = "2025-08-09T03:15:11.298Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/af/58/4a2beb4afdc2bc45aba67f07a32cc534c81d0d32f13e17d8990a1ecccc95/types_dateparser-1.3.0.20260210.tar.gz", hash = "sha256:bd2dd1a3f8cae9f3778ed65166f3d68fcb778b8a73ccef3cbcc08db5877fd938", size = 17462, upload-time = "2026-02-10T04:22:05.783Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/5a/a5cf930804f639f5f1c58434613a1bbc1bd4641e29aec07444f316b41dff/types_dateparser-1.2.2.20250809-py3-none-any.whl", hash = "sha256:f12ae46abc3085e60e16fbe55730c5acbce980cbe3b176b17b08b4cef85850ef", size = 22140, upload-time = "2025-08-09T03:15:10.234Z" },
+    { url = "https://files.pythonhosted.org/packages/d2/60/b27dbff87d24d1f8b7f98480a1d3d978f8076bf3c36bd20c51d384b8c1c8/types_dateparser-1.3.0.20260210-py3-none-any.whl", hash = "sha256:1e482e470a4d62b4c9923a174f0796b869999cf13af7752fe2036af8930014a3", size = 24921, upload-time = "2026-02-10T04:22:04.75Z" },
 ]
 
 [[package]]
@@ -4298,11 +4300,11 @@ wheels = [
 
 [[package]]
 name = "wcwidth"
-version = "0.5.3"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c2/62/a7c072fbfefb2980a00f99ca994279cb9ecf310cb2e6b2a4d2a28fe192b3/wcwidth-0.5.3.tar.gz", hash = "sha256:53123b7af053c74e9fe2e92ac810301f6139e64379031f7124574212fb3b4091", size = 157587, upload-time = "2026-01-31T03:52:10.92Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/35/a2/8e3becb46433538a38726c948d3399905a4c7cabd0df578ede5dc51f0ec2/wcwidth-0.6.0.tar.gz", hash = "sha256:cdc4e4262d6ef9a1a57e018384cbeb1208d8abbc64176027e2c2455c81313159", size = 159684, upload-time = "2026-02-06T19:19:40.919Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3c/c1/d73f12f8cdb1891334a2ccf7389eed244d3941e74d80dd220badb937f3fb/wcwidth-0.5.3-py3-none-any.whl", hash = "sha256:d584eff31cd4753e1e5ff6c12e1edfdb324c995713f75d26c29807bb84bf649e", size = 92981, upload-time = "2026-01-31T03:52:09.14Z" },
+    { url = "https://files.pythonhosted.org/packages/68/5a/199c59e0a824a3db2b89c5d2dade7ab5f9624dbf6448dc291b46d5ec94d3/wcwidth-0.6.0-py3-none-any.whl", hash = "sha256:1a3a1e510b553315f8e146c54764f4fb6264ffad731b3d78088cdb1478ffbdad", size = 94189, upload-time = "2026-02-06T19:19:39.646Z" },
 ]
 
 [[package]]
