@@ -1257,7 +1257,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "==13.0.0" },
-    { name = "invenio-curations", specifier = "==0.4.0" },
+    { name = "invenio-curations", specifier = "==0.6.0" },
     { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
     { name = "invenio-override", git = "https://github.com/sharedRDM/invenio-override?branch=main" },
@@ -1564,7 +1564,7 @@ wheels = [
 
 [[package]]
 name = "invenio-curations"
-version = "0.4.0"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-drafts-resources" },
@@ -1572,9 +1572,9 @@ dependencies = [
     { name = "invenio-requests" },
     { name = "nh3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fa/82/9bded2f2b83dbd40c7a741a8020dcb82b6a58477e39a442219e941e4a304/invenio_curations-0.4.0.tar.gz", hash = "sha256:d82a0f6b8179e16b521113a15b491ef6e23ffbe7d75dd9d1746c8f9d3841d352", size = 99017, upload-time = "2025-12-02T22:20:36.556Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/83/c9/1034c5070976e18989584766e68ebbd78718de1c29f97f167603a9cf1db0/invenio_curations-0.6.0.tar.gz", hash = "sha256:e1ba084c0f94e9c5ce1d1754ab3f05bacff1230b4769f22cc70ccc9a136ff8c7", size = 101403, upload-time = "2026-02-04T10:22:04.316Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/50/16/fc408f20bd4c92bf5ee0bfa04ddd2140b20377ececa4b9e22e49429d0e3a/invenio_curations-0.4.0-py2.py3-none-any.whl", hash = "sha256:869a214c965bc5280ef51a8a3960d4d180ce220fe28cc42b16a51553fb7d4532", size = 113889, upload-time = "2025-12-02T22:20:35.286Z" },
+    { url = "https://files.pythonhosted.org/packages/b4/2a/5bd37f26051da6dcc9179b86972065ef298fee85fb609e2d078258353d17/invenio_curations-0.6.0-py2.py3-none-any.whl", hash = "sha256:4bd9a9e262a5d1610ac6743447131f035898f30225643a48aa5eeffd5a963f35", size = 116527, upload-time = "2026-02-04T10:22:03.147Z" },
 ]
 
 [[package]]
