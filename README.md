@@ -63,7 +63,7 @@ Each image has a correspondent instance _variant_ that a user can choose to depl
 | Name | Description |
 |---|---|
 | ``Dockerfile`` | Dockerfile used to build base image, without theme. - no variant, used for local testing. |
-| ``Dockerfile.mug`` | Dockerfile used to build MUG image. (with Publications) - variant **mug** | 
+| ``Dockerfile.mug`` | Dockerfile used to build MUG image (Research Results only; no Publications). - variant **mug** | 
 | ``Dockerfile.oer`` | Dockerfile used to build Educational Resources image (OER). - variant **oer** |
 | ``Dockerfile.basic`` | Dockerfile used to base invenio-override image (no OER or Publications) and also base invenio theme (without invenio-override) - variants **basic** and **vanilla** |
 
