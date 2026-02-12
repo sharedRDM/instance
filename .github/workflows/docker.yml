@@ -53,25 +53,24 @@ jobs:
           python-version: '3.12'
 
       - name: Install uv package
+        run: pip install uv
+
+      - name: Create .venv
         run: |
-          pip install uv
+          mkdir .venv
+          uv venv .venv
 
       - name: Install invenio-override
         if: ${{ !startsWith( github.ref, 'refs/tags') }}
         run: |
-          mkdir .venv
-          uv venv .venv
           source .venv/bin/activate
-
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
             INVENIO_OVERRIDE_BRANCH="main"
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
+          uv pip install "git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}"
 
-          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
-          eval "$install_cmd"
-    
       - name: Change pyproject.toml override branch
         if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
@@ -136,24 +135,23 @@ jobs:
           python-version: '3.12'
 
       - name: Install uv package
+        run: pip install uv
+
+      - name: Create .venv
         run: |
-          pip install uv
+          mkdir .venv
+          uv venv .venv
 
       - name: Install invenio-override
         if: ${{ !startsWith( github.ref, 'refs/tags') }}
         run: |
-          mkdir .venv
-          uv venv .venv
           source .venv/bin/activate
-
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
             INVENIO_OVERRIDE_BRANCH="main"
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
-
-          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
-          eval "$install_cmd"
+          uv pip install "git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}"
 
       - name: Change pyproject.toml override branch
         if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
@@ -222,24 +220,23 @@ jobs:
           python-version: '3.12'
 
       - name: Install uv package
+        run: pip install uv
+
+      - name: Create .venv
         run: |
-          pip install uv
+          mkdir .venv
+          uv venv .venv
 
       - name: Install invenio-override
         if: ${{ !startsWith( github.ref, 'refs/tags') }}
         run: |
-          mkdir .venv
-          uv venv .venv
           source .venv/bin/activate
-
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
             INVENIO_OVERRIDE_BRANCH="main"
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
-
-          install_cmd='uv pip install git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}'
-          eval "$install_cmd"
+          uv pip install "git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}"
 
       - name: Change pyproject.toml override branch
         if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
@@ -305,18 +302,20 @@ jobs:
           python-version: '3.12'
 
       - name: Install uv package
+        run: pip install uv
+
+      - name: Create .venv
         run: |
-          pip install uv
+          mkdir .venv
+          uv venv .venv
 
       - name: Change pyproject.toml no override
         run: sed -i 's/"invenio-override ~=0.0.6",//g' pyproject.toml
 
       - name: Relock uv
         run: |
-          mkdir .venv
-          uv venv .venv
           source .venv/bin/activate
-          uv pip uninstall invenio-override
+          uv pip uninstall invenio-override || true
           uv lock --upgrade
           deactivate
           rm -rf .venv
