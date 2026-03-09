@@ -1,10 +1,10 @@
-cyverse:
+rdm:
   title: "Cyverse SSO"
   description: Cyverse SSO
   base_url: https://keycloak.cyverse.at
-  realm: CyVerse
+  realm: rdm
   app_key: CYVERSE_KEYCLOAK_APP_CREDENTIALS
-  legacy_url_path: False
+  legacy_url_path: True
 
 meduni:
   title: Meduni SSO

@@ -79,7 +79,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ ${{ !startsWith( github.ref, 'refs/tags') }} ]]; then
-            KEYCLOAK_NODE="cyverse"
+            KEYCLOAK_NODE="rdm"
           else
             KEYCLOAK_NODE="meduni"
           fi
