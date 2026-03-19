@@ -16,7 +16,7 @@ dependencies = [
     "uwsgi-tools >=1.1.1",
     "invenio-curations==0.6.2",
     "invenio-global-search>=0.3.0",
-    "invenio-override ~=0.0.7",
+    "invenio-override[marc21] ~=0.0.7",
     "setuptools <82"
 ]
 
@@ -25,4 +25,4 @@ py-modules = []
 
 [tool.uv.sources]
 # remove or comment these sources for instance releases. build only from official releases.
-invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main"}
+invenio-override = { git = "https://github.com/sharedRDM/invenio-override.git", branch = "theme-redesign" }

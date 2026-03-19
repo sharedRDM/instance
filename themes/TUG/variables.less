@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2020-2025 Graz University of Technology.
+ *   Copyright (C) 2020-2026 Graz University of Technology.
  *
  * invenio-override is free software; you can redistribute it and/or modify it
  * under the terms of the MIT License; see LICENSE file for more details.
@@ -18,27 +18,25 @@
 @accessRightClosed       : @accessRightEmbargoed;
 @accessRightMetadata     : #5e5e5e;
 
-/* Primary colors */
-@overridePrimary         : #007934;
-@overrideSecondary       : #34b233;
-@ocerridePlabels         : #ffffff;
+/* Primary colors — TU Graz Red */
+@overridePrimary         : #e4154b;
+@overrideSecondary       : #c41241;
 @overrideLabels          : #ffffff;
-@searchHighlight         : @overridePrimary;
-@labelDateBlue           : @overridePrimary;
 @overridePrimaryBt       : #dbdce0;
 @hoverOverridePrimaryBt  : #bfc0c2;
 
 /* General colors */
 @primaryBackground       : #ffffff;
-@primaryText             : #000000;
+@primaryText             : #231f20;
 
 /* Accent colors */
 @greyDark                : #393b41;
 @greyLight               : #e0e1e2;
 @labelKeywordBackground  : #e8e8e8;
 
-/* MUG-specific palette */
-@mugSearch               : @overridePrimary;
+/* Search highlight color */
+@searchHighlight         : @overridePrimary;
+@labelDateBlue           : @overridePrimary;
 @outlineRecord           : @accessRightMetadata;
 @recordText              : #6b6d74;
 @recordLightText         : #94959a;
@@ -63,12 +61,13 @@
 /* Account-specific styling (signin, signup) */
 @primaryFormAccounts           : @primaryBackground;
 @formAccountsInputPlaceholder  : silver;
+
 @fieldInputSelectionBackground : #50A2CE;
-@signInBackground              : #6b6d74;
+@signInBackground              : #231f20;
 
 /* Footer-specific styling */
-@footerGrey                    : #5e5e5e;
-@footerBottomBackground        : #f2f2f2;
+@footerGrey                    : #ffffff;
+@footerBottomBackground        : #4a4a4a;
 
 /* Record-specific styling */
 @recordVersionBackground       : #f2f2f2;
@@ -95,6 +94,10 @@
 }
 
 /* ======================================
+   Hyperlink Styling
+====================================== */
+
+/* ======================================
    Design System Tokens
 ====================================== */
 @radiusSmall: 4px;
@@ -114,10 +117,6 @@
 @pageInnerBannerPaddingBottom : 1.5rem;
 @contentGridGap               : 2rem;
 @contentGridMarginV           : 2rem;
-
-/* ======================================
-   Hyperlink Styling
-====================================== */
 
 /* Hyperlink hover and focus */
 a:focus,
