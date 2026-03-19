@@ -1,47 +1,49 @@
 {#
   Copyright (C) 2020 CERN.
   Copyright (C) 2020 Northwestern University.
-  Copyright (C) 2025 Shared RDM.
+  Copyright (C) 2026 Shared RDM.
 
   Invenio App RDM is free software; you can redistribute it and/or modify it
   under the terms of the MIT License; see LICENSE file for more details.
 #}
-{%- set title = _("Uploads") %}
-{%- set page_description = _("Manage and publish your research data, publications and other outputs.") %}
+
+{%- set title = _("Communities") %}
+{%- set page_description = _("Manage your communities and collaborate with others.") %}
 {%- extends "invenio_app_rdm/users/base.html" %}
 
-{% set active_dashboard_menu_item = 'uploads' %}
+{% set active_dashboard_menu_item = 'communities' %}
 
 {%- block javascript %}
 {{ super() }}
-{{ webpack['invenio-app-rdm-user-uploads.js'] }}
+{{ webpack['invenio-app-rdm-user-communities.js'] }}
 {%- endblock javascript %}
 
 {%- block user_dashboard_body %}
   <div
     id="invenio-search-config"
-    class="uploads-search-app"
-    data-invenio-search-config='{{ search_app_rdm_user_uploads_config(app_id="InvenioAppRdm.DashboardUploads") | tojson }}'
+    data-invenio-search-config='{{ search_app_rdm_user_communities_config(app_id="InvenioAppRdm.DashboardCommunities") | tojson }}'
+    data-can-create-community='{{ can_create_community | tojson }}'
   >
   </div>
 
-  {# Upload button — injected into the search/tabs row by JS after React renders #}
-  <div id="upload-new-circle" class="upload-new-wrap" style="display:none;">
-    <a href="{{ url_for('invenio_app_rdm_records.deposit_create') }}"
+  {% if can_create_community %}
+  {# New community button — injected into the search/tabs row by JS after React renders #}
+  <div id="new-community-circle" class="upload-new-wrap" style="display:none;">
+    <a href="{{ url_for('invenio_communities.communities_new') }}"
        class="upload-new-circle"
-       title="{{ _('New upload') }}">
-      <i class="upload icon"></i>
+       title="{{ _('New community') }}">
+      <i class="plus icon"></i>
     </a>
     <div class="upload-new-label-wrap">
-      <span class="upload-new-title">{{ _("New upload") }}</span>
-      <span class="upload-new-desc">{{ _("Share your research") }}</span>
+      <span class="upload-new-title">{{ _("New community") }}</span>
+      <span class="upload-new-desc">{{ _("Create a shared space") }}</span>
     </div>
   </div>
 
   <script>
   (function () {
-    function injectUploadCircle() {
-      var circle = document.getElementById('upload-new-circle');
+    function injectCommunityCircle() {
+      var circle = document.getElementById('new-community-circle');
       if (!circle) return;
       var filterRow = document.querySelector('#invenio-search-config .ui.grid > .row.computer.only');
       if (!filterRow) return;
@@ -54,18 +56,18 @@
       firstCol.appendChild(circle);
     }
 
-    /* React renders asynchronously — poll until the row exists */
     var attempts = 0;
     var interval = setInterval(function () {
       attempts++;
       var row = document.querySelector('#invenio-search-config .ui.grid > .row.computer.only');
       if (row) {
         clearInterval(interval);
-        injectUploadCircle();
+        injectCommunityCircle();
       } else if (attempts > 40) {
         clearInterval(interval);
       }
     }, 100);
   })();
   </script>
+  {% endif %}
 {%- endblock user_dashboard_body %}

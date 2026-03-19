@@ -27,11 +27,16 @@ login & signup page title
 /* global font styling and base size */
 html {
   font-size: 16px;
+  height: 100%;
 }
 
 body {
   font-size: 1rem;
   line-height: 1.6;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 *,
@@ -115,7 +120,7 @@ pre {
 /* search button */
 .ui.search.button {
   background-color: @overridePrimary;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 @radiusPill @radiusPill 0;
   transition: background-color 0.2s ease;
 }
 
@@ -202,11 +207,15 @@ pre {
   border-color: @searchHighlight !important;
 }
 
-/* search input in header */
+/* search input — pill shape globally */
+.ui.action.input > input:first-child {
+  border-radius: @radiusPill 0 0 @radiusPill !important;
+}
+
 .ui.action.input:not([class*="left action"]) > .button:last-child,
 .ui.action.input:not([class*="left action"]) > .buttons:last-child > .button,
 .ui.action.input:not([class*="left action"]) > .dropdown:last-child {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 @radiusPill @radiusPill 0;
 }
 
 /* ======================================
@@ -241,12 +250,19 @@ pre {
 .ui.label.access-status {
   &.open {
     background-color: @accessRightOpen;
+    color: #ffffff;
+  }
+  &.restricted {
+    background-color: @accessRightRestricted;
+    color: #ffffff;
   }
   &.embargoed {
     background-color: @accessRightEmbargoed;
+    color: #000000;
   }
   &.metadata-only {
     background-color: @accessRightMetadata;
+    color: #ffffff;
   }
 }
 
@@ -420,6 +436,7 @@ html {
    Dropdown menus
 ====================================== */
 .ui.dropdown .menu {
+  background-color: #ffffff;
   border-radius: @radiusSmall;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border: @borderSubtle;
@@ -441,4 +458,15 @@ html {
 
 .ui.pagination.menu .item:hover {
   background-color: fade(@overridePrimary, 8%);
+}
+
+/* ======================================
+   Frontpage reasons — icon & button
+====================================== */
+.fp-reason-svg {
+  stroke: #ffffff;
+}
+
+.fp-reasons-more {
+  border-color: @overridePrimary;
 }

@@ -19,7 +19,7 @@ COPY ./app_data/ ${INVENIO_INSTANCE_PATH}/app_data/
 COPY ./assets/ ${INVENIO_INSTANCE_PATH}/assets/
 COPY ./static/ ${INVENIO_INSTANCE_PATH}/static/
 COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
-# COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
+COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 
 # copy TUG-specific templates (e.g., comment-template.html)
 COPY ./themes/TUG/templates/ ${INVENIO_INSTANCE_PATH}/templates/
