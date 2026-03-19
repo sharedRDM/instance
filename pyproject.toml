@@ -14,7 +14,7 @@ dependencies = [
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
     "uwsgi-tools >=1.1.1",
-    "invenio-curations==0.6.0",
+    "invenio-curations==0.6.2",
     "invenio-global-search>=0.3.0",
     "invenio-override ~=0.0.7",
     "setuptools <82"
@@ -24,4 +24,3 @@ dependencies = [
 py-modules = []
 
 [tool.uv.sources]
-#invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main"}
