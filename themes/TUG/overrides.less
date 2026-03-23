@@ -117,6 +117,12 @@ pre {
    Button styling
 ====================================== */
 
+/* clip pill input children to prevent background bleeding at corners */
+.ui.action.input {
+  border-radius: @radiusPill !important;
+  overflow: hidden !important;
+}
+
 /* search button */
 .ui.search.button {
   background-color: @overridePrimary;
@@ -172,6 +178,27 @@ pre {
   color: @greyDark;
 }
 
+/* deposit sidebar — positive buttons green (Start publication process) */
+#deposit-form .deposit-sidebar .ui.positive.button,
+#deposit-form .deposit-sidebar .ui.positive.buttons .button {
+  background-color: @overridePrimary;
+  color: @overrideLabels;
+}
+
+#deposit-form .deposit-sidebar .ui.positive.button:hover,
+#deposit-form .deposit-sidebar .ui.positive.buttons .button:hover {
+  background-color: @overrideSecondary;
+  color: #ffffff;
+}
+
+/* deposit notification — centered, width fits content */
+#deposit-form .ui.message.flashed.top.attached,
+.ui.message.flashed.top.attached[id$="-feedback-div"] {
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* login button — outlined pill style */
 .login-btn {
   background-color: transparent !important;
@@ -205,6 +232,11 @@ pre {
 
 .ui.input > input:hover {
   border-color: @searchHighlight !important;
+}
+
+/* frontpage search — solid white background */
+.frontpage-search-wrapper .ui.icon.input > input {
+  background-color: #ffffff !important;
 }
 
 /* search input — pill shape globally */
@@ -464,9 +496,10 @@ html {
    Frontpage reasons — icon & button
 ====================================== */
 .fp-reason-svg {
-  stroke: #ffffff;
+  stroke: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .fp-reasons-more {
-  border-color: @overridePrimary;
+  border-color: fade(@overridePrimary, 80%);
 }
