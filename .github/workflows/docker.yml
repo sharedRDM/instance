@@ -3,6 +3,7 @@ name: build and push docker image
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  OVERRIDE_VERSION: 0.0.7
 
 on:
   push:
@@ -303,7 +304,7 @@ jobs:
           uv venv .venv
 
       - name: Change pyproject.toml no override
-        run: sed -i 's/"invenio-override ~=0.0.6",//g' pyproject.toml
+        run: sed -i "s/\"invenio-override ~=${OVERRIDE_VERSION}\",//g" pyproject.toml
 
       - name: Relock uv
         run: |

@@ -24,3 +24,5 @@ dependencies = [
 py-modules = []
 
 [tool.uv.sources]
+# remove or comment these sources for instance releases. build only from official releases.
+invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main"}
