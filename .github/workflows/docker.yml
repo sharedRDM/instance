@@ -48,7 +48,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
@@ -113,6 +113,99 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
 
+  build-and-push-tug:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install uv package
+        run: pip install uv
+
+      - name: Create .venv
+        run: |
+          mkdir .venv
+          uv venv .venv
+
+      - name: Install invenio-override
+        if: ${{ !startsWith( github.ref, 'refs/tags') }}
+        run: |
+          source .venv/bin/activate
+          if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
+          else
+            INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
+          fi
+          uv pip install "git+https://github.com/sharedRDM/invenio-override@${INVENIO_OVERRIDE_BRANCH}"
+
+      - name: Change pyproject.toml override branch
+        if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
+        run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
+
+      - name: Set keycloak in invenio.cfg via script
+        run: |
+          source .venv/bin/activate
+          if [[ ${{ !startsWith( github.ref, 'refs/tags') }} ]]; then
+            KEYCLOAK_NODE="rdm"
+          else
+            KEYCLOAK_NODE="meduni"
+          fi
+          python auth/yaml2py.py --source-filename auth/kc-settings-pool.yaml --dest-filename themes/TUG/invenio.cfg --node $KEYCLOAK_NODE --placeholder "<insert_keycloak_config_via_ci>"
+          deactivate
+
+      - name: Relock uv
+        run: |
+          source .venv/bin/activate
+          uv lock --upgrade
+          deactivate
+          rm -rf .venv
+
+      - name: Convert repository name to lowercase
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      - name: Determine Docker tag (from tag or branch)
+        id: get_tag
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG_NAME="${GITHUB_REF#refs/tags/}"
+          else
+            TAG_NAME="${GITHUB_REF#refs/heads/}"
+          fi
+          echo "DOCKER_TAG=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push TUG Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          file: Dockerfile.tug
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-tug
+          labels: ${{ steps.meta.outputs.labels }}
+
+
   build-and-push-oer:
     runs-on: ubuntu-22.04
     permissions:
@@ -141,7 +234,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
@@ -226,7 +319,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi

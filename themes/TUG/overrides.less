@@ -31,9 +31,11 @@ html {
 }
 
 body {
-  font-size: 1rem;
+  font-size: @font-size-base;
   line-height: 1.6;
   background-color: #f0f0f0;
+  background-image: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -62,13 +64,13 @@ pre,
 }
 
 /* consistent heading sizes */
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
-h4 { font-size: 1.1rem; }
+h1 { font-size: @font-size-2xl; }
+h2 { font-size: @font-size-xl; }
+h3 { font-size: @font-size-lg; }
+h4 { font-size: @font-size-nav; }
 
 pre {
-  font-size: 14px;
+  font-size: @font-size-sm;
 }
 
 /* ======================================
@@ -272,8 +274,10 @@ pre {
    Sidebar
 ====================================== */
 .ui.rdm-sidebar {
-  background-color: unset;
-  box-shadow: unset;
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
 }
 
 /* ======================================
@@ -382,7 +386,7 @@ pre {
   box-shadow: @cardShadowRest;
 
   h4 a {
-    font-size: 1.15rem;
+    font-size: @font-size-nav;
     color: @overridePrimary;
     font-weight: 600;
     transition: color @transitionFast ease;
@@ -390,7 +394,7 @@ pre {
 
   .record-card-meta {
     color: @recordText;
-    font-size: 0.9rem;
+    font-size: @font-size-sm;
     margin-top: 0.75rem;
     display: flex;
     justify-content: space-between;
@@ -401,7 +405,7 @@ pre {
     display: flex;
     gap: 1rem;
     color: @recordLightText;
-    font-size: 0.9rem;
+    font-size: @font-size-sm;
 
     i.icon {
       margin-right: 2px;
@@ -417,7 +421,7 @@ pre {
 }
 
 .menus {
-  font-size: 16.8px;
+  font-size: @font-size-base;
 }
 
 /* ======================================
@@ -496,10 +500,93 @@ html {
    Frontpage reasons — icon & button
 ====================================== */
 .fp-reason-svg {
-  stroke: #ffffff !important;
-  color: #ffffff !important;
+  stroke: @primaryText !important;
+  color: @primaryText !important;
 }
 
-.fp-reasons-more {
-  border-color: fade(@overridePrimary, 80%);
+.header-topbar-inner {
+  background: #ffffff !important;
+}
+
+/* ======================================
+   Global pill/outline button utility —
+   Use .btn-outline-pill on any element
+====================================== */
+.btn-outline-pill,
+.computer-flex-header a.ui.button,
+#request-actions .ui.button:not(.primary):not(.positive),
+.ui.modal .actions .ui.left.floated.button,
+#jump-btn.ui.button {
+  background: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.75) !important;
+  border-radius: @radiusPill !important;
+  color: @primaryText !important;
+  font-size: @font-size-sm !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  /* Fix Semantic UI labeled icon button: remove extra left padding */
+  padding-left: 1em !important;
+  padding-right: 1em !important;
+
+  /* Fix Semantic UI labeled icon button: icon has abs position + background */
+  i.icon {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: inherit !important;
+    opacity: 0.7;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin-right: 0.4em !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  &:hover {
+    background: transparent !important;
+    border-color: @overridePrimary !important;
+    color: @overridePrimary !important;
+  }
+}
+
+/* ======================================
+   Request detail — tab panels
+====================================== */
+#conversation-tab-panel,
+#record-tab-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+#conversation-tab-panel {
+  padding-top: 1rem !important;
+}
+
+/* ======================================
+   Request detail — grid columns as cards
+   Scoped to top-level React grid only to avoid
+   nested card-in-card in the Record preview tab
+====================================== */
+#request-detail > .ui.grid > .column {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  padding: 1.5rem !important;
+}
+
+/* ======================================
+   Record detail — remove default Semantic UI
+   grid padding from date row and sidebar
+====================================== */
+#record-info .ui.grid.middle.aligned {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.ui.relaxed.grid > .row > .column.sidebar {
+  padding-top: 0 !important;
 }

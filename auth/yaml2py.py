@@ -8,10 +8,10 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--source-filename', type=str, required=True)
-parser.add_argument('--dest-filename', type=str, required=True)
-parser.add_argument('--node', type=str, required=True)
-parser.add_argument('--placeholder', type=str, required=True)
+parser.add_argument("--source-filename", type=str, required=True)
+parser.add_argument("--dest-filename", type=str, required=True)
+parser.add_argument("--node", type=str, required=True)
+parser.add_argument("--placeholder", type=str, required=True)
 
 args = parser.parse_args()
 
@@ -24,7 +24,7 @@ with open(args.source_filename) as f:
                 if isinstance(val, str):
                     auth_config += f'{node_key}="{val}",\n'
                 else:
-                    auth_config += f'{node_key}={val},\n'
+                    auth_config += f"{node_key}={val},\n"
 
 with open(args.dest_filename, "r") as f:
     config = f.read()

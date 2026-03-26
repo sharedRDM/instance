@@ -76,3 +76,4 @@ celerybeat-schedule*
 
 # IDEs
 .idea/
+*.code-workspace
