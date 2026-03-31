@@ -5,12 +5,14 @@ COPY pyproject.toml uv.lock ./
 
 RUN uv sync --frozen
 
+ARG TUG_ENV=dev
+
 # to use rspack
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
 # Replace variables.less
-COPY themes/TUG/variables.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
-COPY themes/TUG/overrides.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
+COPY themes/TUG/base/variables.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
+COPY themes/TUG/base/overrides.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
 
 RUN invenio collect --verbose && invenio webpack create
 
@@ -22,7 +24,7 @@ COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
 COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
 
 # copy TUG-specific templates (e.g., comment-template.html)
-COPY ./themes/TUG/templates/ ${INVENIO_INSTANCE_PATH}/templates/
+COPY ./themes/TUG/base/templates/ ${INVENIO_INSTANCE_PATH}/templates/
 
 WORKDIR ${INVENIO_INSTANCE_PATH}/assets
 RUN pnpm install
@@ -41,7 +43,7 @@ COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/
 WORKDIR ${WORKING_DIR}/src
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 # invenio.cfg already copied in builder stage, ensure it's in final location
-COPY ./themes/TUG/invenio.cfg ${INVENIO_INSTANCE_PATH}
+COPY ./themes/TUG/$TUG_ENV/invenio.cfg ${INVENIO_INSTANCE_PATH}
 RUN chown invenio:invenio .
 
 USER invenio

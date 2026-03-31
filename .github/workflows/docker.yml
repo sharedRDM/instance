@@ -113,7 +113,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
 
-  build-and-push-tug:
+  build-and-push-tugdev:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -154,12 +154,8 @@ jobs:
       - name: Set keycloak in invenio.cfg via script
         run: |
           source .venv/bin/activate
-          if [[ ${{ !startsWith( github.ref, 'refs/tags') }} ]]; then
-            KEYCLOAK_NODE="rdm"
-          else
-            KEYCLOAK_NODE="meduni"
-          fi
-          python auth/yaml2py.py --source-filename auth/kc-settings-pool.yaml --dest-filename themes/TUG/invenio.cfg --node $KEYCLOAK_NODE --placeholder "<insert_keycloak_config_via_ci>"
+          KEYCLOAK_NODE="rdm"
+          python auth/yaml2py.py --source-filename auth/kc-settings-pool.yaml --dest-filename themes/TUG/dev/invenio.cfg --node $KEYCLOAK_NODE --placeholder "<insert_keycloak_config_via_ci>"
           deactivate
 
       - name: Relock uv
@@ -200,9 +196,11 @@ jobs:
         with:
           context: .
           file: Dockerfile.tug
+          build-args: |
+            TUG_ENV=dev
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-tug
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-tugdev
           labels: ${{ steps.meta.outputs.labels }}
 
 
