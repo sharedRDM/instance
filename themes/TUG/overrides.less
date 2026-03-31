@@ -137,7 +137,7 @@ pre {
   color: #ffffff;
 }
 
-/* primary buttons — smooth transitions */
+/* primary buttons */
 .ui.primary.buttons .button,
 .ui.primary.button {
   background-color: @overridePrimary;
@@ -147,21 +147,6 @@ pre {
 
 .ui.primary.buttons .button:hover,
 .ui.primary.button:hover {
-  background-color: @overrideSecondary;
-  color: #ffffff;
-  text-shadow: none;
-}
-
-.ui.primary.buttons .button:active,
-.ui.primary.button:active {
-  background-color: @overrideSecondary;
-  color: #ffffff;
-  text-shadow: none;
-  transform: translateY(0);
-}
-
-.ui.primary.buttons .button:focus,
-.ui.primary.button:focus {
   background-color: @overrideSecondary;
   color: #ffffff;
   text-shadow: none;
@@ -183,13 +168,37 @@ pre {
 /* deposit sidebar — positive buttons green (Start publication process) */
 #deposit-form .deposit-sidebar .ui.positive.button,
 #deposit-form .deposit-sidebar .ui.positive.buttons .button {
-  background-color: @overridePrimary;
-  color: @overrideLabels;
+  background-color: #048622;
+  color: #ffffff;
 }
 
 #deposit-form .deposit-sidebar .ui.positive.button:hover,
 #deposit-form .deposit-sidebar .ui.positive.buttons .button:hover {
-  background-color: @overrideSecondary;
+  background-color: #048622;
+  color: #ffffff;
+}
+
+/* deposit sidebar — share button blue (exclude SubmitReview which must stay green) */
+#deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]),
+#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]) {
+  background-color: @labelDateBlue;
+  color: #ffffff;
+}
+
+#deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]):hover,
+#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]):hover {
+  background-color: #025faa;
+  color: #ffffff;
+}
+
+/* deposit sidebar — Start publication process button green */
+#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"] {
+  background-color: #048622;
+  color: #ffffff;
+}
+
+#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"]:hover {
+  background-color: #048622;
   color: #ffffff;
 }
 
@@ -508,47 +517,6 @@ html {
   background: #ffffff !important;
 }
 
-/* ======================================
-   Global pill/outline button utility —
-   Use .btn-outline-pill on any element
-====================================== */
-.btn-outline-pill,
-.computer-flex-header a.ui.button,
-#request-actions .ui.button:not(.primary):not(.positive),
-.ui.modal .actions .ui.left.floated.button,
-#jump-btn.ui.button {
-  background: transparent !important;
-  border: 1px solid rgba(0, 0, 0, 0.75) !important;
-  border-radius: @radiusPill !important;
-  color: @primaryText !important;
-  font-size: @font-size-sm !important;
-  font-weight: 500 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  /* Fix Semantic UI labeled icon button: remove extra left padding */
-  padding-left: 1em !important;
-  padding-right: 1em !important;
-
-  /* Fix Semantic UI labeled icon button: icon has abs position + background */
-  i.icon {
-    background: transparent !important;
-    box-shadow: none !important;
-    color: inherit !important;
-    opacity: 0.7;
-    position: static !important;
-    width: auto !important;
-    height: auto !important;
-    margin-right: 0.4em !important;
-    margin-left: 0 !important;
-    padding: 0 !important;
-  }
-
-  &:hover {
-    background: transparent !important;
-    border-color: @overridePrimary !important;
-    color: @overridePrimary !important;
-  }
-}
 
 /* ======================================
    Request detail — tab panels
@@ -563,6 +531,11 @@ html {
 
 #conversation-tab-panel {
   padding-top: 1rem !important;
+}
+
+#record-tab-panel .ui.relaxed.grid {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 /* ======================================

@@ -1251,7 +1251,7 @@ dependencies = [
     { name = "invenio-curations" },
     { name = "invenio-global-search" },
     { name = "invenio-logging" },
-    { name = "invenio-override", extra = ["marc21"] },
+    { name = "invenio-override", extra = ["lom", "marc21"] },
     { name = "setuptools" },
     { name = "uwsgi" },
     { name = "uwsgi-tools" },
@@ -1261,10 +1261,10 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "==13.0.0" },
-    { name = "invenio-curations", specifier = "==0.6.2" },
+    { name = "invenio-curations", git = "https://github.com/lpandath/invenio-curations?branch=feat-curator-request-overview" },
     { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
-    { name = "invenio-override", extras = ["marc21"], git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign" },
+    { name = "invenio-override", extras = ["lom", "marc21"], git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign" },
     { name = "setuptools", specifier = "<82" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
@@ -1568,17 +1568,13 @@ wheels = [
 
 [[package]]
 name = "invenio-curations"
-version = "0.6.2"
-source = { registry = "https://pypi.org/simple" }
+version = "0.8.3"
+source = { git = "https://github.com/lpandath/invenio-curations?branch=feat-curator-request-overview#5ce6596ac3c5b8de401bafd372686fe74af5e590" }
 dependencies = [
     { name = "invenio-drafts-resources" },
     { name = "invenio-rdm-records" },
     { name = "invenio-requests" },
     { name = "nh3" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/96/47/b3f3034f14955f78f59913f0b777a9475ecfca2b0081477af1915e9e2f51/invenio_curations-0.6.2.tar.gz", hash = "sha256:ec84b19b575dc54982b3b6d7160dfb7e15c8c276dd48e58aa22a5eb56be46319", size = 102428 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2e/34/8954508810c7159c4d01c51140c60117d804c4adc929c4e0998058a30e9b/invenio_curations-0.6.2-py2.py3-none-any.whl", hash = "sha256:e397a3530c8e5453abde399e32b9cae3fd18226f0f491bec509cece9b2b4f051", size = 117004 },
 ]
 
 [[package]]
@@ -1697,6 +1693,9 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+lom = [
+    { name = "invenio-records-lom" },
+]
 marc21 = [
     { name = "invenio-records-marc21" },
 ]
@@ -1872,7 +1871,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.7"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#cb96b1f3a35419bf1a2d040eb38cdc6fe1bcbff0" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#bd972b97866040a92df22c3e1dae065303e08c95" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
@@ -1882,6 +1881,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+lom = [
+    { name = "invenio-global-search", extra = ["lom"] },
+]
 marc21 = [
     { name = "invenio-global-search", extra = ["marc21"] },
 ]
@@ -2038,6 +2040,21 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e0/5c/80dffbb8891f5c8acc43bca6a160a47474acff55987a9c000e4002d825da/invenio_records_global_search-0.3.5.tar.gz", hash = "sha256:8fd89785d8768dceac0dfaa7d22f245f11c5f05872138d0da4257f27c89c54a5", size = 45433 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/86/c1/c0d4c20b69599777bb7a4cb4a145e63b1a97dc199443c2bd770d3bca1494/invenio_records_global_search-0.3.5-py2.py3-none-any.whl", hash = "sha256:95eb69fe46caba7defb4336076ba5d5239599972264d35a961a0559ba8fda657", size = 66240 },
+]
+
+[[package]]
+name = "invenio-records-lom"
+version = "0.19.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "invenio-previewer" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-stats" },
+    { name = "marshmallow" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2f/a1/8e60585b7c4c222746e9b30db23913a5bd7d40e9b4e62ce030a5c5dcd94c/invenio_records_lom-0.19.4.tar.gz", hash = "sha256:4a71c917e4b4407c527472d6a1b2800e7e252c29fc241c232aba7dd649be170b", size = 181264 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/c4/85622611d7e3d7ea15035bd8b68de7f4a0fc3821638c920b60f49897c4d2/invenio_records_lom-0.19.4-py2.py3-none-any.whl", hash = "sha256:9e7d6c98f3a8c38ae55bd733a55fca07f46ed3ba87e78cf238700194a572b5f4", size = 238842 },
 ]
 
 [[package]]
