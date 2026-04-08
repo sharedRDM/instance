@@ -40,10 +40,12 @@ COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/sta
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/templates
 
+ARG TUG_ENV=dev
+
 WORKDIR ${WORKING_DIR}/src
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 # invenio.cfg already copied in builder stage, ensure it's in final location
-COPY ./themes/TUG/$TUG_ENV/invenio.cfg ${INVENIO_INSTANCE_PATH}
+COPY ./themes/TUG/${TUG_ENV}/invenio.cfg ${INVENIO_INSTANCE_PATH}
 RUN chown invenio:invenio .
 
 USER invenio

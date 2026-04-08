@@ -165,17 +165,19 @@ pre {
   color: @greyDark;
 }
 
-/* deposit sidebar — positive buttons green (Start publication process) */
+/* deposit sidebar — positive buttons green (Start publication process)
+   !important needed: invenio_curations renders this button with both
+   primary+positive classes; the blue primary rule has higher specificity */
 #deposit-form .deposit-sidebar .ui.positive.button,
 #deposit-form .deposit-sidebar .ui.positive.buttons .button {
-  background-color: #048622;
-  color: #ffffff;
+  background-color: #048622 !important;
+  color: #ffffff !important;
 }
 
 #deposit-form .deposit-sidebar .ui.positive.button:hover,
 #deposit-form .deposit-sidebar .ui.positive.buttons .button:hover {
-  background-color: #048622;
-  color: #ffffff;
+  background-color: #048622 !important;
+  color: #ffffff !important;
 }
 
 /* deposit sidebar — share button blue (exclude SubmitReview which must stay green) */

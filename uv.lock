@@ -1871,7 +1871,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.7"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#bd972b97866040a92df22c3e1dae065303e08c95" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#29666de0a34163b7bb0046c9a583917827f3ec1a" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
