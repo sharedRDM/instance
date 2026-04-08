@@ -169,37 +169,47 @@ pre {
    !important needed: invenio_curations renders this button with both
    primary+positive classes; the blue primary rule has higher specificity */
 #deposit-form .deposit-sidebar .ui.positive.button,
-#deposit-form .deposit-sidebar .ui.positive.buttons .button {
+#deposit-form .deposit-sidebar .ui.positive.buttons .button,
+#marc21-deposit-form .deposit-sidebar .ui.positive.button,
+#marc21-deposit-form .deposit-sidebar .ui.positive.buttons .button {
   background-color: #048622 !important;
   color: #ffffff !important;
 }
 
 #deposit-form .deposit-sidebar .ui.positive.button:hover,
-#deposit-form .deposit-sidebar .ui.positive.buttons .button:hover {
+#deposit-form .deposit-sidebar .ui.positive.buttons .button:hover,
+#marc21-deposit-form .deposit-sidebar .ui.positive.button:hover,
+#marc21-deposit-form .deposit-sidebar .ui.positive.buttons .button:hover {
   background-color: #048622 !important;
   color: #ffffff !important;
 }
 
 /* deposit sidebar — share button blue (exclude SubmitReview which must stay green) */
 #deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]),
-#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]) {
+#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]),
+#marc21-deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]),
+#marc21-deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]) {
   background-color: @labelDateBlue;
   color: #ffffff;
 }
 
 #deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]):hover,
-#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]):hover {
+#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]):hover,
+#marc21-deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]):hover,
+#marc21-deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]):hover {
   background-color: #025faa;
   color: #ffffff;
 }
 
 /* deposit sidebar — Start publication process button green */
-#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"] {
+#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"],
+#marc21-deposit-form .deposit-sidebar .ui.button[name="SubmitReview"] {
   background-color: #048622;
   color: #ffffff;
 }
 
-#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"]:hover {
+#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"]:hover,
+#marc21-deposit-form .deposit-sidebar .ui.button[name="SubmitReview"]:hover {
   background-color: #048622;
   color: #ffffff;
 }
