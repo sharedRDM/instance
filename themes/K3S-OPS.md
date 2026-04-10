@@ -6,17 +6,10 @@ A reference for managing users, roles, demo records, and global search on the k3
 
 ## 1. Prerequisites
 
-You need `kubectl` configured to connect to the cluster. If not set up yet:
+> **TODO:** Document the preferred way to connect to the cluster (kubectl config or Rancher).
+> Connection setup should be kept as local notes or in the infrastructure project.
 
-```bash
-# Run the setup script (requires token and CA certificate from Vault)
-./configure_kubectl.sh https://188.166.116.113:6443 <token> ./ca.crt inveniordm
-
-# Verify connection
-kubectl get pod
-```
-
-The CA certificate can be found at: `https://vault.k3s.cyverse.at/ui/vault/dashboard` → `secrets/cacrt`
+You need `kubectl` configured and connected to the cluster before running any commands below.
 
 ---
 

@@ -1261,7 +1261,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "==13.0.0" },
-    { name = "invenio-curations", git = "https://github.com/lpandath/invenio-curations?branch=feat-curator-request-overview" },
+    { name = "invenio-curations", specifier = "==0.6.2" },
     { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-logging", extras = ["sentry-sdk"], specifier = ">=4.0.0,<5.0.0" },
     { name = "invenio-override", extras = ["lom", "marc21"], git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign" },
@@ -1568,13 +1568,17 @@ wheels = [
 
 [[package]]
 name = "invenio-curations"
-version = "0.8.3"
-source = { git = "https://github.com/lpandath/invenio-curations?branch=feat-curator-request-overview#5ce6596ac3c5b8de401bafd372686fe74af5e590" }
+version = "0.6.2"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-drafts-resources" },
     { name = "invenio-rdm-records" },
     { name = "invenio-requests" },
     { name = "nh3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/96/47/b3f3034f14955f78f59913f0b777a9475ecfca2b0081477af1915e9e2f51/invenio_curations-0.6.2.tar.gz", hash = "sha256:ec84b19b575dc54982b3b6d7160dfb7e15c8c276dd48e58aa22a5eb56be46319", size = 102428 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2e/34/8954508810c7159c4d01c51140c60117d804c4adc929c4e0998058a30e9b/invenio_curations-0.6.2-py2.py3-none-any.whl", hash = "sha256:e397a3530c8e5453abde399e32b9cae3fd18226f0f491bec509cece9b2b4f051", size = 117004 },
 ]
 
 [[package]]
@@ -1871,7 +1875,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.7"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#68c82db9c223fc9b076ce3248f67eb692a6a584a" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#d8740a6d3b3c53e9b1f51d9b0a743a0e9a5b2e4a" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },

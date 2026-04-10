@@ -2,9 +2,10 @@
 Script that injects a given yaml config into arguments of an invenio.cfg class.
 """
 
-import yaml
-import sys
 import argparse
+import sys
+
+import yaml
 
 parser = argparse.ArgumentParser()
 

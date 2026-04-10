@@ -1,6 +1,5 @@
 /*
- *   Copyright (C) 2020-2023 Graz University of Technology.
- *   Copyright (C) 2024-2026 Shared RDM.
+ *   Copyright (C) 2020-2026 Graz University of Technology.
  *
  * invenio-override is free software; you can redistribute it and/or modify it
  * under the terms of the MIT License; see LICENSE file for more details.
@@ -218,12 +217,30 @@ pre {
   color: #ffffff;
 }
 
-/* deposit notification — centered, width fits content */
+/* deposit + login + preview flash notifications — full card style */
 #deposit-form .ui.message.flashed.top.attached,
-.ui.message.flashed.top.attached[id$="-feedback-div"] {
+.ui.message.flashed.top.attached[id$="-feedback-div"],
+.login-card .ui.message.flashed.top.attached,
+.ui.message.flashed.bottom.attached.manage {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  display: block !important;
   width: fit-content !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  max-width: 68.75% !important;
+  margin: 0 auto 1.25rem auto !important;
+
+  border-radius: @radiusCardLarge !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10) !important;
+  border: @borderSubtle !important;
+  padding: 1rem 1.5rem !important;
+
+  animation: depositToastIn 0.25s ease;
+
+  &::before { display: none !important; }
 }
 
 /* login button — outlined pill style */

@@ -6,12 +6,16 @@
   Invenio App RDM is free software; you can redistribute it and/or modify it
   under the terms of the MIT License; see LICENSE file for more details.
 #}
+{#
+  Override: suppresses the upstream avatar + tab-nav header so that uploads.html
+  and communities.html can render their own circular action buttons instead.
+#}
 {%- extends config.BASE_TEMPLATE %}
 
 {%- block page_body %}
 
   {%- block user_dashboard_header %}
-  {# Intentionally empty — suppress the upstream user info + tab-nav header #}
+  {# Intentionally empty — upstream header suppressed; see comment above #}
   {%- endblock user_dashboard_header %}
 
   <div class="ui container rel-mt-2">
