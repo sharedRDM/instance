@@ -225,7 +225,6 @@ pre {
   left: auto !important;
 
   display: block !important;
-  width: fit-content !important;
   max-width: 68.75% !important;
   margin: 0 auto 1.25rem auto !important;
 
@@ -237,6 +236,14 @@ pre {
   animation: depositToastIn 0.25s ease;
 
   &::before { display: none !important; }
+
+  /* inner grid uses .container which has fixed breakpoint widths —
+     force it to fill the card so the close button stays on the same row */
+  > .ui.grid.container {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 /* login button — outlined pill style */
@@ -591,4 +598,55 @@ html {
 
 .ui.relaxed.grid > .row > .column.sidebar {
   padding-top: 0 !important;
+}
+
+/* ======================================
+   Community members & invitations pages
+====================================== */
+
+/* White card for the search content area — matches deposit form style */
+#community-members-search-root,
+#community-invitations-search-root {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  padding: 1.5rem;
+}
+
+/* Left sidebar nav — card style, themed active item */
+.ui.grid.rel-m-2 > .column > .ui.menu.theme-primary-menu {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  width: 100%;
+
+  .item {
+    background-color: @greyLight;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: @radiusSmall;
+    transition: background-color @transitionFast ease;
+
+    &:hover {
+      background-color: @hoverOverridePrimaryBt;
+    }
+  }
+
+  .active.item {
+    background-color: @overridePrimary !important;
+    color: @overrideLabels !important;
+  }
+}
+
+/* Search bar row — spacing below, prevent cramping on narrow widths */
+#community-members-search-root .auto-column-grid,
+#community-invitations-search-root .auto-column-grid {
+  margin-bottom: 1rem;
+  min-width: 0;
+
+  > div {
+    min-width: 0;
+    overflow: visible;
+  }
 }

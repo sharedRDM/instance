@@ -72,7 +72,7 @@ jobs:
       - name: Relock uv
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock
           deactivate
           rm -rf .venv
 
@@ -161,7 +161,7 @@ jobs:
       - name: Relock uv
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock
           deactivate
           rm -rf .venv
 
@@ -248,7 +248,7 @@ jobs:
       - name: Relock uv
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock
           deactivate
           rm -rf .venv
 
@@ -330,7 +330,7 @@ jobs:
       - name: Relock uv
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock
           deactivate
           rm -rf .venv
 
@@ -401,7 +401,7 @@ jobs:
         run: |
           source .venv/bin/activate
           uv pip uninstall invenio-override || true
-          uv lock --upgrade
+          uv lock
           deactivate
           rm -rf .venv
 
