@@ -3,7 +3,7 @@ FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
 
 COPY pyproject.toml uv.lock ./
 
-RUN uv sync --frozen
+RUN uv sync --extra tug --frozen
 
 ARG TUG_ENV=dev
 
