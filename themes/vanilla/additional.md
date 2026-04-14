@@ -1,0 +1,1 @@
+# Example configs for instance installation without any additional package, just invenio-app-rdm.

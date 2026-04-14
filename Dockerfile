@@ -9,10 +9,10 @@ RUN uv sync --frozen
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
 COPY ./app_data/ ${INVENIO_INSTANCE_PATH}/app_data/
-COPY ./assets/ ${INVENIO_INSTANCE_PATH}/assets/
+COPY ./themes/vanilla/assets/ ${INVENIO_INSTANCE_PATH}/assets/
 COPY ./static/ ${INVENIO_INSTANCE_PATH}/static/
 COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
-COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
+COPY ./themes/vanilla/templates ${INVENIO_INSTANCE_PATH}/templates/
 
 RUN invenio collect --verbose && invenio webpack create
 

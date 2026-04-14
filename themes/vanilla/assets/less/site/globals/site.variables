@@ -1,0 +1,3 @@
+/* Override Semantic UI text selection highlight color */
+@highlightBackground : #e4154b;
+@highlightColor      : #ffffff;
