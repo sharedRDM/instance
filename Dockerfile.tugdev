@@ -1,0 +1,51 @@
+# STAGE 1
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
+
+COPY pyproject.toml uv.lock ./
+
+RUN uv sync --extra tug --frozen && \
+    pybabel compile -d ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/translations
+
+# to use rspack
+ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
+
+# Replace variables.less
+COPY themes/TUG/base/variables.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
+COPY themes/TUG/base/overrides.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
+
+RUN invenio collect --verbose && invenio webpack create
+
+# copy remaining instance files (these can override/extend the discovered bundles)
+COPY ./app_data/ ${INVENIO_INSTANCE_PATH}/app_data/
+COPY ./assets/ ${INVENIO_INSTANCE_PATH}/assets/
+COPY ./static/ ${INVENIO_INSTANCE_PATH}/static/
+COPY ./translations ${INVENIO_INSTANCE_PATH}/translations/
+COPY ./templates ${INVENIO_INSTANCE_PATH}/templates/
+
+# copy TUG-specific templates (e.g., comment-template.html)
+COPY ./themes/TUG/base/templates/ ${INVENIO_INSTANCE_PATH}/templates/
+
+WORKDIR ${INVENIO_INSTANCE_PATH}/assets
+RUN pnpm install
+RUN pnpm run build
+
+# STAGE 2
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
+
+COPY --from=builder ${VIRTUAL_ENV}/lib ${VIRTUAL_ENV}/lib
+COPY --from=builder ${VIRTUAL_ENV}/bin ${VIRTUAL_ENV}/bin
+COPY --from=builder ${INVENIO_INSTANCE_PATH}/app_data ${INVENIO_INSTANCE_PATH}/app_data
+COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/static
+COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations
+COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/templates
+
+
+WORKDIR ${WORKING_DIR}/src
+COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
+# invenio.cfg already copied in builder stage, ensure it's in final location
+COPY ./themes/TUG/qa/invenio.cfg ${INVENIO_INSTANCE_PATH}
+RUN chown invenio:invenio .
+
+USER invenio
+
+ENTRYPOINT [ "bash", "-c"]
