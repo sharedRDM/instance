@@ -39,3 +39,35 @@ msgstr "Communities"
 #: invenio_app_rdm/ext.py:60
 msgid "Requests"
 msgstr "Anfragen"
+
+#: templates/invenio_override/navbar.html
+msgid "REPOSITORY"
+msgstr "Repository"
+
+#: templates/invenio_override/navbar.html
+msgid "LIBRARY & ARCHIVES"
+msgstr "Bibliothek und Archiv"
+
+#: templates/invenio_override/navbar.html
+msgid "SCIENCE"
+msgstr "WISSEN"
+
+#: templates/invenio_override/navbar.html
+msgid "PASSION"
+msgstr "LEIDENSCHAFT"
+
+#: templates/invenio_override/navbar.html
+msgid "TECHNOLOGY"
+msgstr "TECHNIK"
+
+#: invenio.cfg
+msgid "Accessibility Statement"
+msgstr "Erklärung zur Barrierefreiheit"
+
+#: invenio.cfg
+msgid "List of preferred file formats"
+msgstr "Liste bevorzugter Dateiformate"
+
+#: invenio.cfg
+msgid "Curation Workflow"
+msgstr "Kurations-Workflow"

@@ -68,9 +68,9 @@
       {% if config.get('OVERRIDE_HEADER_TEXT_LINE1') %}
       <div class="affiliation-text">
         <a title="Home" href="/" class="no-decoration">
-          {{ config.OVERRIDE_HEADER_TEXT_LINE1 }}
-          {% if config.get('OVERRIDE_HEADER_TEXT_LINE2') %}<br>{{ config.OVERRIDE_HEADER_TEXT_LINE2 }}{% endif %}
-          {% if config.get('OVERRIDE_HEADER_TEXT_LINE3') %}<br>{{ config.OVERRIDE_HEADER_TEXT_LINE3 }}{% endif %}
+          {{ _(config.OVERRIDE_HEADER_TEXT_LINE1) }}
+          {% if config.get('OVERRIDE_HEADER_TEXT_LINE2') %}<br>{{ _(config.OVERRIDE_HEADER_TEXT_LINE2) }}{% endif %}
+          {% if config.get('OVERRIDE_HEADER_TEXT_LINE3') %}<br>{{ _(config.OVERRIDE_HEADER_TEXT_LINE3) }}{% endif %}
         </a>
       </div>
       {% endif %}
@@ -83,7 +83,7 @@
         {% if config.get('OVERRIDE_HEADER_CLAIM_WORDS') %}
         <div class="affiliation-logo-claim">
           {% for word in config.OVERRIDE_HEADER_CLAIM_WORDS %}
-          <div class="affiliation-logo-claim-single">{{ word }}</div>
+          <div class="affiliation-logo-claim-single">{{ _(word) }}</div>
           {% endfor %}
         </div>
         {% endif %}
@@ -154,6 +154,21 @@
           {%- endif %}
         </div>
       </div>
+
+      <div class="header-topbar-lang">
+        {%- for l in current_i18n.get_locales() %}
+          {%- if current_i18n.language != l.language %}
+            <a href="{{ url_for("invenio_i18n.set_lang", lang_code=l.language) }}"
+               class="header-topbar-link header-topbar-lang-link">
+              {{ l.get_display_name().upper()[0:2] }}
+            </a>
+          {%- endif %}
+        {%- endfor %}
+      </div>
+
+      {%- block navbar_right %}
+        {%- include config.THEME_HEADER_LOGIN_TEMPLATE %}
+      {%- endblock navbar_right %}
     </div>
   </div>
 </div>
@@ -194,26 +209,3 @@
 </script>
 {%- endif %}
 
-{# ====== ROW 3: Language | Login ====== #}
-<div class="header-secondrow-outer">
-<div class="ui container">
-  <div class="header-secondrow">
-    <div class="header-secondrow-left">
-      <div class="header-secondrow-lang">
-        {%- for l in current_i18n.get_locales() %}
-          {%- if current_i18n.language != l.language %}
-            <a href="{{ url_for("invenio_i18n.set_lang", lang_code=l.language) }}"
-               class="no-decoration">
-              {{ l.get_display_name().upper()[0:2] }}
-            </a>
-          {%- endif %}
-        {%- endfor %}
-      </div>
-    </div>
-    <div class="header-secondrow-right">
-      {%- block navbar_right %}
-        {%- include config.THEME_HEADER_LOGIN_TEMPLATE %}
-      {%- endblock navbar_right %}
-    </div>
-  </div>
-</div>
