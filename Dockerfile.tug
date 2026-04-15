@@ -3,7 +3,8 @@ FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
 
 COPY pyproject.toml uv.lock ./
 
-RUN uv sync --extra tug --frozen
+RUN uv sync --extra tug --frozen && \
+    pybabel compile -d ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/translations
 
 ARG TUG_ENV=dev
 
