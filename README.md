@@ -13,7 +13,7 @@ Make sure you have **invenio-cli** package installed.
 
 Run the following commands to have the instance ready for development:
 ```bash
-invenio-cli packages install # this installs all packages based on your pyproject.toml
+invenio-cli packages install . # this installs all packages based on your pyproject.toml dependencies
 # or
 invenio cli packages install .[tug] # if you want to specify optional packages
 invenio-cli install symlink
