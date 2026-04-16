@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2020-2026 Graz University of Technology.
+#
+# instance is free software; you can redistribute it and/or
+# modify it under the terms of the MIT License; see LICENSE file for more
+# details.
+
 """Additional views."""
 
 from flask import Blueprint
@@ -14,5 +22,4 @@ def create_blueprint(app):
         template_folder="./templates",
     )
 
-    # Add URL rules
     return blueprint

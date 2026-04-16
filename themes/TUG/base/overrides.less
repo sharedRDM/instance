@@ -33,7 +33,7 @@ body {
   font-size: @font-size-base;
   line-height: 1.6;
   background-color: #f0f0f0;
-  background-image: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%);
+  background-image: linear-gradient(180deg, #ffffff 0%, #dddddd 100%);
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
@@ -225,8 +225,9 @@ pre {
   left: auto !important;
 
   display: block !important;
-  max-width: 68.75% !important;
+  max-width: 78.75% !important;
   margin: 0 auto 1.25rem auto !important;
+  margin-top: 10px !important;
 
   border-radius: @radiusCardLarge !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10) !important;
@@ -393,6 +394,7 @@ pre {
 }
 .ui.error.message,
 .ui.negative.message {
+
   background-color: #fff5f5;
   color: #9b1c1c;
   border: 1px solid rgba(155, 28, 28, 0.15);
@@ -549,8 +551,29 @@ html {
   color: @primaryText !important;
 }
 
+.header-topbar {
+  border-bottom: none;
+}
+
 .header-topbar-inner {
   background: #ffffff !important;
+  border: none !important;
+  border-radius: 32px !important;
+  padding: 1rem 1.2rem !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header-topbar-lang {
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  margin-left: 6rem;
+  padding-left: 0.2rem;
+}
+
+.header-topbar-lang-link {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  opacity: 0.7;
+  padding: 0.3em 0.6em !important;
 }
 
 
@@ -562,7 +585,6 @@ html {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 0 !important;
 }
 
 #conversation-tab-panel {

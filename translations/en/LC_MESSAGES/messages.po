@@ -1,0 +1,40 @@
+# English translations for the TU Graz Repository instance.
+# Copyright (C) 2026 TUGRAZ
+# This file is distributed under the same license as the project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: invenio-override 0.0.7\n"
+"Report-Msgid-Bugs-To: mojib.wali@tugraz.at\n"
+"POT-Creation-Date: 2026-04-14 13:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: prod/invenio.cfg:186
+msgid "OER"
+msgstr "Educational Resources"
+
+#: prod/invenio.cfg:190
+msgid "Research Result"
+msgstr "Research Results"
+
+#: prod/invenio.cfg:194
+msgid "Publication"
+msgstr "Publications"
+
+#: invenio_app_rdm/ext.py:50
+msgid "Uploads"
+msgstr "Research Results"
+
+#: invenio_app_rdm/ext.py:55
+msgid "Communities"
+msgstr "Communities"
+
+#: invenio_app_rdm/ext.py:60
+msgid "Requests"
+msgstr "Requests"
