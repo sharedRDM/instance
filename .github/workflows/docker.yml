@@ -21,6 +21,7 @@ on:
 jobs:
 
   build-and-push-mug:
+    if: false  # MUG theme not yet updated for new UI variables — re-enable after mug-theme-redesign is merged
     runs-on: ubuntu-22.04
     permissions:
       contents: read
