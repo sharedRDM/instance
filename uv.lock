@@ -1356,9 +1356,9 @@ requires-dist = [
     { name = "invenio-global-search", marker = "extra == 'tug'", specifier = ">=0.3.0" },
     { name = "invenio-imoox", marker = "extra == 'tug'", specifier = ">=0.2.0" },
     { name = "invenio-moodle", marker = "extra == 'tug'", specifier = ">=1.1.3" },
-    { name = "invenio-override", marker = "extra == 'basic'", git = "https://github.com/sharedRDM/invenio-override?branch=loc" },
-    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/sharedRDM/invenio-override?branch=loc" },
-    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/sharedRDM/invenio-override?branch=loc" },
+    { name = "invenio-override", marker = "extra == 'basic'", git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign" },
+    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign" },
+    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign" },
     { name = "invenio-pure", marker = "extra == 'tug'", specifier = ">=0.1.0" },
     { name = "invenio-saml", marker = "extra == 'tug'", specifier = ">=1.0.0" },
     { name = "invenio-workflows-tugraz", marker = "extra == 'tug'", specifier = ">=0.11.0" },
@@ -2074,7 +2074,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.7"
-source = { git = "https://github.com/sharedRDM/invenio-override?branch=loc#44b7a15ce7f53cdd977cd28a29433e577578e4c0" }
+source = { git = "https://github.com/sharedRDM/invenio-override?branch=theme-redesign#6be332c82b34b39d27f594bfe06b91dfb2be83a1" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },

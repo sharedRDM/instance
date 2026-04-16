@@ -645,13 +645,13 @@ html {
   width: 100%;
 
   .item {
-    background-color: @greyLight;
+    background-color: transparent;
     color: rgba(0, 0, 0, 0.6);
     border-radius: @radiusSmall;
-    transition: background-color @transitionFast ease;
+    transition: background-color @transitionFast ease, color @transitionFast ease;
 
     &:hover {
-      background-color: @hoverOverridePrimaryBt;
+      background-color: @greyLight;
     }
   }
 
@@ -670,5 +670,24 @@ html {
   > div {
     min-width: 0;
     overflow: visible;
+  }
+}
+
+/* ======================================
+   Community page-subheader navigation tabs
+====================================== */
+
+/* Secondary pointing menu (Settings / Members / Curation / …) —
+   active item and hover should use the primary colour, not gray */
+.ui.secondary.pointing.menu.theme-primary {
+  .active.item,
+  .active.item:hover {
+    color: @overridePrimary !important;
+    border-color: @overridePrimary !important;
+  }
+
+  .item:hover {
+    color: @overridePrimary !important;
+    border-color: @overridePrimary !important;
   }
 }
