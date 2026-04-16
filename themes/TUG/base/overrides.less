@@ -1,7 +1,7 @@
 /*
  *   Copyright (C) 2020-2026 Graz University of Technology.
  *
- * invenio-override is free software; you can redistribute it and/or modify it
+ * instance is free software; you can redistribute it and/or modify it
  * under the terms of the MIT License; see LICENSE file for more details.
  */
 
@@ -576,6 +576,20 @@ html {
   padding: 0.3em 0.6em !important;
 }
 
+/* User profile dropdown link — match nav link padding for symmetric spacing */
+.header-topbar-inner #user-profile-dropdown > a {
+  padding: 0.3em 0.9em;
+  display: inline-block;
+  border-radius: @radiusPill;
+  transition: color @transitionFast ease, background-color @transitionFast ease;
+
+  &:hover {
+    color: @overridePrimary !important;
+    background-color: fade(@overridePrimary, 6%);
+    text-decoration: none;
+  }
+}
+
 
 /* ======================================
    Request detail — tab panels
@@ -645,13 +659,13 @@ html {
   width: 100%;
 
   .item {
-    background-color: @greyLight;
+    background-color: transparent;
     color: rgba(0, 0, 0, 0.6);
     border-radius: @radiusSmall;
-    transition: background-color @transitionFast ease;
+    transition: background-color @transitionFast ease, color @transitionFast ease;
 
     &:hover {
-      background-color: @hoverOverridePrimaryBt;
+      background-color: @greyLight;
     }
   }
 
@@ -670,5 +684,24 @@ html {
   > div {
     min-width: 0;
     overflow: visible;
+  }
+}
+
+/* ======================================
+   Community page-subheader navigation tabs
+====================================== */
+
+/* Secondary pointing menu (Settings / Members / Curation / …) —
+   active item and hover should use the primary colour, not gray */
+.ui.secondary.pointing.menu.theme-primary {
+  .active.item,
+  .active.item:hover {
+    color: @overridePrimary !important;
+    border-color: @overridePrimary !important;
+  }
+
+  .item:hover {
+    color: @overridePrimary !important;
+    border-color: @overridePrimary !important;
   }
 }
