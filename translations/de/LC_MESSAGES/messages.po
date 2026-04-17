@@ -1,0 +1,74 @@
+# German translations for the TU Graz Repository instance.
+# Copyright (C) 2026 TUGRAZ
+# This file is distributed under the same license as the project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: invenio-override 0.0.7\n"
+"Report-Msgid-Bugs-To: mojib.wali@tugraz.at\n"
+"POT-Creation-Date: 2026-04-14 13:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: prod/invenio.cfg:186
+msgid "OER"
+msgstr "Bildungsinhalte"
+
+#: prod/invenio.cfg:190
+msgid "Research Result"
+msgstr "Forschungsergebnisse"
+
+#: prod/invenio.cfg:194
+msgid "Publication"
+msgstr "Publikationen"
+
+#: invenio_app_rdm/ext.py:50
+msgid "Uploads"
+msgstr "Forschungsergebnisse"
+
+#: invenio_app_rdm/ext.py:55
+msgid "Communities"
+msgstr "Communities"
+
+#: invenio_app_rdm/ext.py:60
+msgid "Requests"
+msgstr "Anfragen"
+
+#: templates/invenio_override/navbar.html
+msgid "REPOSITORY"
+msgstr "Repository"
+
+#: templates/invenio_override/navbar.html
+msgid "LIBRARY & ARCHIVES"
+msgstr "Bibliothek und Archiv"
+
+#: templates/invenio_override/navbar.html
+msgid "SCIENCE"
+msgstr "WISSEN"
+
+#: templates/invenio_override/navbar.html
+msgid "PASSION"
+msgstr "LEIDENSCHAFT"
+
+#: templates/invenio_override/navbar.html
+msgid "TECHNOLOGY"
+msgstr "TECHNIK"
+
+#: invenio.cfg
+msgid "Accessibility Statement"
+msgstr "Erklärung zur Barrierefreiheit"
+
+#: invenio.cfg
+msgid "List of preferred file formats"
+msgstr "Liste bevorzugter Dateiformate"
+
+#: invenio.cfg
+msgid "Curation Workflow"
+msgstr "Kurations-Workflow"

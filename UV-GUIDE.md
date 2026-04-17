@@ -31,11 +31,24 @@ dependencies = [
 ]
 ```
 
+For optional dependencies add:
+
+```bash
+[project.optional-dependencies]
+mug = [
+    "invenio-curations==0.6.2",
+]
+```
+
+
 ### **sync dependencies**
 
 ```bash
 uv sync
+# or
+uv sync --extra mug
 ```
+
 
 ### **build assets**
 

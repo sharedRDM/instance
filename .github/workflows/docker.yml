@@ -16,11 +16,12 @@ on:
       invenio-override-branch:
         description: 'invenio-override repo branch'     
         required: false
-        default: 'main'
+        default: ''
 
 jobs:
 
   build-and-push-mug:
+    if: false  # MUG theme not yet updated for new UI variables — re-enable after mug-theme-redesign is merged
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -48,7 +49,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
@@ -69,10 +70,10 @@ jobs:
           python auth/yaml2py.py --source-filename auth/kc-settings-pool.yaml --dest-filename themes/MUG/invenio.cfg --node $KEYCLOAK_NODE --placeholder "<insert_keycloak_config_via_ci>"
           deactivate
 
-      - name: Relock uv
+      - name: Update and relock uv.lock file
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock --upgrade-package invenio-override
           deactivate
           rm -rf .venv
 
@@ -113,7 +114,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
 
-  build-and-push-oer:
+  build-and-push-tugdev:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -141,7 +142,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
@@ -151,13 +152,17 @@ jobs:
         if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
 
-      - name: Change pyproject.toml override OER
-        run: sed -i 's/-override ~/-override[lom] ~/g' pyproject.toml
-
-      - name: Relock uv
+      - name: Set keycloak in invenio.cfg via script
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          KEYCLOAK_NODE="rdm"
+          python auth/yaml2py.py --source-filename auth/kc-settings-pool.yaml --dest-filename themes/TUG/dev/invenio.cfg --node $KEYCLOAK_NODE --placeholder "<insert_keycloak_config_via_ci>"
+          deactivate
+
+      - name: Update and relock uv.lock file
+        run: |
+          source .venv/bin/activate
+          uv lock --upgrade-package invenio-override
           deactivate
           rm -rf .venv
 
@@ -187,14 +192,16 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push OER Docker image
+      - name: Build and push TUG Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          file: Dockerfile.oer
+          file: Dockerfile.tug
+          build-args: |
+            TUG_ENV=dev
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-oer
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-tugdev
           labels: ${{ steps.meta.outputs.labels }}
 
 
@@ -226,7 +233,7 @@ jobs:
         run: |
           source .venv/bin/activate
           if [[ '${{ github.event.inputs.invenio-override-branch }}' == '' ]]; then
-            INVENIO_OVERRIDE_BRANCH="main"
+            INVENIO_OVERRIDE_BRANCH=$(grep -oP '(?<=branch = ")[^"]+' pyproject.toml | head -1)
           else
             INVENIO_OVERRIDE_BRANCH="${{ github.event.inputs.invenio-override-branch }}"
           fi
@@ -236,10 +243,10 @@ jobs:
         if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
 
-      - name: Relock uv
+      - name: Update and relock uv.lock file
         run: |
           source .venv/bin/activate
-          uv lock --upgrade
+          uv lock --upgrade-package invenio-override
           deactivate
           rm -rf .venv
 
@@ -306,11 +313,11 @@ jobs:
       - name: Change pyproject.toml no override
         run: sed -i "s/\"invenio-override ~=${OVERRIDE_VERSION}\",//g" pyproject.toml
 
-      - name: Relock uv
+      - name: Update and relock uv.lock file
         run: |
           source .venv/bin/activate
           uv pip uninstall invenio-override || true
-          uv lock --upgrade
+          uv lock --upgrade-package invenio-override
           deactivate
           rm -rf .venv
 
@@ -344,7 +351,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          file: Dockerfile.basic
+          file: Dockerfile
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DOCKER_TAG }}-vanilla

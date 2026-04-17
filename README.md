@@ -7,6 +7,29 @@ This repository is based on InvenioAppRDM version 13.
 
 ## Getting started
 
+Make sure you have **invenio-cli** package installed.
+
+### Start the instance (development)
+
+Run the following commands to have the instance ready for development:
+```bash
+invenio-cli packages install . # this installs all packages based on your pyproject.toml dependencies
+# or
+invenio cli packages install .[tug] # if you want to specify optional packages
+invenio-cli install symlink
+invenio-cli services setup
+
+# then in 2 different terminals
+invenio-cli run worker # 1 terminal
+invenio-cli run web # 1 terminal
+
+# for UI dev
+invenio-cli assets watch # run this to have the UI change done automatically in the running app
+```
+
+
+### Start the instance (all containerized)
+
 Run the following commands in order to start your new InvenioRDM instance:
 
 ```console

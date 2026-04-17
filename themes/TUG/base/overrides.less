@@ -1,0 +1,707 @@
+/*
+ *   Copyright (C) 2020-2026 Graz University of Technology.
+ *
+ * instance is free software; you can redistribute it and/or modify it
+ * under the terms of the MIT License; see LICENSE file for more details.
+ */
+
+/*
+section backgrounds and text colors
+login background color
+login & signup page title
+ */
+.section-content-light-bg {
+  background-color: @primaryBackground;
+}
+.section-title {
+  color: @primaryText;
+}
+.cover-page {
+  background-color: @primaryBackground;
+}
+.panel-free-title {
+  color: @primaryText;
+}
+
+/* global font styling and base size */
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
+body {
+  font-size: @font-size-base;
+  line-height: 1.6;
+  background-color: #f0f0f0;
+  background-image: linear-gradient(180deg, #ffffff 0%, #dddddd 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+*,
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+.ui.button,
+.ui.items,
+.ui.accordion .title:not(.ui),
+.ui.items > .item > .content > .header,
+.ui.modal > .header,
+.ui.menu,
+.ui.header,
+.ui.form input[type],
+.ui.form input[type]:focus {
+  font-family: "Source Sans Pro";
+}
+
+/* consistent heading sizes */
+h1 { font-size: @font-size-2xl; }
+h2 { font-size: @font-size-xl; }
+h3 { font-size: @font-size-lg; }
+h4 { font-size: @font-size-nav; }
+
+pre {
+  font-size: @font-size-sm;
+}
+
+/* ======================================
+   Modern rounded corners
+====================================== */
+.ui.button,
+.ui.basic.button,
+.ui.basic.buttons .button {
+  border-radius: @radiusSmall;
+  transition: background-color @transitionFast ease, color @transitionFast ease, box-shadow @transitionFast ease, transform @transitionFast ease;
+}
+
+.ui.label {
+  border-radius: @radiusSmall;
+  font-weight: 400;
+  transition: background-color @transitionFast ease;
+}
+
+.ui.input > input,
+.ui.form input[type],
+.ui.form input[type]:focus,
+.ui.selection.dropdown {
+  border-radius: @radiusSmall;
+  transition: border-color @transitionFast ease, box-shadow @transitionFast ease;
+}
+
+.ui.segment {
+  border-radius: (@radiusCard - 2);
+}
+
+.ui.card,
+.ui.cards > .card {
+  border-radius: @radiusCard;
+  box-shadow: @cardShadowRest;
+}
+
+.ui.menu {
+  border-radius: 0;
+}
+
+.ui.accordion.styled {
+  border-radius: @radiusSmall;
+}
+
+/* ======================================
+   Button styling
+====================================== */
+
+/* clip pill input children to prevent background bleeding at corners */
+.ui.action.input {
+  border-radius: @radiusPill !important;
+  overflow: hidden !important;
+}
+
+/* search button */
+.ui.search.button {
+  background-color: @overridePrimary;
+  border-radius: 0 @radiusPill @radiusPill 0;
+  transition: background-color 0.2s ease;
+}
+
+.ui.search.button:hover {
+  background-color: @overrideSecondary;
+  color: #ffffff;
+}
+
+/* primary buttons */
+.ui.primary.buttons .button,
+.ui.primary.button {
+  background-color: @overridePrimary;
+  color: @overrideLabels !important;
+  text-shadow: none;
+}
+
+.ui.primary.buttons .button:hover,
+.ui.primary.button:hover {
+  background-color: @overrideSecondary;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* positive buttons (save, etc) */
+.ui.positive.buttons .button,
+.ui.positive.button {
+  background-color: @overridePrimaryBt;
+  color: @greyDark;
+}
+
+.ui.positive.buttons .button:hover,
+.ui.positive.button:hover {
+  background-color: @hoverOverridePrimaryBt;
+  color: @greyDark;
+}
+
+/* deposit sidebar — positive buttons green (Start publication process)
+   !important needed: invenio_curations renders this button with both
+   primary+positive classes; the blue primary rule has higher specificity */
+#deposit-form .deposit-sidebar .ui.positive.button,
+#deposit-form .deposit-sidebar .ui.positive.buttons .button,
+#marc21-deposit-form .deposit-sidebar .ui.positive.button,
+#marc21-deposit-form .deposit-sidebar .ui.positive.buttons .button {
+  background-color: #048622 !important;
+  color: #ffffff !important;
+}
+
+#deposit-form .deposit-sidebar .ui.positive.button:hover,
+#deposit-form .deposit-sidebar .ui.positive.buttons .button:hover,
+#marc21-deposit-form .deposit-sidebar .ui.positive.button:hover,
+#marc21-deposit-form .deposit-sidebar .ui.positive.buttons .button:hover {
+  background-color: #048622 !important;
+  color: #ffffff !important;
+}
+
+/* deposit sidebar — share button blue (exclude SubmitReview which must stay green) */
+#deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]),
+#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]),
+#marc21-deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]),
+#marc21-deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]) {
+  background-color: @labelDateBlue;
+  color: #ffffff;
+}
+
+#deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]):hover,
+#deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]):hover,
+#marc21-deposit-form .deposit-sidebar .ui.primary.button:not([name="SubmitReview"]):hover,
+#marc21-deposit-form .deposit-sidebar .ui.primary.buttons .button:not([name="SubmitReview"]):hover {
+  background-color: #025faa;
+  color: #ffffff;
+}
+
+/* deposit sidebar — Start publication process button green */
+#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"],
+#marc21-deposit-form .deposit-sidebar .ui.button[name="SubmitReview"] {
+  background-color: #048622;
+  color: #ffffff;
+}
+
+#deposit-form .deposit-sidebar .ui.button[name="SubmitReview"]:hover,
+#marc21-deposit-form .deposit-sidebar .ui.button[name="SubmitReview"]:hover {
+  background-color: #048622;
+  color: #ffffff;
+}
+
+/* deposit + login + preview flash notifications — full card style */
+#deposit-form .ui.message.flashed.top.attached,
+.ui.message.flashed.top.attached[id$="-feedback-div"],
+.login-card .ui.message.flashed.top.attached,
+.ui.message.flashed.bottom.attached.manage {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  display: block !important;
+  max-width: 78.75% !important;
+  margin: 0 auto 1.25rem auto !important;
+  margin-top: 10px !important;
+
+  border-radius: @radiusCardLarge !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10) !important;
+  border: @borderSubtle !important;
+  padding: 1rem 1.5rem !important;
+
+  animation: depositToastIn 0.25s ease;
+
+  &::before { display: none !important; }
+
+  /* inner grid uses .container which has fixed breakpoint widths —
+     force it to fill the card so the close button stays on the same row */
+  > .ui.grid.container {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* login button — outlined pill style */
+.login-btn {
+  background-color: transparent !important;
+  border: 1.5px solid @greyDark !important;
+  color: @greyDark !important;
+  border-radius: 20px !important;
+  padding: 8px 20px !important;
+  font-weight: 400 !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background-color: @greyDark !important;
+    color: #ffffff !important;
+  }
+
+  i.icon {
+    margin-right: 4px;
+  }
+}
+
+/* ======================================
+   Input styling
+====================================== */
+
+/* input focus color — subtle glow */
+.ui.input > input:focus,
+.ui.form input[type]:focus {
+  border-color: @searchHighlight !important;
+  box-shadow: 0 0 0 2px fade(@searchHighlight, 15%);
+}
+
+.ui.input > input:hover {
+  border-color: @searchHighlight !important;
+}
+
+/* frontpage search — solid white background */
+.frontpage-search-wrapper .ui.icon.input > input {
+  background-color: #ffffff !important;
+}
+
+/* search input — pill shape globally */
+.ui.action.input > input:first-child {
+  border-radius: @radiusPill 0 0 @radiusPill !important;
+}
+
+.ui.action.input:not([class*="left action"]) > .button:last-child,
+.ui.action.input:not([class*="left action"]) > .buttons:last-child > .button,
+.ui.action.input:not([class*="left action"]) > .dropdown:last-child {
+  border-radius: 0 @radiusPill @radiusPill 0;
+}
+
+/* ======================================
+   Accordion styling
+====================================== */
+.ui.accordion.styled {
+  .title,
+  .title.active {
+    background-color: @greyLight;
+    color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.15s ease;
+  }
+}
+
+.ui.accordion.invenio-accordion-field .title {
+  background-color: @overridePrimary;
+  color: @overrideLabels !important;
+  border-radius: 4px 4px 0 0;
+}
+
+/* ======================================
+   Sidebar
+====================================== */
+.ui.rdm-sidebar {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+}
+
+/* ======================================
+   Access badge colors
+====================================== */
+.ui.label.access-status {
+  &.open {
+    background-color: @accessRightOpen;
+    color: #ffffff;
+  }
+  &.restricted {
+    background-color: @accessRightRestricted;
+    color: #ffffff;
+  }
+  &.embargoed {
+    background-color: @accessRightEmbargoed;
+    color: #000000;
+  }
+  &.metadata-only {
+    background-color: @accessRightMetadata;
+    color: #ffffff;
+  }
+}
+
+/* ======================================
+   Font face definitions
+====================================== */
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./fonts/SourceSansPro/SourceSansPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("./fonts/SourceSansPro/SourceSansPro-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+#alert-content {
+  display: block !important;
+}
+
+/* ======================================
+   UI messages — subtle styling
+====================================== */
+.ui.success.message {
+  background-color: #f0faf5;
+  color: #1a6b4a;
+  border: 1px solid rgba(26, 107, 74, 0.15);
+  border-radius: (@radiusCard - 2);
+}
+.ui.info.message {
+  background-color: #f0f7ff;
+  color: #1a5276;
+  border: 1px solid rgba(26, 82, 118, 0.15);
+  border-radius: (@radiusCard - 2);
+}
+.ui.warning.message {
+  background-color: #fffaf3;
+  color: #856404;
+  border: 1px solid rgba(133, 100, 4, 0.15);
+  border-radius: (@radiusCard - 2);
+}
+.ui.error.message,
+.ui.negative.message {
+
+  background-color: #fff5f5;
+  color: #9b1c1c;
+  border: 1px solid rgba(155, 28, 28, 0.15);
+  border-radius: (@radiusCard - 2);
+}
+
+/* ======================================
+   Brand and label
+====================================== */
+.ui.menu .brand.active.item,
+.ui.brand.menu .active.item {
+  border-color: @overridePrimary !important;
+  background-color: @overridePrimary;
+  color: #ffffff !important;
+}
+
+.ui.primary.label {
+  background-color: @overridePrimary;
+  border-color: @overridePrimary;
+  color: @overrideLabels;
+}
+
+#skip-to-main {
+  display: none !important;
+}
+
+/* ======================================
+   Record cards (used in overrides theme)
+====================================== */
+.record-card {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: @cardShadowRest;
+
+  h4 a {
+    font-size: @font-size-nav;
+    color: @overridePrimary;
+    font-weight: 600;
+    transition: color @transitionFast ease;
+  }
+
+  .record-card-meta {
+    color: @recordText;
+    font-size: @font-size-sm;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .record-card-stats {
+    display: flex;
+    gap: 1rem;
+    color: @recordLightText;
+    font-size: @font-size-sm;
+
+    i.icon {
+      margin-right: 2px;
+    }
+  }
+}
+
+.right-card {
+  background-color: #fff;
+  border-radius: @radiusCardLarge;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+}
+
+.menus {
+  font-size: @font-size-base;
+}
+
+/* ======================================
+   Smooth page transitions
+====================================== */
+a {
+  transition: color 0.15s ease;
+}
+
+/* smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ======================================
+   Hide core blue sub-footer
+====================================== */
+.sub-footer {
+  display: none !important;
+}
+
+/* ======================================
+   Footer link colors — white on dark bg
+====================================== */
+#footer.footer-bottom {
+  .footer-heading {
+    color: #ffffff;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .footer-bottom-bar {
+    border-top-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .footer-powered {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* ======================================
+   Dropdown menus
+====================================== */
+.ui.dropdown .menu {
+  background-color: #ffffff;
+  border-radius: @radiusSmall;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: @borderSubtle;
+}
+
+/* ======================================
+   Pagination
+====================================== */
+.ui.pagination.menu .item {
+  border-radius: @radiusSmall;
+  transition: background-color @transitionFast ease, color @transitionFast ease;
+}
+
+.ui.pagination.menu .active.item {
+  background-color: @overridePrimary;
+  color: #ffffff;
+  border-radius: @radiusSmall;
+}
+
+.ui.pagination.menu .item:hover {
+  background-color: fade(@overridePrimary, 8%);
+}
+
+/* ======================================
+   Frontpage reasons — icon & button
+====================================== */
+.fp-reason-svg {
+  stroke: @primaryText !important;
+  color: @primaryText !important;
+}
+
+.header-topbar {
+  border-bottom: none;
+}
+
+.header-topbar-inner {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 32px !important;
+  padding: 1rem 1.2rem !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header-topbar-lang {
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  margin-left: 6rem;
+  padding-left: 0.2rem;
+}
+
+.header-topbar-lang-link {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  opacity: 0.7;
+  padding: 0.3em 0.6em !important;
+}
+
+/* User profile dropdown link — match nav link padding for symmetric spacing */
+.header-topbar-inner #user-profile-dropdown > a {
+  padding: 0.3em 0.9em;
+  display: inline-block;
+  border-radius: @radiusPill;
+  transition: color @transitionFast ease, background-color @transitionFast ease;
+
+  &:hover {
+    color: @overridePrimary !important;
+    background-color: fade(@overridePrimary, 6%);
+    text-decoration: none;
+  }
+}
+
+
+/* ======================================
+   Request detail — tab panels
+====================================== */
+#conversation-tab-panel,
+#record-tab-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#conversation-tab-panel {
+  padding-top: 1rem !important;
+}
+
+#record-tab-panel .ui.relaxed.grid {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ======================================
+   Request detail — grid columns as cards
+   Scoped to top-level React grid only to avoid
+   nested card-in-card in the Record preview tab
+====================================== */
+#request-detail > .ui.grid > .column {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  padding: 1.5rem !important;
+}
+
+/* ======================================
+   Record detail — remove default Semantic UI
+   grid padding from date row and sidebar
+====================================== */
+#record-info .ui.grid.middle.aligned {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.ui.relaxed.grid > .row > .column.sidebar {
+  padding-top: 0 !important;
+}
+
+/* ======================================
+   Community members & invitations pages
+====================================== */
+
+/* White card for the search content area — matches deposit form style */
+#community-members-search-root,
+#community-invitations-search-root {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  padding: 1.5rem;
+}
+
+/* Left sidebar nav — card style, themed active item */
+.ui.grid.rel-m-2 > .column > .ui.menu.theme-primary-menu {
+  background: #ffffff;
+  border: @borderSubtle;
+  border-radius: @radiusCardLarge;
+  box-shadow: @cardShadowRest;
+  width: 100%;
+
+  .item {
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: @radiusSmall;
+    transition: background-color @transitionFast ease, color @transitionFast ease;
+
+    &:hover {
+      background-color: @greyLight;
+    }
+  }
+
+  .active.item {
+    background-color: @overridePrimary !important;
+    color: @overrideLabels !important;
+  }
+}
+
+/* Search bar row — spacing below, prevent cramping on narrow widths */
+#community-members-search-root .auto-column-grid,
+#community-invitations-search-root .auto-column-grid {
+  margin-bottom: 1rem;
+  min-width: 0;
+
+  > div {
+    min-width: 0;
+    overflow: visible;
+  }
+}
+
+/* ======================================
+   Community page-subheader navigation tabs
+====================================== */
+
+/* Secondary pointing menu (Settings / Members / Curation / …) —
+   active item and hover should use the primary colour, not gray */
+.ui.secondary.pointing.menu.theme-primary {
+  .active.item,
+  .active.item:hover {
+    color: @overridePrimary !important;
+    border-color: @overridePrimary !important;
+  }
+
+  .item:hover {
+    color: @overridePrimary !important;
+    border-color: @overridePrimary !important;
+  }
+}

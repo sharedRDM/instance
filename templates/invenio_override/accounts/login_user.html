@@ -1,0 +1,114 @@
+{#
+  Copyright (C) 2020-2023 Graz University of Technology.
+  Copyright (C) 2026 Shared RDM.
+
+  invenio-override is free software; you can redistribute it and/or
+  modify it under the terms of the MIT License; see LICENSE file for more
+  details.
+#}
+{#
+  Override: fixes SSO provider filtering to use OVERRIDE_LOGIN_OAUTH_PROVIDERS
+  instead of the hardcoded "Meduni SSO" title in the package template.
+  Each instance sets OVERRIDE_LOGIN_OAUTH_PROVIDERS in invenio.cfg to control
+  which providers appear (e.g. ["keycloak"] for TUG/CyVerse).
+  If unset, all configured providers are shown.
+#}
+
+{% extends config.OVERRIDE_ACCOUNT_BASE %}
+{% from "invenio_accounts/_macros.html" import render_field, form_errors %}
+
+{% block page_body %}
+
+{%- set title = title or _(config.THEME_SITENAME) or _('Invenio') %}
+<div class="page-inner-banner">
+  <div class="ui container">
+    <h1 class="page-inner-banner-title">{{ _('Log in to') }} {{ title }}</h1>
+    <p class="page-inner-banner-description">{{ _('Access and manage your research data.') }}</p>
+  </div>
+</div>
+
+<div class="ui container">
+  <div class="login-page-container">
+    <div class="login-card">
+
+      {%- block form_header %}{%- endblock form_header %}
+
+      {%- for category, msg in get_flashed_messages(with_categories=True) %}
+        {%- set category = 'info' if category not in ['info', 'error', 'warning', 'success'] else category %}
+        <div class="ui {{ category }} visible message flashed top attached">
+          <div class="flash-notification-content">
+            {%- if category == 'success' %}<i class="check circle icon" aria-hidden="true"></i>
+            {%- elif category == 'warning' %}<i class="exclamation triangle icon" aria-hidden="true"></i>
+            {%- elif category == 'error' %}<i class="times circle icon" aria-hidden="true"></i>
+            {%- else %}<i class="info circle icon" aria-hidden="true"></i>
+            {%- endif %}
+            <span role="alert">{{ msg }}</span>
+            <button class="ui icon button close-btn flash-close-btn" aria-label="{{ _('Close') }}" type="button">
+              <i class="times icon" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      {%- endfor %}
+
+      {#
+        OAuth buttons are rendered by invenio_oauthclient/login_user.html which
+        overrides form_outer, renders all non-hidden providers, then calls super().
+        We only define form_outer for the local credentials form (super() target).
+      #}
+      {%- block form_outer %}
+      {%- if config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+      {%- with form = login_user_form %}
+      <div class="login-form-section">
+        <p class="login-section-label">{{ _('Log in with repository credentials') }}</p>
+        <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="ui form">
+          {{ form.hidden_tag() }}
+          {{ form_errors(form) }}
+          {{ render_field(form.email, icon="user icon", autofocus=True, errormsg=False) }}
+          {{ render_field(form.password, icon="lock icon", errormsg=False) }}
+          <button type="submit" class="ui fluid large primary button" style="margin-top: 0.5rem;">
+            {{ _('Log In') }}
+          </button>
+        </form>
+      </div>
+      {%- endwith %}
+      {%- endif %}
+      {%- endblock form_outer %}
+
+      {%- if security.registerable or security.recoverable %}
+      <div class="login-card-footer">
+        {%- block registerable %}
+        {%- if security.registerable %}
+        <span class="login-footer-text">
+          {% trans sitename=config.ACCOUNTS_SITENAME %}New to {{ sitename }}?{% endtrans %}
+          <a href="{{ url_for_security('register', next=request.args.get('next')) }}">{{ _('Sign up') }}</a>
+        </span>
+        {%- endif %}
+        {%- endblock registerable %}
+
+        {%- block recoverable %}
+        {%- if security.recoverable %}
+        <a class="login-footer-link" href="{{ url_for_security('forgot_password') }}">{{ _('Forgot password?') }}</a>
+        {%- endif %}
+        {%- endblock recoverable %}
+      </div>
+      {%- endif %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock page_body %}
+
+{% block javascript %}
+{{ super() }}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.flash-close-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var msg = this.closest('.ui.message');
+        if (msg) msg.style.display = 'none';
+      });
+    });
+  });
+</script>
+{% endblock javascript %}
