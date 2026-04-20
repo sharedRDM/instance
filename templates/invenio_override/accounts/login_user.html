@@ -55,6 +55,24 @@
         overrides form_outer, renders all non-hidden providers, then calls super().
         We only define form_outer for the local credentials form (super() target).
       #}
+
+      {% if config.SSO_SAML_IDPS %}
+        {% for name in config.SSO_SAML_IDPS.keys() %}
+          <div class="field">
+            <a class="login-page-button ui fluid large button" href="{{ url_for('sso_saml.sso', idp=name, next=next_url) }}">
+              {{
+                _('Log in with %(title)s', title=config.SSO_SAML_IDPS[name]['title']|default("SAML", true))
+              }}
+              <img src="{{ url_for('static', filename=config.OVERRIDE_ICON) }}" height="20px" />
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      {%- if config.OAUTHCLIENT_REMOTE_APPS or config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
+        <div class="ui horizontal divider login-divider">{{ _("Or") }}</div>
+      {%- endif %}
+
       {%- block form_outer %}
       {%- if config.ACCOUNTS_LOCAL_LOGIN_ENABLED %}
       {%- with form = login_user_form %}
