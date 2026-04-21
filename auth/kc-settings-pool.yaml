@@ -1,6 +1,6 @@
 rdm:
-  title: "Cyverse SSO"
-  description: Cyverse SSO
+  title: "RDM SSO"
+  description: RDM SSO
   base_url: https://keycloak.cyverse.at
   realm: rdm
   app_key: CYVERSE_KEYCLOAK_APP_CREDENTIALS
@@ -12,4 +12,12 @@ meduni:
   base_url: https://openid.medunigraz.at/
   realm: invenioRDM
   app_key: KEYCLOAK_APP_CREDENTIALS
+  legacy_url_path: False
+
+tug:
+  title: TUGRAZ
+  description: TUGRAZ SSO
+  base_url: https://keycloak.cyverse.tugraz.at
+  realm: rdm
+  app_key: TUGRAZ_KEYCLOAK_APP_CREDENTIALS
   legacy_url_path: False
