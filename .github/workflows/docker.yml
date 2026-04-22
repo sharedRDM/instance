@@ -242,7 +242,9 @@ jobs:
         if: "${{ github.event.inputs.invenio-override-branch != '' && !startsWith( github.ref, 'refs/tags') }}"
         run: sed -i 's/invenio-override", branch = "main"/invenio-override", branch = "${{ github.event.inputs.invenio-override-branch }}"/g' pyproject.toml
 
-      - name: Set keycloak in invenio.cfg via script
+      - name: Set keycloak in invenio.cfg via script      
+        env:
+          YAML2PY_SECRETS: ${{ secrets.TUG_YAML2PY_SECRETS }}
         run: |
           source .venv/bin/activate
           KEYCLOAK_NODE="tug"

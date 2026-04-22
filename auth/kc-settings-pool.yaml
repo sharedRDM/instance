@@ -17,7 +17,7 @@ meduni:
 tug:
   title: TUGRAZ
   description: TUGRAZ SSO
-  base_url: https://keycloak.cyverse.tugraz.at
+  base_url: <secret>
   realm: rdm
   app_key: TUGRAZ_KEYCLOAK_APP_CREDENTIALS
   legacy_url_path: False
