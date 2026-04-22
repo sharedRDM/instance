@@ -6,6 +6,8 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --extra tug --frozen && \
     pybabel compile -d ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/translations
 
+ARG TUG_ENV=dev
+
 # to use rspack
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
@@ -39,11 +41,12 @@ COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/sta
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/templates ${INVENIO_INSTANCE_PATH}/templates
 
+ARG TUG_ENV=dev
 
 WORKDIR ${WORKING_DIR}/src
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 # invenio.cfg already copied in builder stage, ensure it's in final location
-COPY ./themes/TUG/dev/invenio.cfg ${INVENIO_INSTANCE_PATH}
+COPY ./themes/TUG/${TUG_ENV}/invenio.cfg ${INVENIO_INSTANCE_PATH}
 COPY ./themes/TUG/base/wipe_recreate.sh ${INVENIO_INSTANCE_PATH}/wipe_recreate.sh
 RUN chmod +x ${INVENIO_INSTANCE_PATH}/wipe_recreate.sh && chown invenio:invenio .
 
