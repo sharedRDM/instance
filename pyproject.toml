@@ -13,7 +13,8 @@ dependencies = [
     "uwsgi >=2.0",
     "uwsgitop >=0.11",
     "uwsgi-tools >=1.1.1",
-    "setuptools <82"
+    "setuptools <82",
+    "invenio-cli>=1.6",
 ]
 
 [project.optional-dependencies]
@@ -47,4 +48,4 @@ py-modules = []
 
 [tool.uv.sources]
 # remove or comment these sources for instance releases. build only from official releases.
-invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main" }
+invenio-override = { path = "../invenio-override", editable = true }
