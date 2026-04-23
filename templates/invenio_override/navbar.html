@@ -5,207 +5,212 @@
   modify it under the terms of the MIT License; see LICENSE file for more
   details.
 #}
-
 {% set options = [] %}
 {% set only_rdm = config.OVERRIDE_SHOW_RDM_SEARCH %}
-
 {# Ensure at least one default option exists #}
-{% set base_option = {
-    "key": "rdm",
-    "text": "Research Results",
-    "value": "/records/search",
-    "title": "Research Data",
-} %}
+{% set base_option = {"key": "rdm", "text": "Research Results", "value": "/records/search", "title": "Research Data"} %}
 {% set options = options + [base_option] %}
-
 {% if config.OVERRIDE_SHOW_PUBLICATIONS_SEARCH and not only_rdm %}
     {% set pub_option = {
-        "key": "marc21",
-        "text": "Publications",
-        "value": url_for("invenio_records_marc21.search"),
-        "title": "Publication",
-    } %}
+            "key": "marc21",
+            "text": "Publications",
+            "value": url_for("invenio_records_marc21.search"),
+            "title": "Publication",
+        } %}
     {% set options = options + [pub_option] %}
 {% endif %}
-
 {% if config.OVERRIDE_SHOW_EDUCATIONAL_RESOURCES and not only_rdm %}
     {% set edu_option = {
-        "key": "lom",
-        "text": "Educational Resources",
-        "value": url_for("invenio_records_lom.search"),
-        "title": "OER",
-    } %}
+            "key": "lom",
+            "text": "Educational Resources",
+            "value": url_for("invenio_records_lom.search"),
+            "title": "OER",
+        } %}
     {% set options = options + [edu_option] %}
 {% endif %}
-
 {% if options | length > 1 %}
     {% set all_option = {
-        "key": "records",
-        "text": "All",
-        "value": url_for("invenio_search_ui.search"),
-        "title": "repo",
-    } %}
+            "key": "records",
+            "text": "All",
+            "value": url_for("invenio_search_ui.search"),
+            "title": "repo",
+        } %}
     {% set options = [all_option] + options %}
 {% endif %}
-
 {# Ensure options is not None or Undefined #}
 {% set options_json = options | tojson if options is not none else "[]" %}
-
 {# Hidden element required by invenio_app_rdm search page JS to read options #}
-<div id="header-search-bar" data-options='{{ options_json }}' style="display:none;"></div>
-
+<div id="header-search-bar"
+     data-options='{{ options_json }}'
+     style="display:none"></div>
 {# ====== ROW 1: Logo section ====== #}
 <div>
-<div class="ui container">
-  <div class="header-logorow">
-    {# Left: Repository logo + text #}
-    <div class="header-logorow-left">
-      {% if config.get('OVERRIDE_HEADER_LOGO_LEFT') %}
-      <div class="repo-img">
-        <img height="52" src="{{ url_for('static', filename=config.OVERRIDE_HEADER_LOGO_LEFT) }}">
-      </div>
-      {% endif %}
-      {% if config.get('OVERRIDE_HEADER_TEXT_LINE1') %}
-      <div class="affiliation-text">
-        <a title="Home" href="/" class="no-decoration">
-          {{ _(config.OVERRIDE_HEADER_TEXT_LINE1) }}
-          {% if config.get('OVERRIDE_HEADER_TEXT_LINE2') %}<br>{{ _(config.OVERRIDE_HEADER_TEXT_LINE2) }}{% endif %}
-          {% if config.get('OVERRIDE_HEADER_TEXT_LINE3') %}<br>{{ _(config.OVERRIDE_HEADER_TEXT_LINE3) }}{% endif %}
-        </a>
-      </div>
-      {% endif %}
-    </div>
-    {# Right: Institutional logo with claim #}
-    <div class="header-logorow-right">
-      <a href="{{ config.get('OVERRIDE_HEADER_LOGO_LINK', '/') }}"
-         title="{{ config.get('THEME_SITENAME', 'Home') }}"
-         target="_blank" class="no-decoration affiliation-logo">
-        {% if config.get('OVERRIDE_HEADER_CLAIM_WORDS') %}
-        <div class="affiliation-logo-claim">
-          {% for word in config.OVERRIDE_HEADER_CLAIM_WORDS %}
-          <div class="affiliation-logo-claim-single">{{ _(word) }}</div>
-          {% endfor %}
+    <div class="ui container">
+        <div class="header-logorow">
+            {# Left: Repository logo + text #}
+            <div class="header-logorow-left">
+                {% if config.get('OVERRIDE_HEADER_LOGO_LEFT') %}
+                    <div class="repo-img">
+                        <img height="52"
+                             src="{{ url_for('static', filename=config.OVERRIDE_HEADER_LOGO_LEFT) }}">
+                    </div>
+                {% endif %}
+                {% if config.get('OVERRIDE_HEADER_TEXT_LINE1') %}
+                    <div class="affiliation-text">
+                        <a title="Home" href="/" class="no-decoration">
+                            {{ _(config.OVERRIDE_HEADER_TEXT_LINE1) }}
+                            {% if config.get('OVERRIDE_HEADER_TEXT_LINE2') %}
+                                <br>
+                                {{ _(config.OVERRIDE_HEADER_TEXT_LINE2) }}
+                            {% endif %}
+                            {% if config.get('OVERRIDE_HEADER_TEXT_LINE3') %}
+                                <br>
+                                {{ _(config.OVERRIDE_HEADER_TEXT_LINE3) }}
+                            {% endif %}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            {# Right: Institutional logo with claim #}
+            <div class="header-logorow-right">
+                <a href="{{ config.get('OVERRIDE_HEADER_LOGO_LINK', '/') }}"
+                   title="{{ config.get('THEME_SITENAME', 'Home') }}"
+                   target="_blank"
+                   class="no-decoration affiliation-logo">
+                    {% if config.get('OVERRIDE_HEADER_CLAIM_WORDS') %}
+                        <div class="affiliation-logo-claim">
+                            {% for word in config.OVERRIDE_HEADER_CLAIM_WORDS %}
+                                <div class="affiliation-logo-claim-single">{{ _(word) }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if config.get('OVERRIDE_HEADER_LOGO_SVG') %}
+                        <img id="int-header-logo-img"
+                             height="48"
+                             src="{{ url_for('static', filename=config.OVERRIDE_HEADER_LOGO_SVG) }}">
+                    {% elif config.get('OVERRIDE_LOGO') %}
+                        <img id="int-header-logo-img"
+                             height="64"
+                             src="{{ url_for('static', filename=config.OVERRIDE_LOGO) }}">
+                    {% endif %}
+                </a>
+            </div>
         </div>
-        {% endif %}
-        {% if config.get('OVERRIDE_HEADER_LOGO_SVG') %}
-          <img id="int-header-logo-img" height="48"
-               src="{{ url_for('static', filename=config.OVERRIDE_HEADER_LOGO_SVG) }}">
-        {% elif config.get('OVERRIDE_LOGO') %}
-          <img id="int-header-logo-img" height="64"
-               src="{{ url_for('static', filename=config.OVERRIDE_LOGO) }}">
-        {% endif %}
-      </a>
     </div>
-  </div>
 </div>
-</div>
-
 {# ====== ROW 2: Dark top nav bar ====== #}
 <div class="header-topbar">
-  <div class="ui container">
-    <div class="header-topbar-inner">
-      <a href="/" title="Home" class="header-topbar-link">
-        <span class="home-inline">
-          <svg shape-rendering="geometricPrecision" id="int-menu-q-home-icon"
-               xmlns="http://www.w3.org/2000/svg"
-               version="1.1" xml:space="preserve" height="36.997" width="35.969"
-               viewBox="0 0 35.969 36.997451">
-               <polyline class="home-stroke" style="stroke-linecap:square;stroke-width:4;fill:none"
-                         points="282.72 437.28 282.72 414.77 297.71 406.69 312.69 414.77 312.69 437.28"
-                         transform="translate(-279.72 -403.28)">
-               </polyline>
-          </svg>
-        </span>
-      </a>
-      <div class="header-topbar-dropdown">
-        <a href="/me/overview" class="header-topbar-link">
-          {{ _("Dashboard") }} <span class="topbar-arrow"></span>
-        </a>
-        <div class="header-topbar-dropdown-menu">
-          <a href="/me/uploads" class="header-topbar-dropdown-item">{{ _("My Uploads") }}</a>
-          <a href="/me/requests" class="header-topbar-dropdown-item">{{ _("My Requests") }}</a>
-        </div>
-      </div>
-      <div class="header-topbar-dropdown">
-        <a href="/communities" class="header-topbar-link">
-          {{ _("Communities") }} <span class="topbar-arrow"></span>
-        </a>
-        <div class="header-topbar-dropdown-menu">
-          <a href="/me/communities" class="header-topbar-dropdown-item">{{ _("My Communities") }}</a>
-          <a href="/communities-search" class="header-topbar-dropdown-item">{{ _("All Communities") }}</a>
-          <a href="/communities/new" class="header-topbar-dropdown-item">{{ _("New Community") }}</a>
-        </div>
-      </div>
-      {%- for item in current_menu.submenu('profile-admin').children if item.visible %}
-        {% set admin_text = item.text|safe %}
-        {% if 'Administration' in item.text|safe %}
-          {% set admin_text = _("Administration") %}
-        {%- endif %}
-        <a class="header-topbar-link" href="{{ item.url }}">{{ admin_text }}</a>
-      {%- endfor %}
-      <div class="header-topbar-dropdown">
-        <a href="#" class="header-topbar-link" onclick="return false;">
-          {{ _("Help") }} <span class="topbar-arrow"></span>
-        </a>
-        <div class="header-topbar-dropdown-menu">
-          <a href="/help/search" class="header-topbar-dropdown-item">{{ _("Search Guide") }}</a>
-          {%- if config.get('OVERRIDE_SHOW_CONTACT') or config.get('OVERRIDE_FRONTPAGE_RIGHT') %}
-          <a id="contact-modal-trigger" href="#" class="header-topbar-dropdown-item">{{ _("Contact") }}</a>
-          {%- endif %}
-        </div>
-      </div>
-
-      <div class="header-topbar-lang">
-        {%- for l in current_i18n.get_locales() %}
-          {%- if current_i18n.language != l.language %}
-            <a href="{{ url_for("invenio_i18n.set_lang", lang_code=l.language) }}"
-               class="header-topbar-link header-topbar-lang-link">
-              {{ l.get_display_name().upper()[0:2] }}
+    <div class="ui container">
+        <div class="header-topbar-inner">
+            <a href="/" title="Home" class="header-topbar-link">
+                <span class="home-inline">
+                    <svg shape-rendering="geometricPrecision"
+                         id="int-menu-q-home-icon"
+                         xmlns="http://www.w3.org/2000/svg"
+                         version="1.1"
+                         xml:space="preserve"
+                         height="36.997"
+                         width="35.969"
+                         viewBox="0 0 35.969 36.997451">
+                        <polyline class="home-stroke" style="stroke-linecap:square;stroke-width:4;fill:none" points="282.72 437.28 282.72 414.77 297.71 406.69 312.69 414.77 312.69 437.28" transform="translate(-279.72 -403.28)">
+                        </polyline>
+                    </svg>
+                </span>
             </a>
-          {%- endif %}
-        {%- endfor %}
-      </div>
-
-      {%- block navbar_right %}
-        {%- include config.THEME_HEADER_LOGIN_TEMPLATE %}
-      {%- endblock navbar_right %}
+            {# Mobile-only #}
+            <button class="header-mobile-toggle"
+                    aria-label="{{ _("Menu") }}"
+                    aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="header-mobile-nav">
+                <div class="header-topbar-dropdown">
+                    <a href="/me/overview" class="header-topbar-link">
+                        {{ _("Dashboard") }} <span class="topbar-arrow"></span>
+                    </a>
+                    <div class="header-topbar-dropdown-menu">
+                        <a href="/me/uploads" class="header-topbar-dropdown-item">{{ _("My Uploads") }}</a>
+                        <a href="/me/requests" class="header-topbar-dropdown-item">{{ _("My Requests") }}</a>
+                    </div>
+                </div>
+                <div class="header-topbar-dropdown">
+                    <a href="/communities" class="header-topbar-link">
+                        {{ _("Communities") }} <span class="topbar-arrow"></span>
+                    </a>
+                    <div class="header-topbar-dropdown-menu">
+                        <a href="/me/communities" class="header-topbar-dropdown-item">{{ _("My Communities") }}</a>
+                        <a href="/communities-search" class="header-topbar-dropdown-item">{{ _("All Communities") }}</a>
+                        <a href="/communities/new" class="header-topbar-dropdown-item">{{ _("New Community") }}</a>
+                    </div>
+                </div>
+                {%- for item in current_menu.submenu('profile-admin').children if item.visible %}
+                    {% set admin_text = item.text|safe %}
+                    {% if 'Administration' in item.text|safe %}
+                        {% set admin_text = _("Administration") %}
+                    {%- endif %}
+                    <a class="header-topbar-link" href="{{ item.url }}">{{ admin_text }}</a>
+                {%- endfor %}
+                <div class="header-topbar-dropdown">
+                    <a href="#" class="header-topbar-link" onclick="return false;">
+                        {{ _("Help") }} <span class="topbar-arrow"></span>
+                    </a>
+                    <div class="header-topbar-dropdown-menu">
+                        <a href="/help/search" class="header-topbar-dropdown-item">{{ _("Search Guide") }}</a>
+                        {%- if config.get('OVERRIDE_SHOW_CONTACT') or config.get('OVERRIDE_FRONTPAGE_RIGHT') %}
+                            <a id="contact-modal-trigger"
+                               href="#"
+                               class="header-topbar-dropdown-item">{{ _("Contact") }}</a>
+                        {%- endif %}
+                    </div>
+                </div>
+                <div class="header-topbar-lang">
+                    {%- for l in current_i18n.get_locales() %}
+                        {%- if current_i18n.language != l.language %}
+                            <a href="{{ url_for("invenio_i18n.set_lang", lang_code=l.language) }}"
+                               class="header-topbar-link header-topbar-lang-link">
+                                {{ l.get_display_name().upper()[0:2] }}
+                            </a>
+                        {%- endif %}
+                    {%- endfor %}
+                </div>
+                {%- block navbar_right %}
+                    {%- include config.THEME_HEADER_LOGIN_TEMPLATE %}
+                {%- endblock navbar_right %}
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
 {%- if config.get('OVERRIDE_SHOW_CONTACT') or config.get('OVERRIDE_FRONTPAGE_RIGHT') %}
-<div class="ui small modal" id="contact-modal">
-  <div class="header">{{ _("Need help?") }}</div>
-  <div class="content">
-    <p>{{ _("We can help with:") }}</p>
-    <ul>
-      <li>{{ _("Upload your research results, software, preprints, etc.") }}</li>
-      <li>{{ _("Increase upload limit beyond our default policy of 10GB.") }}</li>
-      <li>{{ _("Establish contact with data stewards.") }}</li>
-      <li>{{ _("Find individual solutions.") }}</li>
-    </ul>
-    {%- if config.OVERRIDE_CONTACT_FORM %}
-    <div style="margin-top: 1em;">
-      <a id="feedback-form" class="ui primary button">{{ _("Contact us") }}</a>
+    <div class="ui small modal" id="contact-modal">
+        <div class="header">{{ _("Need help?") }}</div>
+        <div class="content">
+            <p>{{ _("We can help with:") }}</p>
+            <ul>
+                <li>{{ _("Upload your research results, software, preprints, etc.") }}</li>
+                <li>{{ _("Increase upload limit beyond our default policy of 10GB.") }}</li>
+                <li>{{ _("Establish contact with data stewards.") }}</li>
+                <li>{{ _("Find individual solutions.") }}</li>
+            </ul>
+            {%- if config.OVERRIDE_CONTACT_FORM %}
+                <div style="margin-top: 1em;">
+                    <a id="feedback-form" class="ui primary button">{{ _("Contact us") }}</a>
+                </div>
+            {%- endif %}
+            {%- if config.OVERRIDE_SHOW_RIGHT_CONTACT_EMAIL %}
+                <div style="margin-top: 0.75em;">
+                    <a href="mailto:{{ config.OVERRIDE_RIGHT_SECTION_CONTACT_EMAIL }}"
+                       class="ui primary button">{{ _("Contact our Help Service") }}</a>
+                </div>
+            {%- endif %}
+        </div>
+        <div class="actions">
+            <div class="ui cancel button">{{ _("Close") }}</div>
+        </div>
     </div>
-    {%- endif %}
-    {%- if config.OVERRIDE_SHOW_RIGHT_CONTACT_EMAIL %}
-    <div style="margin-top: 0.75em;">
-      <a href="mailto:{{ config.OVERRIDE_RIGHT_SECTION_CONTACT_EMAIL }}" class="ui primary button">
-        {{ _("Contact our Help Service") }}
-      </a>
-    </div>
-    {%- endif %}
-  </div>
-  <div class="actions">
-    <div class="ui cancel button">{{ _("Close") }}</div>
-  </div>
-</div>
-<script>
+    <script>
   document.getElementById('contact-modal-trigger').addEventListener('click', function(e) {
     e.preventDefault();
     $('#contact-modal').modal('show');
   });
-</script>
+    </script>
 {%- endif %}
-
