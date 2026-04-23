@@ -261,7 +261,7 @@ pre {
    Semantic UI grid applies negative left/right margins (-1em) for column gutters,
    which makes the grid wider than 100% even after the upstream width:100% fix.
    Zeroing those margins on mobile keeps the search button inside the viewport. */
-@media screen and (max-width: @largestMobileScreen) {
+@media screen and (max-width: 767px) {
   #frontpage-search-bar .ui.container.grid {
     margin-left: 0 !important;
     margin-right: 0 !important;

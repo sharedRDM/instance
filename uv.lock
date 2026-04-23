@@ -1418,9 +1418,9 @@ requires-dist = [
     { name = "invenio-global-search", marker = "extra == 'tug'", specifier = ">=0.3.0" },
     { name = "invenio-imoox", marker = "extra == 'tug'", specifier = ">=0.2.0" },
     { name = "invenio-moodle", marker = "extra == 'tug'", specifier = ">=1.1.3" },
-    { name = "invenio-override", marker = "extra == 'basic'", editable = "../invenio-override" },
-    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", editable = "../invenio-override" },
-    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", editable = "../invenio-override" },
+    { name = "invenio-override", marker = "extra == 'basic'", git = "https://github.com/sharedRDM/invenio-override.git?branch=mobile-ui-and-dashboard-improvements" },
+    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/sharedRDM/invenio-override.git?branch=mobile-ui-and-dashboard-improvements" },
+    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/sharedRDM/invenio-override.git?branch=mobile-ui-and-dashboard-improvements" },
     { name = "invenio-pure", marker = "extra == 'tug'", specifier = ">=0.1.0" },
     { name = "invenio-saml", marker = "extra == 'tug'", specifier = ">=1.0.0" },
     { name = "invenio-workflows-tugraz", marker = "extra == 'tug'", specifier = ">=0.11.0" },
@@ -2157,7 +2157,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.7"
-source = { editable = "../invenio-override" }
+source = { git = "https://github.com/sharedRDM/invenio-override.git?branch=mobile-ui-and-dashboard-improvements#3735454bd437079ae5196f5f2a3998935e734b20" }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
     { name = "invenio-global-search" },
@@ -2173,26 +2173,6 @@ lom = [
 marc21 = [
     { name = "invenio-global-search", extra = ["marc21"] },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "invenio-app", marker = "extra == 'tests'", specifier = ">=2.1.0,<3.0.0" },
-    { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = ">=13.0.0b3.dev2,<14.0.0" },
-    { name = "invenio-global-search", specifier = ">=0.3.0" },
-    { name = "invenio-global-search", extras = ["lom"], marker = "extra == 'lom'", specifier = ">=0.3.0" },
-    { name = "invenio-global-search", extras = ["lom", "marc21"], marker = "extra == 'tests'", specifier = ">=0.3.0" },
-    { name = "invenio-global-search", extras = ["marc21"], marker = "extra == 'marc21'", specifier = ">=0.3.0" },
-    { name = "invenio-previewer", marker = "extra == 'tests'", specifier = ">=2.2.0" },
-    { name = "invenio-rdm-records", specifier = ">=19.0.0" },
-    { name = "invenio-search", extras = ["opensearch2"], marker = "extra == 'opensearch2'", specifier = ">=3.0.0,<4.0.0" },
-    { name = "opensearch-dsl", specifier = ">=2.0.0,<3.0.0" },
-    { name = "opensearch-py", specifier = ">=2.0.0,<3.0.0" },
-    { name = "pytest-black", marker = "extra == 'tests'", specifier = ">=0.6.0" },
-    { name = "pytest-invenio", marker = "extra == 'tests'", specifier = ">=3.3.0,<4.0.0" },
-    { name = "setuptools", marker = "extra == 'tests'", specifier = "<82" },
-    { name = "sphinx", marker = "extra == 'tests'", specifier = ">=4.5.0" },
-]
-provides-extras = ["lom", "marc21", "tests", "opensearch2"]
 
 [[package]]
 name = "invenio-pages"
