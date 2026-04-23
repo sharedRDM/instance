@@ -132,10 +132,15 @@ pre {
    Button styling
 ====================================== */
 
-/* clip pill input children to prevent background bleeding at corners */
-.ui.action.input {
-  border-radius: @radiusPill !important;
-  overflow: hidden !important;
+/* search input — pill shape globally */
+.ui.action.input > input:first-child {
+  border-radius: @radiusPill 0 0 @radiusPill !important;
+}
+
+.ui.action.input:not([class*="left action"]) > .button:last-child,
+.ui.action.input:not([class*="left action"]) > .buttons:last-child > .button,
+.ui.action.input:not([class*="left action"]) > .dropdown:last-child {
+  border-radius: 0 @radiusPill @radiusPill 0;
 }
 
 /* search button */
