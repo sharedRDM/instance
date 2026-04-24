@@ -14,7 +14,7 @@
     {% set pub_option = {
             "key": "marc21",
             "text": "Publications",
-            "value": url_for("invenio_records_marc21.search"),
+            "value": invenio_url_for("invenio_records_marc21.search"),
             "title": "Publication",
         } %}
     {% set options = options + [pub_option] %}
@@ -23,7 +23,7 @@
     {% set edu_option = {
             "key": "lom",
             "text": "Educational Resources",
-            "value": url_for("invenio_records_lom.search"),
+            "value": invenio_url_for("invenio_records_lom.search"),
             "title": "OER",
         } %}
     {% set options = options + [edu_option] %}
@@ -32,7 +32,7 @@
     {% set all_option = {
             "key": "records",
             "text": "All",
-            "value": url_for("invenio_search_ui.search"),
+            "value": invenio_url_for("invenio_search_ui.search"),
             "title": "repo",
         } %}
     {% set options = [all_option] + options %}
@@ -166,7 +166,7 @@
                 <div class="header-topbar-lang">
                     {%- for l in current_i18n.get_locales() %}
                         {%- if current_i18n.language != l.language %}
-                            <a href="{{ url_for("invenio_i18n.set_lang", lang_code=l.language) }}"
+                            <a href="{{ invenio_url_for("invenio_i18n.set_lang", lang_code=l.language) }}"
                                class="header-topbar-link header-topbar-lang-link">
                                 {{ l.get_display_name().upper()[0:2] }}
                             </a>
