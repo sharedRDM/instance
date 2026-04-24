@@ -11,39 +11,39 @@
 {%- extends "invenio_app_rdm/users/base.html" %}
 {% set active_dashboard_menu_item = "uploads" %}
 {%- block javascript %}
-    {{ super() }}
-    {{ webpack['invenio-app-rdm-user-uploads.js'] }}
+  {{ super() }}
+  {{ webpack['invenio-app-rdm-user-uploads.js'] }}
 {%- endblock javascript %}
 {%- block user_dashboard_body %}
-    {# Mobile upload button — shown above the search app on mobile/tablet #}
-    <div class="dashboard-mobile-action-bar">
-        <a href="{{ url_for("invenio_app_rdm_records.deposit_create") }}"
-           class="upload-new-circle"
-           title="{{ _("New upload") }}">
-            <i class="upload icon"></i>
-        </a>
-        <div class="upload-new-label-wrap">
-            <span class="upload-new-title">{{ _("New upload") }}</span>
-            <span class="upload-new-desc">{{ _("Share your research") }}</span>
-        </div>
+  {# Mobile upload button — shown above the search app on mobile/tablet #}
+  <div class="dashboard-mobile-action-bar">
+    <a href="{{ url_for('invenio_app_rdm_records.deposit_create') }}"
+       class="upload-new-circle"
+       title="{{ _('New upload') }}">
+      <i class="upload icon"></i>
+    </a>
+    <div class="upload-new-label-wrap">
+      <span class="upload-new-title">{{ _('New upload') }}</span>
+      <span class="upload-new-desc">{{ _("Share your research") }}</span>
     </div>
-    <div id="invenio-search-config"
-         class="uploads-search-app"
-         data-invenio-search-config='{{ search_app_rdm_user_uploads_config(app_id="InvenioAppRdm.DashboardUploads") | tojson }}'>
+  </div>
+  <div id="invenio-search-config"
+       class="uploads-search-app"
+       data-invenio-search-config='{{ search_app_rdm_user_uploads_config(app_id="InvenioAppRdm.DashboardUploads") | tojson }}'>
+  </div>
+  {# Desktop upload button — injected into the computer.only row by JS #}
+  <div id="upload-new-circle" class="upload-new-wrap" style="display:none;">
+    <a href="{{ url_for('invenio_app_rdm_records.deposit_create') }}"
+       class="upload-new-circle"
+       title="{{ _('New upload') }}">
+      <i class="upload icon"></i>
+    </a>
+    <div class="upload-new-label-wrap">
+      <span class="upload-new-title">{{ _('New upload') }}</span>
+      <span class="upload-new-desc">{{ _("Share your research") }}</span>
     </div>
-    {# Desktop upload button — injected into the computer.only row by JS #}
-    <div id="upload-new-circle" class="upload-new-wrap" style="display:none;">
-        <a href="{{ url_for("invenio_app_rdm_records.deposit_create") }}"
-           class="upload-new-circle"
-           title="{{ _("New upload") }}">
-            <i class="upload icon"></i>
-        </a>
-        <div class="upload-new-label-wrap">
-            <span class="upload-new-title">{{ _("New upload") }}</span>
-            <span class="upload-new-desc">{{ _("Share your research") }}</span>
-        </div>
-    </div>
-    <script>
+  </div>
+  <script>
   (function () {
     function injectUploadCircle() {
       var circle = document.getElementById('upload-new-circle');
@@ -71,5 +71,5 @@
       }
     }, 100);
   })();
-    </script>
+  </script>
 {%- endblock user_dashboard_body %}

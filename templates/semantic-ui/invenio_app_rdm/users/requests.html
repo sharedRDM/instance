@@ -11,12 +11,12 @@
 {%- extends "invenio_app_rdm/users/base.html" %}
 {% set active_dashboard_menu_item = "requests" %}
 {%- block javascript %}
-    {{ super() }}
-    {{ webpack['invenio-app-rdm-user-requests.js'] }}
+  {{ super() }}
+  {{ webpack['invenio-app-rdm-user-requests.js'] }}
 {%- endblock javascript %}
 {%- block user_dashboard_body %}
-    <div id="invenio-search-config"
-         class="requests-search-app"
-         data-invenio-search-config='{{ search_app_rdm_user_requests_config(app_id="InvenioAppRdm.DashboardRequests") | tojson }}'>
-    </div>
+  <div id="invenio-search-config"
+       class="requests-search-app"
+       data-invenio-search-config='{{ search_app_rdm_user_requests_config(app_id="InvenioAppRdm.DashboardRequests") | tojson }}'>
+  </div>
 {%- endblock user_dashboard_body %}
