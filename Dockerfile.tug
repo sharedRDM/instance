@@ -1,10 +1,11 @@
 # STAGE 1
-FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder-3.14 AS builder
+
 
 COPY pyproject.toml uv.lock ./
 
 RUN uv sync --extra tug --frozen && \
-    pybabel compile -d ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/translations
+    pybabel compile -d ${VIRTUAL_ENV}/lib/python3.14/site-packages/invenio_override/translations || true
 
 ARG TUG_ENV=dev
 
@@ -12,8 +13,8 @@ ARG TUG_ENV=dev
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
 # Replace variables.less
-COPY themes/TUG/base/variables.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
-COPY themes/TUG/base/overrides.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
+COPY themes/TUG/base/variables.less ${VIRTUAL_ENV}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
+COPY themes/TUG/base/overrides.less ${VIRTUAL_ENV}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
 
 RUN invenio collect --verbose && invenio webpack create
 
@@ -32,7 +33,8 @@ RUN pnpm install
 RUN pnpm run build
 
 # STAGE 2
-FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend-3.14 AS frontend
+
 
 COPY --from=builder ${VIRTUAL_ENV}/lib ${VIRTUAL_ENV}/lib
 COPY --from=builder ${VIRTUAL_ENV}/bin ${VIRTUAL_ENV}/bin
