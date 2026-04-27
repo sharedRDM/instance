@@ -9,7 +9,6 @@
 {%- set title = _("FAQ statistics") %}
 {%- set page_description = _("Answers to frequently asked questions about how usage statistics are collected, anonymized and displayed.") %}
 {%- extends config.BASE_TEMPLATE %}
-
 {%- block page_body %}
   <div class="ui two column grid container rel-mt-2">
     <div class="ui row">
@@ -72,8 +71,10 @@
             ?
           </p>
         </h3>
-        <p>A user (human or machine) downloading a file from a record, excluding double-clicks and robots. If a record has
-          multiple files and you download all files, each file counts as one download.</p>
+        <p>
+          A user (human or machine) downloading a file from a record, excluding double-clicks and robots. If a record has
+          multiple files and you download all files, each file counts as one download.
+        </p>
         <h3>
           <p>
             What is a
@@ -95,14 +96,19 @@
             ?
           </p>
         </h3>
-        <p>The total data volume that has been downloaded for all files in a record by a user (human or machine), excluding
+        <p>
+          The total data volume that has been downloaded for all files in a record by a user (human or machine), excluding
           double-clicks and robots. In case a user cancels a file download mid-way, we still count the total file size as
-          fully downloaded.</p><h3>
+          fully downloaded.
+        </p>
+        <h3>
           <p>How do you deal with versions?</p>
         </h3>
-        <p>By default, for a record, we display the aggregated counts of views, downloads and data volume for all versions
+        <p>
+          By default, for a record, we display the aggregated counts of views, downloads and data volume for all versions
           of a record. You can further expand the usage statistics box on a record page to see the counts for the specific
-          version.</p>
+          version.
+        </p>
         <h3>
           <p>How do you deal with robots?</p>
         </h3>
@@ -152,9 +158,11 @@
         <h3>
           <p>How do you anonymize users?</p>
         </h3>
-        <p>For each view/download event, we track an anonymized visitor ID. This anonymized visitor ID changes for a user
+        <p>
+          For each view/download event, we track an anonymized visitor ID. This anonymized visitor ID changes for a user
           every 24 hours, hence a user viewing the same record on two different days will have two different anonymized
-          visitor IDs. The reason we track an anonymized visitor ID is in order to count unique views and downloads.</p>
+          visitor IDs. The reason we track an anonymized visitor ID is in order to count unique views and downloads.
+        </p>
         <p>
           For security purposes, we also keep a web server access log which includes your
           <a href="https://en.wikipedia.org/wiki/IP_address">IP address</a>
@@ -178,8 +186,10 @@
         <h3>
           <p>Can I opt-out of the usage statistics tracking?</p>
         </h3>
-        <p>No, it is not possible to opt-out. The usage statistics tracking is fully anonymized and is done on the
-          server-side.</p>
+        <p>
+          No, it is not possible to opt-out. The usage statistics tracking is fully anonymized and is done on the
+          server-side.
+        </p>
         <h3>
           <p>Do you support usage statistics for a community?</p>
         </h3>

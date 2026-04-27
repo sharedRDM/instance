@@ -9,11 +9,11 @@ authors = [
 ]
 
 dependencies = [
-    "invenio-app-rdm[opensearch2] ==13.0.0",
-    "uwsgi >=2.0",
-    "uwsgitop >=0.11",
-    "uwsgi-tools >=1.1.1",
-    "setuptools <82"
+    "invenio-app-rdm[opensearch2]==13.0.0",
+    "uwsgi>=2.0",
+    "uwsgitop>=0.11",
+    "uwsgi-tools>=1.1.1",
+    "setuptools<82",
 ]
 
 [project.optional-dependencies]
@@ -42,9 +42,11 @@ basic = [
 ]
 
 
+[tool.djlint]
+indent = 2
+profile = "jinja"
+
 [tool.setuptools]
 py-modules = []
 
 [tool.uv.sources]
-# remove or comment these sources for instance releases. build only from official releases.
-invenio-override = { git = "https://github.com/sharedRDM/invenio-override", branch = "main" }
