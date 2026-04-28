@@ -32,9 +32,11 @@ RUN pnpm run build
 # STAGE 2
 FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend-3.14 AS frontend
 
+ENV PATH=/opt/env/bin:$PATH
 
-COPY --from=builder ${VIRTUAL_ENV}/lib ${VIRTUAL_ENV}/lib
-COPY --from=builder ${VIRTUAL_ENV}/bin ${VIRTUAL_ENV}/bin
+
+COPY --from=builder /usr/local/lib /usr/local/lib
+COPY --from=builder /usr/local/bin /usr/local/bin
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/app_data ${INVENIO_INSTANCE_PATH}/app_data
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/static
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations
