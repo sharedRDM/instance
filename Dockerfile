@@ -30,8 +30,8 @@ FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend-3.14 AS frontend
 ENV PATH=/opt/env/bin:$PATH
 
 
-COPY --from=builder /usr/local/lib /usr/local/lib
-COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder ${UV_PROJECT_ENVIRONMENT}/lib ${UV_PROJECT_ENVIRONMENT}/lib
+COPY --from=builder ${UV_PROJECT_ENVIRONMENT}/bin ${UV_PROJECT_ENVIRONMENT}/bin
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/app_data ${INVENIO_INSTANCE_PATH}/app_data
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/static
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations

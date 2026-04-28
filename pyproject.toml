@@ -10,7 +10,6 @@ authors = [
 
 dependencies = [
     "invenio-app-rdm[opensearch2]==14.0.0b5.dev6",
-    "lxml==6.0.2",
     "uwsgi>=2.0",
     "uwsgitop>=0.11",
     "uwsgi-tools>=1.1.1",
@@ -19,6 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 tug = [
+    "lxml==6.0.2",
     "invenio-alma>=0.13.5",
     "invenio-campusonline>=0.3.0",
     "invenio-catalogue-marc21>=0.2.0",
@@ -54,4 +54,4 @@ profile = "jinja"
 py-modules = []
 
 [tool.uv.sources]
-invenio-override = { git = "https://github.com/tu-graz-library/invenio-override.git", branch = "upgrade-to-rdm-v14" }
+invenio-override = { git = "https://github.com/tu-graz-library/invenio-override.git", branch = "main" }

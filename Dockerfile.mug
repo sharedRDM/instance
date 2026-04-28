@@ -1,6 +1,5 @@
 # STAGE 1
-FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder-3.14 AS builder
-
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
 
 COPY pyproject.toml uv.lock ./
 
@@ -10,8 +9,8 @@ RUN uv sync --extra mug --frozen
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
 # Replace variables.less
-COPY themes/MUG/variables.less ${VIRTUAL_ENV}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
-COPY themes/MUG/overrides.less ${VIRTUAL_ENV}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
+COPY themes/MUG/variables.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
+COPY themes/MUG/overrides.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
 
 RUN invenio collect --verbose && invenio webpack create
 
@@ -30,13 +29,10 @@ RUN pnpm install
 RUN pnpm run build
 
 # STAGE 2
-FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend-3.14 AS frontend
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
 
-ENV PATH=/opt/env/bin:$PATH
-
-
-COPY --from=builder /usr/local/lib /usr/local/lib
-COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder ${VIRTUAL_ENV}/lib ${VIRTUAL_ENV}/lib
+COPY --from=builder ${VIRTUAL_ENV}/bin ${VIRTUAL_ENV}/bin
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/app_data ${INVENIO_INSTANCE_PATH}/app_data
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/static
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations
