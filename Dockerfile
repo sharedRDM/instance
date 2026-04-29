@@ -1,5 +1,6 @@
 # STAGE 1
-FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder-3.14 AS builder
+
 
 COPY pyproject.toml uv.lock ./
 
@@ -24,10 +25,13 @@ RUN pnpm run build
 
 
 # STAGE 2
-FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend AS frontend
+FROM ghcr.io/tu-graz-library/docker-invenio-base:main-frontend-3.14 AS frontend
 
-COPY --from=builder ${VIRTUAL_ENV}/lib ${VIRTUAL_ENV}/lib
-COPY --from=builder ${VIRTUAL_ENV}/bin ${VIRTUAL_ENV}/bin
+ENV PATH=/opt/env/bin:$PATH
+
+
+COPY --from=builder ${UV_PROJECT_ENVIRONMENT}/lib ${UV_PROJECT_ENVIRONMENT}/lib
+COPY --from=builder ${UV_PROJECT_ENVIRONMENT}/bin ${UV_PROJECT_ENVIRONMENT}/bin
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/app_data ${INVENIO_INSTANCE_PATH}/app_data
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/static ${INVENIO_INSTANCE_PATH}/static
 COPY --from=builder ${INVENIO_INSTANCE_PATH}/translations ${INVENIO_INSTANCE_PATH}/translations

@@ -680,6 +680,45 @@ html {
 }
 
 /* ======================================
+   Admin UI — TUG colors
+====================================== */
+
+.invenio-administration #invenio-admin-home-nav.ui.inverted.menu,
+.invenio-administration #invenio-admin-top-nav.ui.inverted.menu {
+  background-color: @overridePrimary !important;
+}
+
+.invenio-administration .ui.inverted.menu .item,
+.invenio-administration .ui.inverted.menu .item > a {
+  color: #ffffff !important;
+}
+
+.invenio-administration .ui.inverted.menu .item:hover,
+.invenio-administration .ui.inverted.menu .item > a:hover {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+  color: #ffffff !important;
+}
+
+.invenio-administration .ui.vertical.menu .item {
+  color: @primaryText !important;
+}
+
+.invenio-administration .ui.vertical.menu .item:hover {
+  color: @overridePrimary !important;
+}
+
+.invenio-administration .ui.vertical.menu .item.active {
+  color: @overridePrimary !important;
+  font-weight: 600;
+}
+
+.invenio-administration .rdm-logo {
+  max-height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+/* ======================================
    Community page-subheader navigation tabs
 ====================================== */
 

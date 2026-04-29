@@ -1,6 +1,6 @@
 [project]
 name = "instance"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dynamic = ["version"]
 
 authors = [
@@ -9,7 +9,7 @@ authors = [
 ]
 
 dependencies = [
-    "invenio-app-rdm[opensearch2]==13.0.0",
+    "invenio-app-rdm[opensearch2]==14.0.0b5.dev6",
     "uwsgi>=2.0",
     "uwsgitop>=0.11",
     "uwsgi-tools>=1.1.1",
@@ -18,27 +18,31 @@ dependencies = [
 
 [project.optional-dependencies]
 tug = [
-    "invenio-saml>=1.0.0",
-    "invenio-config-tugraz>=0.13.3",
-    "invenio-curations==0.6.2",
-    "invenio-global-search>=0.3.0",
-    "invenio-override[marc21,lom] ~=0.0.7",
-    "invenio-imoox>=0.2.0",
+    "lxml==6.0.2",
     "invenio-alma>=0.13.5",
-    "invenio-pure>=0.1.0",
-    "invenio-moodle>=1.1.3",
     "invenio-campusonline>=0.3.0",
-    "invenio-workflows-tugraz>=0.11.0",
-    "repository-cli>=0.11.0",
-    "invenio-catalogue-marc21>=0.0.4",
+    "invenio-catalogue-marc21>=0.2.0",
+    "invenio-config-tugraz>=0.14.2",
+    "invenio-curations>=0.8.3",
+    "invenio-global-search>=0.3.0",
+    "invenio-imoox>=0.2.0",
+    "invenio-moodle>=1.1.3",
+    "invenio-override[marc21,lom] ~=0.0.7",
+    "invenio-pure>=0.1.0",
+    "invenio-records-global-search>=0.3.5",
+    "invenio-records-lom>=0.20.1",
+    "invenio-records-marc21>=0.27.0",
+    "invenio-saml>=1.0.0",
+    "invenio-workflows-tugraz>=0.12.0",
+    "repository-cli>=0.13.0",
 ]
 mug = [
-    "invenio-curations==0.6.2",
+    "invenio-curations>=0.8.3",
     "invenio-global-search>=0.3.0",
-    "invenio-override[lom] ~=0.0.7"
+    "invenio-override[lom] ~=0.0.7",
 ]
 basic = [
-    "invenio-override ~=0.0.7"
+    "invenio-override ~=0.0.7",
 ]
 
 
@@ -50,5 +54,4 @@ profile = "jinja"
 py-modules = []
 
 [tool.uv.sources]
-invenio-override = { git = "https://github.com/sharedRDM/invenio-override.git", branch = "main" }
-
+invenio-override = { git = "https://github.com/tu-graz-library/invenio-override.git", branch = "main" }
