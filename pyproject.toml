@@ -10,8 +10,7 @@ authors = [
 
 dependencies = [
     "invenio-app-rdm[opensearch2]==14.0.0b5.dev6",
-    "uwsgi>=2.0; sys_platform == 'linux'",
-    "pyuwsgi>=2.0; sys_platform == 'darwin'",
+    "uwsgi>=2.0",
     "uwsgitop>=0.11",
     "uwsgi-tools>=1.1.1",
     "setuptools<82",
@@ -55,4 +54,4 @@ profile = "jinja"
 py-modules = []
 
 [tool.uv.sources]
-invenio-override = { git = "https://github.com/tu-graz-library/invenio-override", branch = "add-search-nav" }
+invenio-override = { git = "https://github.com/tu-graz-library/invenio-override", branch = "main" }
