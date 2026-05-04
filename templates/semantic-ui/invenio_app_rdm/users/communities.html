@@ -18,7 +18,7 @@
   {% if can_create_community %}
     {# Mobile new community ≤1300px #}
     <div class="dashboard-mobile-action-bar">
-      <a href="{{ url_for('invenio_communities.communities_new') }}"
+      <a href="{{ invenio_url_for('invenio_communities.communities_new') }}"
          class="upload-new-circle"
          title="{{ _('New community') }}">
         <i class="plus icon"></i>
@@ -38,7 +38,7 @@
     <div id="new-community-circle"
          class="upload-new-wrap"
          style="display:none">
-      <a href="{{ url_for('invenio_communities.communities_new') }}"
+      <a href="{{ invenio_url_for('invenio_communities.communities_new') }}"
          class="upload-new-circle"
          title="{{ _('New community') }}">
         <i class="plus icon"></i>
