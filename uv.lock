@@ -1213,7 +1213,6 @@ name = "instance"
 source = { virtual = "." }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
-    { name = "pyuwsgi", marker = "sys_platform == 'darwin'" },
     { name = "setuptools" },
     { name = "uwsgi", marker = "sys_platform == 'linux'" },
     { name = "uwsgi-tools" },
@@ -1262,9 +1261,9 @@ requires-dist = [
     { name = "invenio-global-search", marker = "extra == 'tug'", specifier = ">=0.3.0" },
     { name = "invenio-imoox", marker = "extra == 'tug'", specifier = ">=0.2.0" },
     { name = "invenio-moodle", marker = "extra == 'tug'", specifier = ">=1.1.3" },
-    { name = "invenio-override", marker = "extra == 'basic'", git = "https://github.com/tu-graz-library/invenio-override?branch=add-search-nav" },
-    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/tu-graz-library/invenio-override?branch=add-search-nav" },
-    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/tu-graz-library/invenio-override?branch=add-search-nav" },
+    { name = "invenio-override", marker = "extra == 'basic'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
+    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
+    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-pure", marker = "extra == 'tug'", specifier = ">=0.1.0" },
     { name = "invenio-records-global-search", marker = "extra == 'tug'", specifier = ">=0.3.5" },
     { name = "invenio-records-lom", marker = "extra == 'tug'", specifier = ">=0.20.1" },
@@ -1272,7 +1271,6 @@ requires-dist = [
     { name = "invenio-saml", marker = "extra == 'tug'", specifier = ">=1.0.0" },
     { name = "invenio-workflows-tugraz", marker = "extra == 'tug'", specifier = ">=0.12.0" },
     { name = "lxml", marker = "extra == 'tug'", specifier = "==6.0.2" },
-    { name = "pyuwsgi", marker = "sys_platform == 'darwin'", specifier = ">=2.0" },
     { name = "repository-cli", marker = "extra == 'tug'", specifier = ">=0.13.0" },
     { name = "setuptools", specifier = "<82" },
     { name = "uwsgi", marker = "sys_platform == 'linux'", specifier = ">=2.0" },
@@ -1988,7 +1986,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "0.0.7"
-source = { git = "https://github.com/tu-graz-library/invenio-override?branch=add-search-nav#59b63705c8467c82cf7033ad8cb976a569694ba7" }
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#fbffedc6fea066afde557827bd6b2c1ac3428513" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
@@ -3532,16 +3530,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/90/26/9f1f00a5d021fff16dee3de13d43e5e978f3d58928e129c3a62cf7eb9738/pytz-2024.1.tar.gz", hash = "sha256:2a29735ea9c18baf14b448846bde5a48030ed267578472d8955cd0e7443a9812", size = 316214 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9c/3d/a121f284241f08268b21359bd425f7d4825cffc5ac5cd0e1b3d82ffd2b10/pytz-2024.1-py2.py3-none-any.whl", hash = "sha256:328171f4e3623139da4983451950b28e95ac706e13f3f2630a879749e7a8b319", size = 505474 },
-]
-
-[[package]]
-name = "pyuwsgi"
-version = "2.0.30.post1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/98/28/c1fa01c1f7613724e95c9f9f3276d4bdd9dc187b140cd68d50b3079bfe56/pyuwsgi-2.0.30.post1.tar.gz", hash = "sha256:b09a4a462173944f6f1d56f942074db02866e16f39045658fa8b7bec861042f4", size = 877709 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b7/fb/c815c011e7fe4fa401eef7de2cdd106e919b4e29498a1381c18599228825/pyuwsgi-2.0.30.post1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:057ad7829f7f2358a044547cf3345a4a3a6d5c34630fc78c67d4bd6f3164fc84", size = 639808 },
-    { url = "https://files.pythonhosted.org/packages/7d/a3/b5cec94aa846d964278aa92fe01ec9768b2a20caba83224b2f32d3fca49e/pyuwsgi-2.0.30.post1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:db315664b858eb19ab186dd6c175b9253f82963327ddbe307604ee35b9d7df30", size = 584936 },
 ]
 
 [[package]]
