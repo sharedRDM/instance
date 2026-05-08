@@ -210,6 +210,10 @@ pre {
     display: none !important;
   }
 
+  @media screen and (max-width: 767.9px) {
+    font-size: @font-size-sm !important;
+  }
+
   /* inner grid uses .container which has fixed breakpoint widths —
      force it to fill the card so the close button stays on the same row */
   > .ui.grid.container {
@@ -357,34 +361,7 @@ pre {
   display: block !important;
 }
 
-/* ======================================
-   UI messages — subtle styling
-====================================== */
-.ui.success.message {
-  background-color: #f0faf5;
-  color: #1a6b4a;
-  border: 1px solid rgba(26, 107, 74, 0.15);
-  border-radius: (@radiusCard - 2);
-}
-.ui.info.message {
-  background-color: #f0f7ff;
-  color: #1a5276;
-  border: 1px solid rgba(26, 82, 118, 0.15);
-  border-radius: (@radiusCard - 2);
-}
-.ui.warning.message {
-  background-color: #fffaf3;
-  color: #856404;
-  border: 1px solid rgba(133, 100, 4, 0.15);
-  border-radius: (@radiusCard - 2);
-}
-.ui.error.message,
-.ui.negative.message {
-  background-color: #fff5f5;
-  color: #9b1c1c;
-  border: 1px solid rgba(155, 28, 28, 0.15);
-  border-radius: (@radiusCard - 2);
-}
+/* Message styles handled by invenio-override/overrides.less */
 
 /* ======================================
    Brand and label
@@ -601,29 +578,12 @@ html {
 }
 
 /* ======================================
-   Request detail — grid columns as cards
-   Scoped to top-level React grid only to avoid
-   nested card-in-card in the Record preview tab
-====================================== */
-#request-detail > .ui.grid > .column {
-  background: #ffffff;
-  border: @borderSubtle;
-  border-radius: @radiusCardLarge;
-  box-shadow: @cardShadowRest;
-  padding: 1.5rem !important;
-}
-
-/* ======================================
    Record detail — remove default Semantic UI
    grid padding from date row and sidebar
 ====================================== */
 #record-info .ui.grid.middle.aligned {
   padding-top: 0 !important;
   margin-top: 0 !important;
-}
-
-.ui.relaxed.grid > .row > .column.sidebar {
-  padding-top: 0 !important;
 }
 
 /* ======================================
