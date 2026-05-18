@@ -20,4 +20,6 @@ tug:
   base_url: <secret>
   realm: rdm
   app_key: TUGRAZ_KEYCLOAK_APP_CREDENTIALS
-  legacy_url_path: False
+  # Adds "/auth/" between the base URL and realm names for
+  # generated Keycloak URLs (default: True)
+  legacy_url_path: True
