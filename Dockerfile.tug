@@ -52,7 +52,7 @@ COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 # invenio.cfg already copied in builder stage, ensure it's in final location
 COPY ./themes/TUG/${TUG_ENV}/invenio.cfg ${INVENIO_INSTANCE_PATH}
 RUN chown invenio:invenio .
-RUN chown invenio:invenio ${INVENIO_INSTANCE_PATH}/data/
+RUN chown invenio:invenio ${INVENIO_INSTANCE_PATH}/data
 USER invenio
 
 ENTRYPOINT [ "bash", "-c"]
