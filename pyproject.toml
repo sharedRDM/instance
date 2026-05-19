@@ -54,5 +54,5 @@ profile = "jinja"
 py-modules = []
 
 [tool.uv.sources]
-invenio-config-tugraz = { git = "https://github.com/tu-graz-library/invenio-config-tugraz", branch = "repository" }
 invenio-override = { git = "https://github.com/tu-graz-library/invenio-override", branch = "main" }
+invenio-config-tugraz = { git = "https://github.com/tu-graz-library/invenio-config-tugraz", branch = "repository" }
