@@ -1,0 +1,27 @@
+[project]
+name = "instance"
+requires-python = ">=3.12"
+dynamic = ["version"]
+
+authors = [
+    { name = "Laura Thaci", email = "lthaci@tugraz.at" },
+    { name = "Mojib Wali", email = "mojib.wali@tugraz.at" },
+]
+
+dependencies = [
+    "invenio-app-rdm[opensearch2]==13.0.0",
+    "uwsgi>=2.0",
+    "uwsgitop>=0.11",
+    "uwsgi-tools>=1.1.1",
+    "setuptools<82",
+    "invenio-curations>=0.6.0",
+    "invenio-global-search>=0.3.0",
+    "invenio-override[lom] ==0.0.7",
+]
+
+[tool.djlint]
+indent = 2
+profile = "jinja"
+
+[tool.setuptools]
+py-modules = []
