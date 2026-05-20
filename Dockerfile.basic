@@ -1,6 +1,7 @@
 # STAGE 1
 FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder-3.14 AS builder
-COPY pyproject.toml uv.lock ./
+
+COPY themes/override-basic/pyproject.toml themes/override-basic/uv.lock ./
 
 RUN uv sync --frozen
 

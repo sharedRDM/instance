@@ -1,9 +1,9 @@
 # STAGE 1
 FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder AS builder
 
-COPY pyproject.toml uv.lock ./
+COPY themes/MUG/pyproject.toml themes/MUG/uv.lock ./
 
-RUN uv sync --extra mug --frozen
+RUN uv sync --frozen
 
 # to use rspack
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
