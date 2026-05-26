@@ -77,6 +77,16 @@
              name="deposits-record-permissions"
              value='{{ permissions | tojson }}'>
     {%- endif %}
+    {%- if record_deletion %}
+      <input type="hidden"
+             name="deposits-record-deletion"
+             value='{{ record_deletion | tojson }}'>
+    {%- endif %}
+    {%- if file_modification %}
+      <input type="hidden"
+             name="deposits-file-modification"
+             value='{{ file_modification | tojson }}'>
+    {%- endif %}
     <div id="deposit-form"></div>
   {%- endblock page_body %}
   {%- block javascript %}
