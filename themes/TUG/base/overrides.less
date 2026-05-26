@@ -696,3 +696,25 @@ html {
     border-color: @overridePrimary !important;
   }
 }
+
+/* ======================================
+   Flash messages
+====================================== */
+
+.flashed-wrapper {
+  max-width: 800px;
+  margin: 0.5rem auto;
+  padding: 0 1rem;
+}
+
+.flash-notification-content {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  i.icon {
+    flex-shrink: 0;
+    font-size: 1.1em;
+    margin: 0 !important;
+  }
+}

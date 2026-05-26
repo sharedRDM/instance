@@ -1958,7 +1958,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "1.0.0"
-source = { git = "https://github.com/lpandath/invenio-override?branch=fouc-prevention-footer-cleanup#bd636b7281b105421ece61ef818570b8ae0c28a0" }
+source = { git = "https://github.com/lpandath/invenio-override?branch=fouc-prevention-footer-cleanup#e2cf2272e91038ef0d002736e6050573944d0045" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
