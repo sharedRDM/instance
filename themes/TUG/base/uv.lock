@@ -1237,7 +1237,7 @@ requires-dist = [
     { name = "invenio-global-search", specifier = ">=0.3.0" },
     { name = "invenio-imoox", specifier = ">=0.2.0" },
     { name = "invenio-moodle", specifier = ">=1.1.3" },
-    { name = "invenio-override", extras = ["lom", "marc21"], git = "https://github.com/lpandath/invenio-override?branch=fouc-prevention-footer-cleanup" },
+    { name = "invenio-override", extras = ["lom", "marc21"], git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-pure", specifier = ">=0.1.0" },
     { name = "invenio-records-global-search", specifier = ">=0.3.5" },
     { name = "invenio-records-lom", specifier = ">=0.20.1" },
@@ -1958,7 +1958,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "1.0.0"
-source = { git = "https://github.com/lpandath/invenio-override?branch=fouc-prevention-footer-cleanup#cefcb2a5ffc06531898209a8550a9e68e627c7fc" }
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#e67b9d69b8cf6cb30ae7ed0b890daf69831c943d" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
