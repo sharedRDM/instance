@@ -696,3 +696,50 @@ html {
     border-color: @overridePrimary !important;
   }
 }
+
+/* ======================================
+   Flash messages
+====================================== */
+
+.ui.message {
+  border-radius: @radiusCardLarge !important;
+  box-shadow: @msgShadow !important;
+  border: @borderSubtle !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.flashed-wrapper {
+  max-width: 800px;
+  margin: 0.5rem auto;
+  padding: 0 1rem;
+}
+
+.flash-notification-content {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  i.icon {
+    flex-shrink: 0;
+    font-size: 1.1em;
+    margin: 0 !important;
+  }
+}
+
+.ui.success.message {
+  background-color: @msgSuccessBg;
+  color: @msgSuccessText;
+}
+.ui.info.message {
+  background-color: @msgInfoBg;
+  color: @msgInfoText;
+}
+.ui.warning.message {
+  background-color: @msgWarningBg;
+  color: @msgWarningText;
+}
+.ui.error.message,
+.ui.negative.message {
+  background-color: @msgErrorBg;
+  color: @msgErrorText;
+}
