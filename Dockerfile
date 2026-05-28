@@ -41,7 +41,8 @@ WORKDIR ${WORKING_DIR}/src
 
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 COPY ./invenio.cfg ${INVENIO_INSTANCE_PATH}
-RUN chown invenio:invenio .
+COPY ./themes/TUG/base/wipe_recreate.sh ${INVENIO_INSTANCE_PATH}/wipe_recreate.sh
+RUN chmod +x ${INVENIO_INSTANCE_PATH}/wipe_recreate.sh && chown invenio:invenio .
 
 USER invenio
 
