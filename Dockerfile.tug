@@ -12,10 +12,6 @@ ARG TUG_ENV=dev
 # to use rspack
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
-# Replace variables.less
-COPY themes/TUG/base/variables.less ${UV_PROJECT_ENVIRONMENT}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
-COPY themes/TUG/base/overrides.less ${UV_PROJECT_ENVIRONMENT}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
-
 RUN invenio collect --verbose && invenio webpack create
 
 # copy remaining instance files (these can override/extend the discovered bundles)
