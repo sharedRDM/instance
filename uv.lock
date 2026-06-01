@@ -1624,7 +1624,7 @@ wheels = [
 [[package]]
 name = "invenio-config-tugraz"
 version = "0.14.3"
-source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#df1bc492e36d4f5ed2696c31cca59d858047bd48" }
+source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#f8041b46488e2484c559347b502b1cecc8d9fb28" }
 dependencies = [
     { name = "invenio-cache" },
     { name = "invenio-curations" },
