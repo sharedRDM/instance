@@ -1256,8 +1256,8 @@ requires-dist = [
     { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-pure", marker = "extra == 'tug'", specifier = ">=0.1.0" },
     { name = "invenio-records-global-search", marker = "extra == 'tug'", specifier = ">=0.3.5" },
-    { name = "invenio-records-lom", marker = "extra == 'tug'", specifier = ">=0.22.0" },
-    { name = "invenio-records-marc21", marker = "extra == 'tug'", specifier = ">=0.30.0" },
+    { name = "invenio-records-lom", marker = "extra == 'tug'", specifier = ">=0.23.0" },
+    { name = "invenio-records-marc21", marker = "extra == 'tug'", specifier = ">=0.31.0" },
     { name = "invenio-saml", marker = "extra == 'tug'", specifier = ">=1.0.0" },
     { name = "invenio-workflows-tugraz", marker = "extra == 'tug'", specifier = ">=0.12.0" },
     { name = "lxml", marker = "extra == 'tug'", specifier = "==6.0.2" },
@@ -1624,7 +1624,7 @@ wheels = [
 [[package]]
 name = "invenio-config-tugraz"
 version = "0.14.3"
-source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#f8041b46488e2484c559347b502b1cecc8d9fb28" }
+source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#f1b11019f1efe3881ff33f8e930a173efde9a9a0" }
 dependencies = [
     { name = "invenio-cache" },
     { name = "invenio-curations" },
@@ -1975,7 +1975,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "1.0.0"
-source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#8c5175045ea33592ed80bfc7e42dc1952044c82e" }
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#e0b67fa353b38d3a11459abbf2fb0b69d7a768eb" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
@@ -2171,7 +2171,7 @@ wheels = [
 
 [[package]]
 name = "invenio-records-lom"
-version = "0.22.0"
+version = "0.23.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-previewer" },
@@ -2179,14 +2179,14 @@ dependencies = [
     { name = "invenio-stats" },
     { name = "marshmallow" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d8/b1/e875527ae5dd8e6b655d686291992cfc9781aaf1b2d86e83f90eec5dcd69/invenio_records_lom-0.22.0.tar.gz", hash = "sha256:b9d51fb36c30acfbd6392feb4bd2979197b287daa7c397e6919c766666fcdda1", size = 184017 }
+sdist = { url = "https://files.pythonhosted.org/packages/22/91/5f24e8f54ad833e9487e838940f5268805bed100a050469b526dad908b09/invenio_records_lom-0.23.0.tar.gz", hash = "sha256:4c06009390b55c8f481e625e58fb74335583555549fedce3cbdaba9c1edf9ece", size = 184193 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9f/3b/d704a5b5850b34a8b0baa6d867a43db901c4b2fcbbfba94b17081e1b88f0/invenio_records_lom-0.22.0-py2.py3-none-any.whl", hash = "sha256:50748c42a14b82d9f1342f2fd3183dc6ec66242e2422f9e7cd7850408f86fdc9", size = 243718 },
+    { url = "https://files.pythonhosted.org/packages/53/71/df0a29d15361c88ef7ab51cc101ff5de7100b4b486adc3eb693b635ea47b/invenio_records_lom-0.23.0-py2.py3-none-any.whl", hash = "sha256:70f3f83b02a1ae00c7bcec1cafdf303283d3abd6450d3c9f853648b220a03845", size = 243832 },
 ]
 
 [[package]]
 name = "invenio-records-marc21"
-version = "0.30.0"
+version = "0.31.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "arrow" },
@@ -2195,9 +2195,9 @@ dependencies = [
     { name = "invenio-stats" },
     { name = "lxml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1c/5b/70b1924323606775b98ddd184ace18f6953dd105aee8fe56ae7666c285aa/invenio_records_marc21-0.30.0.tar.gz", hash = "sha256:578a82a7504167594564af5e5464909d28b99d74a26394efb6043e285294d9c3", size = 199051 }
+sdist = { url = "https://files.pythonhosted.org/packages/9c/c3/daecd9102f9adf71bc5d2736d7d5121de665266829798f816a62646c70e3/invenio_records_marc21-0.31.0.tar.gz", hash = "sha256:c373350f67258214873c84a693eba232af919ac7aa18eccb17b2f75cef34e9fa", size = 199213 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b0/a3/a9450b768cb74e4a218568ca4aa8f535ad99f1f7666f819046c5c930cfbb/invenio_records_marc21-0.30.0-py2.py3-none-any.whl", hash = "sha256:5e57d66d7748313c3ac06ae5b3c4e8b34d799b7656db9e23bef06d1ff6d104c0", size = 299283 },
+    { url = "https://files.pythonhosted.org/packages/af/b4/05dbcb549f2559b77a73c7ac6e663a4309844dab79f24da3f39b406f737e/invenio_records_marc21-0.31.0-py2.py3-none-any.whl", hash = "sha256:429c735ba3bd194e7a9a81a599d3ae219c721902906afde02bb44afdfbcac473", size = 299439 },
 ]
 
 [[package]]
