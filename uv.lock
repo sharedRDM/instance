@@ -1255,7 +1255,7 @@ requires-dist = [
     { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-pure", marker = "extra == 'tug'", specifier = ">=0.1.0" },
-    { name = "invenio-records-global-search", marker = "extra == 'tug'", specifier = ">=0.3.5" },
+    { name = "invenio-records-global-search", marker = "extra == 'tug'", specifier = ">=0.4.0" },
     { name = "invenio-records-lom", marker = "extra == 'tug'", specifier = ">=0.23.0" },
     { name = "invenio-records-marc21", marker = "extra == 'tug'", specifier = ">=0.31.0" },
     { name = "invenio-saml", marker = "extra == 'tug'", specifier = ">=1.0.0" },
@@ -1624,7 +1624,7 @@ wheels = [
 [[package]]
 name = "invenio-config-tugraz"
 version = "0.14.3"
-source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#f1b11019f1efe3881ff33f8e930a173efde9a9a0" }
+source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#8a07ef5e6da063b7607b8b9d98f98f5b50094b43" }
 dependencies = [
     { name = "invenio-cache" },
     { name = "invenio-curations" },
@@ -1755,14 +1755,14 @@ wheels = [
 
 [[package]]
 name = "invenio-global-search"
-version = "0.4.2"
+version = "0.4.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-records-global-search" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/b9/cf16c5c38336e77f3b3b83b17088f1f1f56372de2ebde3afe8c893cd3b41/invenio_global_search-0.4.2.tar.gz", hash = "sha256:51e775344c42ba008a6eb901a0c30ada5098476598d51acc830870726ec43274", size = 17833 }
+sdist = { url = "https://files.pythonhosted.org/packages/7f/f8/581cb63fdd02694cd74d6a12d8795a0e26d26982f17cacd75cfd8e4b1f29/invenio_global_search-0.4.3.tar.gz", hash = "sha256:cad95d144baa2f1dbde9b2538c32cce755005b5d6cc52db5d27037c086b09aef", size = 17948 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a1/05/cf80868fd64f74f096eb877aae6552f3dad9bed979e8f13c373b9a6d870b/invenio_global_search-0.4.2-py2.py3-none-any.whl", hash = "sha256:3ff7e26675957023cbace3fa626a6e057b2947d5f6a56002e973ec9ee5183320", size = 15069 },
+    { url = "https://files.pythonhosted.org/packages/c1/62/1c178b2ff37586b26fbc09896e48a04056d054a0a02176639da647ab8fa1/invenio_global_search-0.4.3-py2.py3-none-any.whl", hash = "sha256:f579e549101bde7e2d9bf27ae501a6b2428bdb3b43da0db68482f33c6b8e3e76", size = 15151 },
 ]
 
 [package.optional-dependencies]
@@ -1975,7 +1975,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "1.0.0"
-source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#e0b67fa353b38d3a11459abbf2fb0b69d7a768eb" }
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#71b8d32f50fca4ae3a4df89b3b87448fd991d7eb" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
@@ -2156,7 +2156,7 @@ wheels = [
 
 [[package]]
 name = "invenio-records-global-search"
-version = "0.3.5"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invenio-indexer" },
@@ -2164,9 +2164,9 @@ dependencies = [
     { name = "invenio-records-resources" },
     { name = "invenio-search-ui" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e0/5c/80dffbb8891f5c8acc43bca6a160a47474acff55987a9c000e4002d825da/invenio_records_global_search-0.3.5.tar.gz", hash = "sha256:8fd89785d8768dceac0dfaa7d22f245f11c5f05872138d0da4257f27c89c54a5", size = 45433 }
+sdist = { url = "https://files.pythonhosted.org/packages/21/c2/4560e81fee45bad5699726db0c911cdc424faf17b46846ae0c2955f39156/invenio_records_global_search-0.4.0.tar.gz", hash = "sha256:75362242181910945830f96010efeea51159147a6184afaf6f6c7a20fc20a9a1", size = 45947 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/86/c1/c0d4c20b69599777bb7a4cb4a145e63b1a97dc199443c2bd770d3bca1494/invenio_records_global_search-0.3.5-py2.py3-none-any.whl", hash = "sha256:95eb69fe46caba7defb4336076ba5d5239599972264d35a961a0559ba8fda657", size = 66240 },
+    { url = "https://files.pythonhosted.org/packages/64/f4/a1250ab853109d027207e929b3d6afe91447a6d447cf46ee6a3bee782cbd/invenio_records_global_search-0.4.0-py2.py3-none-any.whl", hash = "sha256:e7a1c387b4ce987e2c68e0bbde75c9a9342565a39af75695f8f8c3784aba06f1", size = 66558 },
 ]
 
 [[package]]
