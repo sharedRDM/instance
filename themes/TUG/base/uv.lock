@@ -1607,7 +1607,7 @@ wheels = [
 [[package]]
 name = "invenio-config-tugraz"
 version = "0.14.3"
-source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#8a07ef5e6da063b7607b8b9d98f98f5b50094b43" }
+source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#257f9b1b1a6766216dd5e986302b33f1f5a9c75e" }
 dependencies = [
     { name = "invenio-cache" },
     { name = "invenio-curations" },
@@ -1958,7 +1958,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "1.0.0"
-source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#71b8d32f50fca4ae3a4df89b3b87448fd991d7eb" }
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#37313644880c5915bd1820565bbcf606d8acc003" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
