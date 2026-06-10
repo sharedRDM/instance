@@ -1958,7 +1958,7 @@ wheels = [
 [[package]]
 name = "invenio-override"
 version = "1.0.0"
-source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#37313644880c5915bd1820565bbcf606d8acc003" }
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#6800709b03c5632a1fc8ff2314160b7c3d0485d9" }
 dependencies = [
     { name = "invenio-global-search" },
     { name = "invenio-rdm-records" },
