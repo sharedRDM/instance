@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2020-2025 Graz University of Technology.
+ *   Copyright (C) 2020-2026 Graz University of Technology.
  *
  * invenio-override is free software; you can redistribute it and/or modify it
  * under the terms of the MIT License; see LICENSE file for more details.
@@ -18,24 +18,26 @@
 @accessRightClosed: @accessRightEmbargoed;
 @accessRightMetadata: #5e5e5e;
 
-/* Primary colors */
+/* Primary colors — Medical University of Graz Green */
 @overridePrimary: #007934;
 @overrideSecondary: #34b233;
-@ocerridePlabels: #ffffff;
+@overrideLabels: #ffffff;
 @overridePrimaryBt: #dbdce0;
 @hoverOverridePrimaryBt: #bfc0c2;
+@highlightHeaderColor: @overridePrimaryBt;
 
 /* General colors */
 @primaryBackground: #ffffff;
-@primaryText: #000000;
+@primaryText: #231f20;
 
 /* Accent colors */
 @greyDark: #393b41;
 @greyLight: #e0e1e2;
 @labelKeywordBackground: #e8e8e8;
 
-/* MUG-specific palette */
-@mugSearch: @overridePrimary;
+/* Search highlight color */
+@searchHighlight: @overridePrimary;
+@labelDateBlue: #0377cd;
 @outlineRecord: @accessRightMetadata;
 @recordText: #6b6d74;
 @recordLightText: #94959a;
@@ -60,12 +62,13 @@
 /* Account-specific styling (signin, signup) */
 @primaryFormAccounts: @primaryBackground;
 @formAccountsInputPlaceholder: silver;
+
 @fieldInputSelectionBackground: #50a2ce;
-@signInBackground: #6b6d74;
+@signInBackground: #231f20;
 
 /* Footer-specific styling */
-@footerGrey: #5e5e5e;
-@footerBottomBackground: #f2f2f2;
+@footerGrey: #ffffff;
+@footerBottomBackground: #4a4a4a;
 
 /* Record-specific styling */
 @recordVersionBackground: #f2f2f2;
@@ -84,7 +87,7 @@
 ====================================== */
 
 /* Home stroke SVG styling */
-.home-stroke polyline {
+.home-stroke {
   stroke: @overridePrimary;
   stroke-linecap: square;
   stroke-width: 4;
@@ -94,6 +97,85 @@
 /* ======================================
    Hyperlink Styling
 ====================================== */
+
+/* ======================================
+   Message / Notification Colors
+====================================== */
+@msgShadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+@msgSuccessBg: #f0faf5;
+@msgSuccessText: #1a6b4a;
+
+@msgInfoBg: #f0f7ff;
+@msgInfoText: #1a5276;
+
+@msgWarningBg: #fffaf3;
+@msgWarningText: #856404;
+
+@msgErrorBg: #fff5f5;
+@msgErrorText: #9b1c1c;
+
+/* ======================================
+   Design System Tokens
+====================================== */
+@instanceBannerTest: #fff3cd;
+@instanceBannerTestText: #6b4c00;
+@instanceBannerDemo: #ffe0b2;
+@instanceBannerDemoText: #7a3000;
+
+@radiusSmall: 4px;
+@radiusCard: 8px;
+@radiusCardLarge: 10px;
+@radiusPill: 24px;
+@cardShadowRest: 0 1px 3px rgba(0, 0, 0, 0.04);
+@cardShadowHover: 0 6px 20px rgba(0, 0, 0, 0.08);
+@borderSubtle: 1px solid rgba(34, 36, 38, 0.08);
+@transitionDuration: 0.25s;
+@transitionFast: 0.15s;
+
+/* ======================================
+   Typography Scale
+====================================== */
+@font-size-xs: 0.75rem; // 12px
+@font-size-sm: 0.875rem; // 14px
+@font-size-base: 1rem; // 16px
+@font-size-nav: 1.125rem; // 18px
+@font-size-lg: 1.25rem; // h3
+@font-size-xl: 1.5rem; // h2
+@font-size-2xl: 2rem; // h1
+
+/* ======================================
+   Message / Notification Colors
+====================================== */
+@msgShadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+@msgSuccessBg: #f0faf5;
+@msgSuccessText: #1a6b4a;
+
+@msgInfoBg: #f0f7ff;
+@msgInfoText: #1a5276;
+
+@msgWarningBg: #fffaf3;
+@msgWarningText: #856404;
+
+@msgErrorBg: #fff5f5;
+@msgErrorText: #9b1c1c;
+
+/* ======================================
+   Instance Banner Colors
+====================================== */
+@instanceBannerTest: #fff3cd;
+@instanceBannerTestText: #6b4c00;
+@instanceBannerDemo: #ffe0b2;
+@instanceBannerDemoText: #7a3000;
+
+/* ======================================
+   Layout Spacing Tokens
+====================================== */
+@pageInnerBannerPaddingTop: 6rem;
+@pageInnerBannerPaddingBottom: 1.5rem;
+@contentGridGap: 2rem;
+@contentGridMarginV: 2rem;
 
 /* Hyperlink hover and focus */
 a:focus,
