@@ -1,7 +1,7 @@
 rdm:
   title: "RDM SSO"
   description: RDM SSO
-  base_url: https://keycloak.cyverse.at
+  base_url: https://keycloak.k3s.cyverse.at
   realm: rdm
   app_key: CYVERSE_KEYCLOAK_APP_CREDENTIALS
   legacy_url_path: True
