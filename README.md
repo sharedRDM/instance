@@ -3,7 +3,8 @@
 Welcome to your InvenioRDM instance.
 
 ## Version
-This repository is based on InvenioAppRDM version 13.
+This repository is based on InvenioRDM v14. The exact pinned version lives in
+``pyproject.toml`` / ``uv.lock``.
 
 ## Getting started
 
@@ -13,9 +14,9 @@ Make sure you have **invenio-cli** package installed.
 
 Run the following commands to have the instance ready for development:
 ```bash
-invenio-cli packages install . # this installs all packages based on your pyproject.toml dependencies
+uv sync # this installs all packages based on your pyproject.toml dependencies
 # or
-invenio cli packages install .[tug] # if you want to specify optional packages
+uv sync --extra tug # if you want to specify optional packages (basic, tug, mug)
 invenio-cli install symlink
 invenio-cli services setup
 
@@ -27,6 +28,37 @@ invenio-cli run web # 1 terminal
 invenio-cli assets watch # run this to have the UI change done automatically in the running app
 ```
 
+### Run a theme locally (default / TUG / MUG)
+
+The instance ships several looks. `local_theme.sh` does locally what the
+Dockerfiles do for the images: install that theme's `invenio.cfg`, swap the
+theme files into the collected assets and build.
+
+```bash
+uv sync --extra basic && ./local_theme.sh default   # core InvenioRDM look, with our theme on top
+uv sync --extra tug   && ./local_theme.sh TUG       # TU Graz
+uv sync --extra mug   && ./local_theme.sh MUG       # Med Uni Graz
+
+invenio-cli run
+```
+
+| Theme | Config | Look |
+|---|---|---|
+| ``default`` | ``themes/override-basic/invenio.cfg`` | ``themes/override-basic/variables.less`` |
+| ``TUG`` | ``themes/TUG/dev/invenio.cfg`` | shipped by the invenio-override package |
+| ``MUG`` | ``themes/MUG/invenio.cfg`` | ``themes/MUG/variables.less`` |
+
+Good to know:
+
+- the script **replaces** ``invenio webpack buildall`` - do not run that
+  afterwards, it re-runs ``webpack create`` and undoes the theme swap
+- ``uv sync`` is only needed when switching profile, not when you only edited a cfg
+- if a switch looks wrong, run ``invenio webpack clean`` first: ``webpack create``
+  never overwrites files it already collected
+- log in with the local email/password form - the Keycloak button needs
+  credentials that only exist in the deployed images
+- the theme cfgs expect the database URI and search index prefix from
+  environment variables in the images, so the script appends local dev values
 
 ### Start the instance (all containerized)
 
@@ -54,8 +86,10 @@ Following is an overview of the generated files and folders:
 | Name | Description |
 |---|---|
 | ``Dockerfile`` | Dockerfile used to build your application image. |
-| ``Pipfile`` | Python requirements installed via [pipenv](https://pipenv.pypa.io) |
-| ``Pipfile.lock`` | Locked requirements (generated on first install). |
+| ``pyproject.toml`` | Python requirements, installed via [uv](https://docs.astral.sh/uv/). Optional extras select the variant (``basic``, ``tug``, ``mug``). |
+| ``uv.lock`` | Locked requirements. |
+| ``local_theme.sh`` | Local dev helper to run a theme (``default``/``TUG``/``MUG``). |
+| ``themes`` | Per-variant config, look and dependencies. |
 | ``app_data`` | Application data such as vocabularies. |
 | ``assets`` | Web assets (CSS, JavaScript, LESS, JSX templates) used in the Webpack build. |
 | ``docker`` | Example configuration for NGINX and uWSGI. |
@@ -85,10 +119,11 @@ Each image has a correspondent instance _variant_ that a user can choose to depl
 
 | Name | Description |
 |---|---|
-| ``Dockerfile`` | Dockerfile used to build base image, without theme. - no variant, used for local testing. |
-| ``Dockerfile.mug`` | Dockerfile used to build MUG image (Research Results only; no Publications). - variant **mug** | 
-| ``Dockerfile.oer`` | Dockerfile used to build Educational Resources image (OER). - variant **oer** |
-| ``Dockerfile.basic`` | Dockerfile used to base invenio-override image (no OER or Publications) and also base invenio theme (without invenio-override) - variants **basic** and **vanilla** |
+| ``Dockerfile.tug`` | TU Graz image. Built twice, selected by the ``TUG_ENV`` build arg - variants **dev** and **qa** |
+| ``Dockerfile.mug`` | Med Uni Graz image (Research Results and Publications) - variant **mug** |
+| ``Dockerfile.basic`` | Core InvenioRDM behaviour with the invenio-override theme on top - variant **basic** |
+| ``Dockerfile`` | Core InvenioRDM without any theme - variant **vanilla** |
+| ``Dockerfile.oer`` | Educational Resources image (OER) - variant **oer**, not built by CI |
 
 
 ## CI/CD

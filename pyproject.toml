@@ -39,7 +39,8 @@ tug = [
 mug = [
     "invenio-curations>=0.8.3",
     "invenio-global-search>=0.4.3",
-    "invenio-override[lom] >=1.0.0",
+    "invenio-records-marc21>=0.32.1",
+    "invenio-override[marc21,lom] >=1.0.0",
 ]
 basic = [
     "invenio-override >=1.0.0",
