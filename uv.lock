@@ -1205,7 +1205,8 @@ basic = [
 mug = [
     { name = "invenio-curations" },
     { name = "invenio-global-search" },
-    { name = "invenio-override", extra = ["lom"] },
+    { name = "invenio-override", extra = ["lom", "marc21"] },
+    { name = "invenio-records-marc21" },
 ]
 tug = [
     { name = "invenio-alma" },
@@ -1241,11 +1242,12 @@ requires-dist = [
     { name = "invenio-imoox", marker = "extra == 'tug'", specifier = ">=0.2.0" },
     { name = "invenio-moodle", marker = "extra == 'tug'", specifier = ">=1.1.4" },
     { name = "invenio-override", marker = "extra == 'basic'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
-    { name = "invenio-override", extras = ["lom"], marker = "extra == 'mug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
+    { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'mug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-override", extras = ["lom", "marc21"], marker = "extra == 'tug'", git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
     { name = "invenio-pure", marker = "extra == 'tug'", specifier = ">=0.1.0" },
     { name = "invenio-records-global-search", marker = "extra == 'tug'", specifier = ">=0.4.0" },
     { name = "invenio-records-lom", marker = "extra == 'tug'", specifier = ">=0.23.0" },
+    { name = "invenio-records-marc21", marker = "extra == 'mug'", specifier = ">=0.32.1" },
     { name = "invenio-records-marc21", marker = "extra == 'tug'", specifier = ">=0.32.1" },
     { name = "invenio-saml", marker = "extra == 'tug'", specifier = ">=1.0.0" },
     { name = "invenio-workflows-tugraz", marker = "extra == 'tug'", specifier = ">=0.12.1" },
