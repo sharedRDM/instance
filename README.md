@@ -125,6 +125,12 @@ Each image has a correspondent instance _variant_ that a user can choose to depl
 | ``Dockerfile`` | Core InvenioRDM without any theme - variant **vanilla** |
 | ``Dockerfile.oer`` | Educational Resources image (OER) - variant **oer**, not built by CI |
 
+Every image builds from the root ``pyproject.toml``/``uv.lock`` and picks the
+variant with ``uv sync --frozen --extra <basic|tug|mug>`` - the same dependencies
+``local_theme.sh`` installs, so local and CI resolve the exact same package set.
+Each ``themes/<variant>`` directory then only holds that variant's look
+(``variables.less``/``overrides.less``), ``invenio.cfg`` and templates.
+
 
 ## CI/CD
 

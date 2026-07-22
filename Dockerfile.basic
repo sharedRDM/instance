@@ -1,9 +1,9 @@
 # STAGE 1
 FROM ghcr.io/tu-graz-library/docker-invenio-base:main-builder-3.14 AS builder
 
-COPY themes/override-basic/pyproject.toml themes/override-basic/uv.lock ./
+COPY pyproject.toml uv.lock ./
 
-RUN uv sync --frozen
+RUN uv sync --frozen --extra basic
 
 # to use rspack
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
