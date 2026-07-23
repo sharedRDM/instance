@@ -2,9 +2,12 @@
 # local dev only: point the local instance at a theme and build its assets.
 # does what the dockerfiles do - install the theme cfg, swap the look, build.
 #
-#   uv sync --extra basic && ./local_theme.sh default
-#   uv sync --extra tug   && ./local_theme.sh TUG
-#   uv sync --extra mug   && ./local_theme.sh MUG
+#   ./local_theme.sh default
+#   ./local_theme.sh TUG
+#   ./local_theme.sh MUG
+#
+# it installs the same pyproject/uv.lock the variant's Dockerfile builds from,
+# so local and CI resolve the same versions - no `uv sync --extra` beforehand.
 #
 # note: this replaces `invenio webpack buildall`, do not run that after.
 # if a switch looks wrong, `invenio webpack clean` first - webpack create
@@ -24,20 +27,23 @@ MAPPING="assets/js/invenio_app_rdm/overridableRegistry/mapping.js"
 # what each theme needs: a cfg, and which look files to swap in.
 # TUG has no swaps - the theme package already ships the TUG look.
 # ============================================================================
-CFG="" ; VARIABLES="" ; OVERRIDES="" ; MAPPING_SRC=""
+CFG="" ; VARIABLES="" ; OVERRIDES="" ; MAPPING_SRC="" ; PROJECT=""
 case "$THEME" in
   default)
     CFG="themes/override-basic/invenio.cfg"
     VARIABLES="themes/override-basic/variables.less"
     MAPPING_SRC="themes/override-basic/$MAPPING"
+    PROJECT="themes/override-basic"
     ;;
   TUG)
     CFG="themes/TUG/dev/invenio.cfg"
+    PROJECT="themes/TUG/base"
     ;;
   MUG)
     CFG="themes/MUG/invenio.cfg"
     VARIABLES="themes/MUG/variables.less"
     OVERRIDES="themes/MUG/overrides.less"
+    PROJECT="themes/MUG"
     ;;
   *)
     echo "usage: $0 default|TUG|MUG" >&2
@@ -48,6 +54,15 @@ esac
 # ============================================================================
 # steps
 # ============================================================================
+
+install_deps() {
+  # install exactly what this variant's Dockerfile builds from - the theme's
+  # own pyproject + uv.lock - so local and CI resolve the same versions.
+  # UV_PROJECT_ENVIRONMENT keeps it in ./.venv instead of creating a venv
+  # inside the theme folder.
+  UV_PROJECT_ENVIRONMENT="$HERE/.venv" \
+    uv sync --project "$HERE/$PROJECT" --frozen
+}
 
 install_config() {
   # the theme cfgs expect these from the dockerfile ENV
@@ -112,6 +127,7 @@ apply_look() {
 # ============================================================================
 echo "==> theme: $THEME"
 
+install_deps
 install_config
 
 "$INVENIO" collect --verbose
