@@ -123,4 +123,9 @@ apply_look
 "$INVENIO" webpack install
 "$INVENIO" webpack build
 
+# `uv sync --extra ...` (run before this script) prunes invenio-cli from the
+# venv - it is a dev tool, not a project dependency - so reinstall it here so
+# `invenio-cli run` works afterwards.
+uv pip install --python "$HERE/.venv/bin/python" invenio-cli
+
 echo "==> done, now: invenio-cli run"
