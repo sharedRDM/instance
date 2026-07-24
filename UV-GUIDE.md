@@ -23,30 +23,39 @@ uv sync
 
 ### **define dependencies**
 
-Update your pyproject.toml file to include all necessary dependencies
+Base (vanilla) dependencies live in the root `pyproject.toml`:
 
 ```bash
 dependencies = [
-    "invenio-override ~=0.0.3"
+    "invenio-app-rdm[opensearch2]==14.0.0rc2",
 ]
 ```
 
-For optional dependencies add:
-
-```bash
-[project.optional-dependencies]
-mug = [
-    "invenio-curations==0.6.2",
-]
-```
+Each theme pins its own dependencies in its own project under `themes/<variant>/`
+(e.g. `themes/TUG/base`, `themes/MUG`), so instances can run different versions
+independently.
 
 
 ### **sync dependencies**
 
+Base venv (vanilla / bootstrap):
+
 ```bash
 uv sync
-# or
-uv sync --extra mug
+```
+
+For a theme, install from its own lock - the same one its Dockerfile builds from
+(this is what `local_theme.sh` does under the hood):
+
+```bash
+uv sync --project themes/TUG/base --frozen
+```
+
+To update a theme's lock, or bump a single package:
+
+```bash
+uv lock --project themes/TUG/base
+uv lock --project themes/TUG/base -P invenio-override
 ```
 
 
