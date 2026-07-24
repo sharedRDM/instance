@@ -14,9 +14,8 @@ Make sure you have **invenio-cli** package installed.
 
 Run the following commands to have the instance ready for development:
 ```bash
-uv sync # this installs all packages based on your pyproject.toml dependencies
-# or
-uv sync --extra tug # if you want to specify optional packages (basic, tug, mug)
+uv sync # base install, creates the .venv
+# theme-specific packages are installed by local_theme.sh 
 invenio-cli install symlink
 invenio-cli services setup
 
@@ -31,28 +30,32 @@ invenio-cli assets watch # run this to have the UI change done automatically in 
 ### Run a theme locally (default / TUG / MUG)
 
 The instance ships several looks. `local_theme.sh` does locally what the
-Dockerfiles do for the images: install that theme's `invenio.cfg`, swap the
-theme files into the collected assets and build.
+Dockerfiles do for the images: install that theme's dependencies from its own
+`pyproject.toml`/`uv.lock`, install its `invenio.cfg`, swap the theme files into
+the collected assets and build. Local and CI therefore resolve the same package
+versions.
 
 ```bash
-uv sync --extra basic && ./local_theme.sh default   # core InvenioRDM look, with our theme on top
-uv sync --extra tug   && ./local_theme.sh TUG       # TU Graz
-uv sync --extra mug   && ./local_theme.sh MUG       # Med Uni Graz
+./local_theme.sh default   # core InvenioRDM look, with our theme on top
+./local_theme.sh TUG       # TU Graz
+./local_theme.sh MUG       # Med Uni Graz
 
 invenio-cli run
 ```
 
-| Theme | Config | Look |
-|---|---|---|
-| ``default`` | ``themes/override-basic/invenio.cfg`` | ``themes/override-basic/variables.less`` |
-| ``TUG`` | ``themes/TUG/dev/invenio.cfg`` | shipped by the invenio-override package |
-| ``MUG`` | ``themes/MUG/invenio.cfg`` | ``themes/MUG/variables.less`` |
+| Theme | Dependencies | Config | Look |
+|---|---|---|---|
+| ``default`` | ``themes/override-basic`` | ``themes/override-basic/invenio.cfg`` | ``themes/override-basic/variables.less`` |
+| ``TUG`` | ``themes/TUG/base`` | ``themes/TUG/dev/invenio.cfg`` | shipped by the invenio-override package |
+| ``MUG`` | ``themes/MUG`` | ``themes/MUG/invenio.cfg`` | ``themes/MUG/variables.less`` |
 
 Good to know:
 
 - the script **replaces** ``invenio webpack buildall`` - do not run that
   afterwards, it re-runs ``webpack create`` and undoes the theme swap
-- ``uv sync`` is only needed when switching profile, not when you only edited a cfg
+- the script installs from that theme's own ``pyproject.toml``/``uv.lock`` - the
+  same files its Dockerfile builds from - so local matches the image. switching
+  theme re-syncs the venv, no ``uv sync --extra`` needed
 - if a switch looks wrong, run ``invenio webpack clean`` first: ``webpack create``
   never overwrites files it already collected
 - log in with the local email/password form - the Keycloak button needs
@@ -86,7 +89,7 @@ Following is an overview of the generated files and folders:
 | Name | Description |
 |---|---|
 | ``Dockerfile`` | Dockerfile used to build your application image. |
-| ``pyproject.toml`` | Python requirements, installed via [uv](https://docs.astral.sh/uv/). Optional extras select the variant (``basic``, ``tug``, ``mug``). |
+| ``pyproject.toml`` | Base Python requirements, installed via [uv](https://docs.astral.sh/uv/). Each variant pins its own dependencies under ``themes/<variant>/``. |
 | ``uv.lock`` | Locked requirements. |
 | ``local_theme.sh`` | Local dev helper to run a theme (``default``/``TUG``/``MUG``). |
 | ``themes`` | Per-variant config, look and dependencies. |
