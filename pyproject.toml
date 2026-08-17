@@ -14,6 +14,13 @@ dependencies = [
     "uwsgitop>=0.11",
     "uwsgi-tools>=1.1.1",
     "setuptools<82",
+    "invenio-override>=1.0.0",
+    "invenio-curations>=0.8.3",
+    "invenio-global-search>=0.4.3",
+    "invenio-records-global-search>=0.4.0",
+    "invenio-records-marc21>=0.32.1",
+    "invenio-records-lom>=0.23.0",
+    "invenio-config-tugraz>=0.14.4",
 ]
 
 [tool.djlint]
