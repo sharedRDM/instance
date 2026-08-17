@@ -1148,6 +1148,13 @@ name = "instance"
 source = { virtual = "." }
 dependencies = [
     { name = "invenio-app-rdm", extra = ["opensearch2"] },
+    { name = "invenio-config-tugraz" },
+    { name = "invenio-curations" },
+    { name = "invenio-global-search" },
+    { name = "invenio-override", extra = ["lom", "marc21"] },
+    { name = "invenio-records-global-search" },
+    { name = "invenio-records-lom" },
+    { name = "invenio-records-marc21" },
     { name = "setuptools" },
     { name = "uwsgi" },
     { name = "uwsgi-tools" },
@@ -1157,6 +1164,13 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "invenio-app-rdm", extras = ["opensearch2"], specifier = "==14.0.0rc2" },
+    { name = "invenio-config-tugraz", git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository" },
+    { name = "invenio-curations", specifier = ">=0.8.3" },
+    { name = "invenio-global-search", specifier = ">=0.4.3" },
+    { name = "invenio-override", extras = ["lom", "marc21"], git = "https://github.com/tu-graz-library/invenio-override?branch=main" },
+    { name = "invenio-records-global-search", specifier = ">=0.4.0" },
+    { name = "invenio-records-lom", specifier = ">=0.23.0" },
+    { name = "invenio-records-marc21", specifier = ">=0.32.1" },
     { name = "setuptools", specifier = "<82" },
     { name = "uwsgi", specifier = ">=2.0" },
     { name = "uwsgi-tools", specifier = ">=1.1.1" },
@@ -1460,6 +1474,35 @@ wheels = [
 ]
 
 [[package]]
+name = "invenio-config-tugraz"
+version = "0.14.4"
+source = { git = "https://github.com/tu-graz-library/invenio-config-tugraz?branch=repository#9d3161f88ca86e1769f0afea57358d78aea59e36" }
+dependencies = [
+    { name = "invenio-cache" },
+    { name = "invenio-curations" },
+    { name = "invenio-global-search" },
+    { name = "invenio-i18n" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-records-lom" },
+    { name = "invenio-records-marc21" },
+]
+
+[[package]]
+name = "invenio-curations"
+version = "0.8.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "invenio-drafts-resources" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-requests" },
+    { name = "nh3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/62/70/ac56cca627fd5421c382c0295d80419db77232f9eb15f332afc8a24e4f97/invenio_curations-0.8.5.tar.gz", hash = "sha256:76ec1db9dc076c835acf483f1cd181b28d6689b7247b0db7c14673caa454c3a7", size = 104740 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f1/16/e491d64dbf3784441f4a1d4d999f84119e40b1a1867e32988cde9fe2e6aa/invenio_curations-0.8.5-py2.py3-none-any.whl", hash = "sha256:92a4f2d5bb7549fefdc6b654db736e9d7112febed6f6c8ad3c0ef8dbafca0f57", size = 118096 },
+]
+
+[[package]]
 name = "invenio-db"
 version = "2.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1529,6 +1572,26 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/46/d4/03589b0b54b0b702b01a1143a03a8416ad5f4c86cf6c5e05d455feae3904/invenio_formatter-4.0.0.tar.gz", hash = "sha256:f57fb97ed55b2f43f7eece1bc28bf5d2a67b3ca42aeae2fb30a2b3acae7899ea", size = 24134 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cd/42/f560e5007e9239bfe629f10bc60064cfe58531c28ad8cfa307ea0a57ad98/invenio_formatter-4.0.0-py2.py3-none-any.whl", hash = "sha256:86816419416bcc4e25f082de41b481dc9820193b6f1746a5706344f2cd94ad76", size = 64098 },
+]
+
+[[package]]
+name = "invenio-global-search"
+version = "0.5.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "invenio-records-global-search" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/53/0b/ec777ac418943248fdcef35d41e904d69fdcd36d6123b1b8d3762b854f74/invenio_global_search-0.5.1.tar.gz", hash = "sha256:127d063d6e018e47f427430f1f02263fe84a619bd6cf53848e5d83827b73a475", size = 18642 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8e/f7/7b9bdc2d672cff28ae300229d3601186d35e08081d08af3baedb897cee1b/invenio_global_search-0.5.1-py2.py3-none-any.whl", hash = "sha256:a37e80119785cc2d3286d71ed00e80b42ee7e862aa126cc8167b4a001f15e48f", size = 15808 },
+]
+
+[package.optional-dependencies]
+lom = [
+    { name = "invenio-records-lom" },
+]
+marc21 = [
+    { name = "invenio-records-marc21" },
 ]
 
 [[package]]
@@ -1700,6 +1763,26 @@ wheels = [
 ]
 
 [[package]]
+name = "invenio-override"
+version = "1.0.0"
+source = { git = "https://github.com/tu-graz-library/invenio-override?branch=main#3d662569db2c5b01d3c8569ca7e65423be5ce8ef" }
+dependencies = [
+    { name = "invenio-global-search" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-records-global-search" },
+    { name = "opensearch-dsl" },
+    { name = "opensearch-py" },
+]
+
+[package.optional-dependencies]
+lom = [
+    { name = "invenio-global-search", extra = ["lom"] },
+]
+marc21 = [
+    { name = "invenio-global-search", extra = ["marc21"] },
+]
+
+[[package]]
 name = "invenio-pages"
 version = "9.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1837,6 +1920,52 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/38/b3/f6f9e5c814cb77602a777ef40b0158449c9d8a352a38c6d8145b8946bb72/invenio_records_files-3.0.0.tar.gz", hash = "sha256:7a3fb570148877471e3dcc1e287120229388061d7c19974083c125d4fb380e20", size = 19079 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/21/e5/0eabb404603aa6fb42d2a77c3457d2bf607798b59cbbff350225829b4284/invenio_records_files-3.0.0-py2.py3-none-any.whl", hash = "sha256:a8b48b8934121f7c3cbb005fdfd8583b938eb27b395b1b638f154f45462afe57", size = 21603 },
+]
+
+[[package]]
+name = "invenio-records-global-search"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "invenio-indexer" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-records-resources" },
+    { name = "invenio-search-ui" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f1/75/fd157b756ff1a5177c793cda6c1939b3aee6242e34f9996225f30b76d125/invenio_records_global_search-0.5.0.tar.gz", hash = "sha256:6e4ea9533247542436f1b2920707ad9ace9202159d3a5dab4c96b121f906ff79", size = 46296 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/8a/f908700e65a24c11b7017739bf87b2e3eb6269131685738313ba032855d5/invenio_records_global_search-0.5.0-py2.py3-none-any.whl", hash = "sha256:6940d4fe1d5f3545f9e38735c9bc3eea67a4299d13575b479b2ca1e7cd25e9ed", size = 66941 },
+]
+
+[[package]]
+name = "invenio-records-lom"
+version = "0.23.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "invenio-previewer" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-stats" },
+    { name = "marshmallow" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/22/91/5f24e8f54ad833e9487e838940f5268805bed100a050469b526dad908b09/invenio_records_lom-0.23.0.tar.gz", hash = "sha256:4c06009390b55c8f481e625e58fb74335583555549fedce3cbdaba9c1edf9ece", size = 184193 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/53/71/df0a29d15361c88ef7ab51cc101ff5de7100b4b486adc3eb693b635ea47b/invenio_records_lom-0.23.0-py2.py3-none-any.whl", hash = "sha256:70f3f83b02a1ae00c7bcec1cafdf303283d3abd6450d3c9f853648b220a03845", size = 243832 },
+]
+
+[[package]]
+name = "invenio-records-marc21"
+version = "0.34.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "arrow" },
+    { name = "fastjsonschema" },
+    { name = "invenio-rdm-records" },
+    { name = "invenio-stats" },
+    { name = "lxml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/de/cf/c1c50243909056c022aecc384896b3391389c08c0cd368fa2b1f9c8682fe/invenio_records_marc21-0.34.0.tar.gz", hash = "sha256:647a3dbccd7f45e4e9e94f4db3b385dc8b564b5706f8e707a2e7cb063fe50e7f", size = 192753 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/06/8f/1715928c8e50cd5e3251fb26a84e501d1b00392b71b39f551662a6a527af/invenio_records_marc21-0.34.0-py2.py3-none-any.whl", hash = "sha256:0d15a861a4ea732a9a22d8193179c4675dfaf8a6c38fb79bc43162bf9a3c53c5", size = 301171 },
 ]
 
 [[package]]
