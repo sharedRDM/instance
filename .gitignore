@@ -72,9 +72,4 @@ data/default/*
 data/.minio.sys
 
 # Celery
-celerybeat-schedule*
-
-# IDEs
-.idea/
-.vscode/
-*.code-workspace
+celerybeat-schedule

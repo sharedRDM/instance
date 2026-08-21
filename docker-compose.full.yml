@@ -13,7 +13,7 @@
 # - UI application: UWSGI (not exposed)
 # - API application: UWSGI (not exposed)
 # - Cache: Redis (exposed port: 6379)
-# - DB: (PostgresSQL/MySQL) (exposed port: 5432 or 3306)
+# - DB: PostgreSQL (exposed port: 5432)
 # - Message queue: RabbitMQ (exposed ports: 5672, 15672)
 # - Search platform: (OpenSearch) (exposed ports: 9200, 9600)
 # - OpenSearch Dashboard/Kibana (view OS/ES indexes) (exposed ports: 5601)
@@ -31,18 +31,17 @@ services:
     extends:
       file: docker-services.yml
       service: mq
+  flower:
+    extends:
+      file: docker-services.yml
+      service: flower
+    depends_on:
+      mq:
+        condition: service_started
   search:
     extends:
       file: docker-services.yml
       service: search
-  opensearch-dashboards:
-    extends:
-      file: docker-services.yml
-      service: opensearch-dashboards
-  pgadmin:
-    extends:
-      file: docker-services.yml
-      service: pgadmin
   # Frontend
   frontend:
     extends:
@@ -54,17 +53,20 @@ services:
       - web-ui
       - web-api
     ports:
-      - "80:80"
-      - "443:443"
+      - "${DOCKER_WEB_IP_BIND:-0.0.0.0}:80:80"
+      - "${DOCKER_WEB_IP_BIND:-0.0.0.0}:443:443"
   # UI Application
   web-ui:
     extends:
       file: docker-services.yml
       service: app
     command: ["uwsgi /opt/invenio/var/instance/uwsgi_ui.ini"]
-    image: ghcr.io/sharedrdm/instance:official-v13-basic
+    depends_on:
+      search:
+        condition: service_healthy
+    image: instance:latest
     ports:
-      - "5000"
+      - "${DOCKER_SERVICES_IP_BIND:-127.0.0.1}:5000:5000"
     volumes:
       - static_data:/opt/invenio/var/instance/static
       - uploaded_data:/opt/invenio/var/instance/data
@@ -76,9 +78,12 @@ services:
       file: docker-services.yml
       service: app
     command: ["uwsgi /opt/invenio/var/instance/uwsgi_rest.ini"]
-    image: ghcr.io/sharedrdm/instance:official-v13-basic
+    depends_on:
+      search:
+        condition: service_healthy
+    image: instance:latest
     ports:
-      - "5000"
+      - "${DOCKER_SERVICES_IP_BIND:-127.0.0.1}:5001:5000"
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
       - archived_data:/opt/invenio/var/instance/archive
@@ -89,19 +94,35 @@ services:
       file: docker-services.yml
       service: app
     command: ["celery -A invenio_app.celery worker --beat --loglevel=INFO"]
-    image: ghcr.io/sharedrdm/instance:official-v13-basic
+    image: instance:latest
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
     depends_on:
       search:
-        condition: service_started
+        condition: service_healthy
       cache:
         condition: service_started
       db:
         condition: service_started
       mq:
         condition: service_started
+
+  # Jobs scheduler
+  scheduler:
+    extends:
+      file: docker-services.yml
+      service: app
+    command: ["celery -A invenio_app.celery beat --scheduler invenio_jobs.services.scheduler:RunScheduler --loglevel=INFO"]
+    image: instance:latest
+    depends_on:
+      mq:
+        condition: service_started
+      db:
+        condition: service_started
 volumes:
+  db_data:
+  mq_data:
+  search_data:
   static_data:
   uploaded_data:
   archived_data:
