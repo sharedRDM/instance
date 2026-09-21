@@ -116,8 +116,8 @@ apply_look() {
   swap "$pkg/variables.less" "$LESS_DIR/variables.less"
   swap "$pkg/overrides.less" "$LESS_DIR/overrides.less"
 
-  [ -n "$VARIABLES" ]   && swap "$HERE/$VARIABLES"   "$LESS_DIR/variables.less"
-  [ -n "$OVERRIDES" ]   && swap "$HERE/$OVERRIDES"   "$LESS_DIR/overrides.less"
+  [ -n "$VARIABLES" ]   && cat "$HERE/$VARIABLES"   >> "$LESS_DIR/variables.less"
+  [ -n "$OVERRIDES" ]   && cat "$HERE/$OVERRIDES"   >> "$LESS_DIR/overrides.less"
   [ -n "$MAPPING_SRC" ] && swap "$HERE/$MAPPING_SRC" "$VAR/$MAPPING"
   return 0
 }
