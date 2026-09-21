@@ -8,9 +8,10 @@ RUN uv sync --frozen
 # to use rspack
 ENV INVENIO_WEBPACKEXT_PROJECT="invenio_assets.webpack:rspack_project"
 
-# Replace variables.less
-COPY themes/MUG/variables.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/variables.less
-COPY themes/MUG/overrides.less ${VIRTUAL_ENV}/lib/python3.12/site-packages/invenio_override/assets/semantic-ui/less/invenio_override/overrides.less
+COPY themes/MUG/variables.less themes/MUG/overrides.less /tmp/mug-less/
+RUN OVERRIDE_LESS=${VIRTUAL_ENV}/lib/python3.14/site-packages/invenio_override/assets/semantic-ui/less/invenio_override && \
+    cat /tmp/mug-less/variables.less >> ${OVERRIDE_LESS}/variables.less && \
+    cat /tmp/mug-less/overrides.less >> ${OVERRIDE_LESS}/overrides.less
 
 RUN invenio collect --verbose && invenio webpack create
 
