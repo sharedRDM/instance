@@ -1,0 +1,99 @@
+{#
+  Copyright (C) 2026 Graz University of Technology.
+
+  instance is free software; you can redistribute it and/or modify it under the
+  terms of the MIT License; see LICENSE file for more details.
+#}
+{%- extends config.BASE_TEMPLATE %}
+{%- block css %}
+  {{ super() }}
+  <style>
+  .advanced-search-card {
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+    border: none;
+  }
+  </style>
+{%- endblock css %}
+{%- block page_body %}
+  <section class="rel-pt-3 rel-pb-3">
+    <div class="ui container">
+      <div class="ui centered grid">
+        <div class="twelve wide computer sixteen wide tablet column">
+          <h1 class="ui header rel-mb-1">
+            <i class="search icon"></i>
+            <div class="content">
+              {{ _("Advanced search") }}
+              <div class="sub header">{{ _("Fill in one or more fields. Empty fields are ignored.") }}</div>
+            </div>
+          </h1>
+          <div class="ui padded segment advanced-search-card rel-mt-2">
+            <form class="ui form"
+                  method="GET"
+                  action="{{ url_for('instance.advanced_search') }}">
+              <input type="hidden" name="submitted" value="1">
+              {%- for field in fields %}
+                {%- if field.kind == "text" %}
+                  <div class="field">
+                    <label for="{{ field.name }}">{{ field.label }}</label>
+                    <input type="text"
+                           id="{{ field.name }}"
+                           name="{{ field.name }}"
+                           value="{{ request.args.get(field.name, '') }}"
+                           {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}>
+                  </div>
+                {%- elif field.kind == "select" %}
+                  <div class="field">
+                    <label for="{{ field.name }}">{{ field.label }}</label>
+                    <select class="ui fluid search selection dropdown"
+                            id="{{ field.name }}"
+                            name="{{ field.name }}">
+                      <option value="">{{ _("Any") }}</option>
+                      {%- for option_id, option_label in options.get(field.name, []) %}
+                        <option value="{{ option_id }}"
+                                {%- if request.args.get(field.name) == option_id %}selected{% endif %}>
+                          {{ option_label }}
+                        </option>
+                      {%- endfor %}
+                    </select>
+                  </div>
+                {%- elif field.kind == "daterange" %}
+                  <div class="two fields">
+                    <div class="field">
+                      <label for="{{ field.name }}_from">{{ field.label }} {{ _("from") }}</label>
+                      <div class="ui left icon input">
+                        <i class="calendar alternate outline icon"></i>
+                        <input type="text"
+                               id="{{ field.name }}_from"
+                               name="{{ field.name }}_from"
+                               value="{{ request.args.get(field.name + '_from', '') }}"
+                               placeholder="YYYY {{ _("or") }} YYYY-MM-DD">
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label for="{{ field.name }}_to">{{ field.label }} {{ _("to") }}</label>
+                      <div class="ui left icon input">
+                        <i class="calendar alternate outline icon"></i>
+                        <input type="text"
+                               id="{{ field.name }}_to"
+                               name="{{ field.name }}_to"
+                               value="{{ request.args.get(field.name + '_to', '') }}"
+                               placeholder="YYYY {{ _("or") }} YYYY-MM-DD">
+                      </div>
+                    </div>
+                  </div>
+                {%- endif %}
+              {%- endfor %}
+              <div class="ui hidden divider"></div>
+              <button class="ui primary large button" type="submit">
+                <i class="search icon"></i> {{ _("Search") }}
+              </button>
+              <a class="ui basic large button"
+                 href="{{ url_for('instance.advanced_search') }}">{{ _("Reset") }}</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endblock page_body %}
